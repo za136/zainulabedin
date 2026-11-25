@@ -742,6 +742,46 @@
         }
       }
     },
+    "apps": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9+.-]*$"
+        },
+        "ios": {
+          "type": "object",
+          "properties": {
+            "bundleId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "bundleId"
+          ]
+        },
+        "android": {
+          "type": "object",
+          "properties": {
+            "package": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "package"
+          ]
+        },
+        "digitalGoodsInNativeApps": {
+          "default": "web-checkout",
+          "type": "string",
+          "enum": [
+            "web-checkout",
+            "browse-only"
+          ]
+        }
+      }
+    },
     "home": {
       "type": "object",
       "properties": {

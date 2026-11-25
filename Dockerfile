@@ -12,8 +12,10 @@ COPY packages/core/package.json packages/core/
 COPY packages/config/package.json packages/config/
 COPY packages/db/package.json packages/db/
 COPY packages/sdk/package.json packages/sdk/
+COPY packages/i18n/package.json packages/i18n/
 COPY apps/api/package.json apps/api/
 COPY apps/web/package.json apps/web/
+COPY apps/mobile/package.json apps/mobile/
 COPY tools/factory/package.json tools/factory/
 RUN pnpm install --frozen-lockfile
 

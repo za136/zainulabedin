@@ -11,7 +11,7 @@
 1. `pnpm install && pnpm dev` → storefront :3000, API :4000 (docs at `/docs`). No database server needed (embedded PGlite).
 2. **Never put business rules in the frontend or in routes.** Money/tax/discount/legal rules live in `packages/core` (pure, tested). Routes call services; services call core.
 3. **A store = a folder in `stores/`.** Change a shop by editing JSON there, not code. `pnpm factory validate --all` must pass.
-4. **German first.** Default locale `de` lives at `/`; every UI string exists in `apps/web/messages/de.json` *and* `en.json` (keys must match).
+4. **German first.** Default locale `de` lives at `/`; every UI string exists in `packages/i18n/src/de.json` *and* `en.json` (keys must match; shared by website and app).
 5. Before committing: `pnpm typecheck && pnpm test && pnpm factory validate --all && pnpm --filter @factory/web build`.
 6. Money is **integer minor units** (cents), **gross** (VAT included). Never floats.
 7. Read §12 (legal) before touching checkout, prices, discounts, reviews or subscriptions — there are German laws behind each of them.
@@ -32,6 +32,8 @@
 | Subscriptions: purchase, entitlement, § 312k cancel, renewal job | ⚠️ renewal **extends the period without charging** — wire to Stripe Billing before selling real subscriptions | `library.service.ts → renewSubscriptions` |
 | Storefront (Next.js 16): home, listing/search, product pages per kind, cart, checkout, mock pay, success, account/library, legal, 3D viewer, admin | ✅ production build passes, real-browser journey passes with 0 console errors | `apps/web` |
 | Factory CLI | ✅ 10 tests | `tools/factory` |
+| PWA (installable website: iOS, Android, Windows, macOS, Linux, ChromeOS) | ✅ manifest, store-themed icons, service worker, offline page — verified in Chromium | `apps/web/src/app/manifest.ts`, `app-icon/`, `public/sw.js` |
+| Native iOS + Android app (Expo SDK 58 / React Native 0.88) | ✅ iOS & Android Hermes bundles compile; full purchase journey verified on the Expo **web** build in an emulated iPhone 13 + tablet. ⚠️ **Not yet run on a physical device or iOS/Android simulator** (none available here) and not yet built/signed with EAS | `apps/mobile` |
 | Canva | ✅ `canva:pull` via Canva Connect API (untested without a token); brand kit `kAHVj-kOybo` recorded in `stores/wissenswerk/store.json` | §10 |
 | Docker / compose / CI | ⚠️ written, **images not built in this environment** (no Docker daemon) | `Dockerfile`, `docker-compose.yml`, `.github/workflows/ci.yml` |
 | Email | ⚠️ console mailer only (logs mails) — add SMTP/Postmark adapter | `notifications/mailer.ts` |
@@ -88,10 +90,12 @@ docker compose up --build      # db + api + web; STORE=<id> docker compose up to
 │   ├── core/      pure domain (no I/O, isomorphic, runs in browser too)
 │   ├── config/    store.json schema, loader, cross-validation, presets, emitted *.schema.json
 │   ├── db/        Drizzle schema, migrations (drizzle/), client (pg | pglite), seed
-│   └── sdk/       typed API client + public API types
+│   ├── sdk/       typed API client + public API types
+│   └── i18n/      UI translations (de/en) shared by web and mobile
 ├── apps/
 │   ├── api/       Fastify API (src/modules/* = one folder per bounded context)
-│   └── web/       Next.js storefront (src/app/[locale]/*, src/components/*, messages/*.json)
+│   ├── web/       Next.js storefront + PWA (src/app/[locale]/*, src/components/*)
+│   └── mobile/    Expo / React Native app for iOS, Android, web (app/* = expo-router screens, src/*)
 └── tools/factory/ CLI + templates (legal pages, starter diagram)
 ```
 
@@ -175,8 +179,8 @@ Kind-specific data lives in `products.attributes`, validated by `attributeSchema
 **Checklist — adding a new kind (e.g. `gift_card`, `bundle`, `rental`):**
 1. `core/src/product-kinds.ts`: add attribute schema + `PRODUCT_KIND_DEFINITIONS` entry (choose or add a `FulfillmentStrategy`).
 2. New strategy? add handler in `apps/api/src/modules/fulfillment/fulfillment.service.ts`.
-3. `apps/web/messages/{de,en}.json`: `kinds.<kind>` and `kindText.<kind>`.
-4. Product page block: `apps/web/src/components/product/kind-blocks.tsx`; icon in `components/home/sections.tsx` and `product-art.tsx`.
+3. `packages/i18n/src/{de,en}.json`: `kinds.<kind>` and `kindText.<kind>`.
+4. Product page block: `apps/web/src/components/product/kind-blocks.tsx` and `apps/mobile/app/product/[slug].tsx → KindDetails`; icons in `components/home/sections.tsx`, `product-art.tsx` and the app's `KIND_GLYPH`. If it is digital content, add it to `DIGITAL_KINDS` in `apps/mobile/src/lib/format.ts`.
 5. Factory scaffold: `ATTRIBUTE_SKELETONS` in `tools/factory/src/commands.ts`.
 6. Tests in `core` and an API flow test.
 
@@ -243,7 +247,7 @@ JSON scenes: `nodes` (shape, position, scale, colour, label, detail, chapter, gr
 ## 8. Storefront (apps/web)
 
 - **Next.js 16 App Router**, Turbopack, React 19, Tailwind v4, next-intl 4. `src/proxy.ts` is Next 16's renamed middleware.
-- **German first:** `localePrefix: 'as-needed'`, `localeDetection: false` → German at `/`, English at `/en`. To add French: add `fr` to `src/i18n/routing.ts`, `messages/fr.json`, `store.json → locales.supported`, and `content/fr/*.md`.
+- **German first:** `localePrefix: 'as-needed'`, `localeDetection: false` → German at `/`, English at `/en`. To add French: add `fr` to `src/i18n/routing.ts`, `packages/i18n/src/fr.json` (register it in `packages/i18n/src/index.ts`), `store.json → locales.supported`, and `content/fr/*.md`.
 - **BFF pattern:** the browser never holds the API session token. `src/lib/api.ts` builds an SDK client from httpOnly cookies (`sf_session`, `sf_cart`, `sf_country`). All writes are **server actions** in `src/lib/actions.ts` returning `{ok, data} | {ok:false, code}`.
 - **Theme:** `app/[locale]/layout.tsx` maps `store.theme` to CSS variables; `app/globals.css` maps Tailwind tokens (`bg-primary`, `rounded-[var(--radius-brand)]`, …) onto them. Custom utilities (`btn-primary`, `card`, `input`, `chip`, `container-page`) are `@utility` blocks (Tailwind v4 requires this for `@apply` reuse).
 - **No Google Fonts CDN** (GDPR ruling LG München I, 3 O 17493/20). Self-host font files in `public/fonts` if you want Fraunces/Inter exactly.
@@ -260,6 +264,39 @@ const api = createClient({ baseUrl: 'https://api.example.de', market: { locale: 
 const { items } = await api.catalog.list({ kind: 'interactive_book' });
 ```
 A Hydrogen/Remix storefront can consume this API exactly like `apps/web` does (keep tokens server-side). Conversely, a **Shopify backend adapter** (sync catalog to Shopify, use Shopify checkout) is not built — see roadmap.
+
+
+## 8b. Every platform: PWA, iOS, Android
+
+```
+                 ┌──────────── stores/<id>/store.json (name, theme, icon, bundle ids, policies) ────────────┐
+                 ▼                                   ▼                                                      ▼
+   apps/web (Next.js) ── PWA install ──►   apps/mobile (Expo) ── EAS ──► App Store / Google Play      other frontends
+   desktop & mobile browsers               iOS · Android · (web)                                       via @factory/sdk
+                 └──────────────────────────────┬────────────────────────────────────────┘
+                                   one API · one domain core · one i18n catalogue
+```
+
+### PWA (apps/web)
+- `src/app/manifest.ts` → `/manifest.webmanifest`, generated from the store (name, colours, shortcuts to search/cart/library).
+- `src/app/app-icon/[size]/route.tsx` → PNG icons in any size from the logo mark + brand colours (`?maskable=1` for full-bleed). Apple touch icon and theme colour are set in the layout metadata.
+- `public/sw.js`: cache-first for hashed static assets, network-first navigations with `public/offline.html` fallback. **Never caches API calls, carts, accounts or prices.** Bump `VERSION` when changing caching.
+- Registered only in production builds (`components/pwa/register-sw.tsx`).
+
+### Native app (apps/mobile)
+- **Stack:** Expo SDK 58, React Native 0.88, expo-router (file-based routes in `app/`), `use-intl` with the shared `@factory/i18n` catalogue, `@factory/sdk` for the API, `@factory/core` for formatting. No business logic is duplicated.
+- **Store-driven build:** `app.config.ts` reads `stores/$STORE/store.json` → app name, slug, deep-link `scheme`, `ios.bundleIdentifier`, `android.package`, icon (`assets/app-icon.png`, create with `pnpm factory app:icon <store>`), splash and adaptive-icon colours. Different store → different app from the same code.
+- **Config:** `EXPO_PUBLIC_API_URL` (default `http://localhost:4000`; Android emulator `http://10.0.2.2:4000`), `EXPO_PUBLIC_WEB_URL` (website; used for 3D diagrams and web checkout). Profiles in `eas.json`.
+- **Screens:** tabs Start / Suche / Warenkorb / Konto; product detail (variants, slots, stock, VAT note, kind details, editions); checkout (same consents and § 312j button as the web); order status (Vorkasse details, dev mock payment, invoice); account (login/register incl. guest-order claim, library with downloads, licence keys (copy), course progress, 3D, subscriptions with § 312k cancel, orders); legal pages (native Markdown); settings (language, delivery country).
+- **Security:** session token in Keychain/Keystore (`expo-secure-store`), localStorage on web. The app talks to the API directly with a Bearer token (native apps are not subject to the browser threat model the web BFF protects against).
+- **3D diagrams:** one implementation for all platforms — the app shows the website's `/embed/diagram/<id>` (chrome-less three.js viewer) in a WebView and passes the session as an `Authorization` header (never in the URL), so purchased diagrams unlock.
+- **App-store billing rules (important):** Apple App Review 3.1.1 and Google Play require their own billing for *digital content* bought inside an app. `store.json → apps.digitalGoodsInNativeApps`:
+  - `web-checkout` (default): on iOS/Android, digital items (e-books, 3D books, courses, downloads, licences, subscriptions) show "Auf der Website kaufen" and open the website; afterwards they appear in the in-app library. Allowed for EU storefronts under the DMA and for US storefronts — **check each market and Apple's current entitlement requirements before release.**
+  - `browse-only`: reader-app mode — no purchase path for digital items in the app.
+  - Physical goods (books, electronics) and real-world services (consulting appointments) always use the shop's own checkout in the app.
+  - Implementing StoreKit / Play Billing (e.g. via RevenueCat) is on the roadmap.
+- **Run:** `pnpm dev` (API + website) then `pnpm dev:mobile` → `i` / `a` / `w` or Expo Go. **Ship:** `cd apps/mobile && npx eas build -p ios|android --profile production`, then `npx eas submit`. Needs an Expo account, Apple Developer Program and Google Play Console accounts.
+- **Verify:** `pnpm mobile:export` (compiles iOS, Android and web bundles), `node apps/mobile/e2e/app-journey.cjs` against the web export.
 
 ---
 
@@ -288,7 +325,10 @@ Workflow: edit schema → `pnpm db:generate` → commit the new SQL in `packages
 | db (4) | `pnpm --filter @factory/db test` | idempotent seed, price binding, German FTS, timezone-correct slot seeding |
 | api (28) | `pnpm --filter @factory/api test` | full HTTP flows on embedded Postgres: catalog/search, carts, consents, stock & slot races, mock/Vorkasse payments, entitlements, downloads, invoices, subscriptions, B2B, OSS, admin, reviews |
 | factory (10) | `pnpm --filter @factory/cli test` | every preset generates a valid store; clone; scaffolds |
-| browser | `node apps/web/e2e/storefront-journey.cjs <dir>` | real Chromium journey incl. WebGL scene, checkout, account, English, legal, mobile |
+| i18n (2) | `pnpm --filter @factory/i18n test` | every locale has exactly the German keys, no empty strings |
+| browser (web) | `node apps/web/e2e/storefront-journey.cjs <dir>` | real Chromium journey incl. WebGL scene, checkout, account, English, legal, mobile |
+| browser (app) | `node apps/mobile/e2e/app-journey.cjs <dir>` | Expo web build on emulated iPhone 13 + tablet: search, product, cart, checkout, mock payment, account, English, legal |
+| native bundles | `pnpm mobile:export` | iOS + Android Hermes bundles compile |
 
 Tests use `pglite://memory` and an injectable clock (`TestApp.clock.offsetMs`) — no external services.
 
@@ -345,6 +385,8 @@ Tests use `pglite://memory` and an injectable clock (`TestApp.clock.offsetMs`) �
 10. Price history for § 11 PAngV reference prices.
 11. Shopify/Hydrogen interop: catalog sync adapter or Storefront-API-compatible facade.
 12. Build & publish Docker images in CI; Helm chart.
+13. **Native apps:** run on real devices/simulators, EAS builds & store listings, push notifications (order shipped, course updates), universal links / app links for `/products/*`, StoreKit + Play Billing (RevenueCat) for digital goods, native Stripe PaymentSheet, offline reading of purchased e-books.
+14. Desktop app shell (Tauri/Electron) only if PWA install isn't enough.
 
 ---
 
@@ -354,6 +396,6 @@ Tests use `pglite://memory` and an injectable clock (`TestApp.clock.offsetMs`) �
 - Keep `packages/core` free of I/O and add a unit test for every rule change.
 - API: one folder per bounded context in `apps/api/src/modules/`; routes stay thin; services take `AppContext`; return stable error codes via `AppError`.
 - DB writes that must be consistent go in **one transaction**; side effects (email, webhooks) go through `emit()` (outbox), never directly.
-- Storefront: server components by default; `'use client'` only for interaction; all UI text via `messages/*.json` (add DE **and** EN); never call the API from the browser with credentials — use server actions.
+- Storefront: server components by default; `'use client'` only for interaction; all UI text via `packages/i18n` (add DE **and** EN); never call the API from the browser with credentials — use server actions.
 - Money: integers, gross, `formatMoney`/`money()` for display. Dates: UTC in DB, `Europe/Berlin` in UI.
 - Commit messages: imperative, explain the *why*; run the quality gates first.

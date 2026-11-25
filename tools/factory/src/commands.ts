@@ -101,6 +101,8 @@ export function validateStore(io: Io, id: string): boolean {
     if (s.config.legal.company.includes('Platzhalter') || s.config.legal.street === 'Musterstraße 1') warnings.push('legal entity data is still a placeholder (Impressum!)');
     if (s.config.payments.providers.every((p) => p.id === 'mock' || !p.enabled)) warnings.push('only the mock payment provider is enabled');
     for (const l of s.config.locales.supported) if (!existsSync(join(dir, 'content', l))) warnings.push(`no content pages for locale "${l}"`);
+    if (!s.config.apps.ios?.bundleId || !s.config.apps.android?.package) warnings.push('apps.ios.bundleId / apps.android.package not set — native apps fall back to com.example.*');
+    if (!existsSync(join(dir, 'assets', 'app-icon.png'))) warnings.push(`no assets/app-icon.png — run: pnpm factory app:icon ${id}`);
     for (const w of warnings) io.log(`  ⚠ ${w}`);
     return true;
   } catch (e) {
@@ -161,6 +163,22 @@ export function newDiagram(io: Io, store: string, id: string): void {
   mkdirSync(join(storesDir(io), store, 'diagrams'), { recursive: true });
   writeFileSync(file, json(tpl));
   io.log(`✔ created stores/${store}/diagrams/${id}.json — preview it at /diagrams/${id} in the storefront`);
+}
+
+/* -------------------------------- app icon -------------------------------- */
+
+/**
+ * Save the store's 1024×1024 full-bleed app icon (rendered by the storefront from the
+ * theme + logo mark) to stores/<id>/assets/app-icon.png — used by the iOS/Android build,
+ * splash screen and favicon. Requires the storefront to be running for that store.
+ */
+export async function appIcon(io: Io, store: string, webUrl = process.env.WEB_URL ?? 'http://localhost:3000'): Promise<void> {
+  const res = await fetch(`${webUrl.replace(/\/$/, '')}/app-icon/1024?maskable=1`);
+  if (!res.ok) throw new Error(`storefront at ${webUrl} answered ${res.status} — start it with STORE=${store} pnpm dev`);
+  const out = join(storesDir(io), store, 'assets', 'app-icon.png');
+  mkdirSync(join(out, '..'), { recursive: true });
+  writeFileSync(out, Buffer.from(await res.arrayBuffer()));
+  io.log(`✔ wrote stores/${store}/assets/app-icon.png (replace it with a designed icon any time, e.g. from Canva)`);
 }
 
 /* ---------------------------------- canva --------------------------------- */

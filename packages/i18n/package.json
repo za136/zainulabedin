@@ -1,0 +1,9 @@
+{
+  "name": "@factory/i18n",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "UI translations shared by the website (next-intl) and the iOS/Android app (use-intl). German first.",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "typecheck": "tsc -p tsconfig.json", "test": "vitest run" }
+}

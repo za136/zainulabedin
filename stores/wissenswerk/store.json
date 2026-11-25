@@ -282,6 +282,16 @@
       "assets": []
     }
   },
+  "apps": {
+    "scheme": "wissenswerk",
+    "ios": {
+      "bundleId": "de.wissenswerk.app"
+    },
+    "android": {
+      "package": "de.wissenswerk.app"
+    },
+    "digitalGoodsInNativeApps": "web-checkout"
+  },
   "home": {
     "sections": [
       {

@@ -140,6 +140,23 @@ export const storeConfigSchema = z.object({
         .optional(),
     })
     .prefault({}),
+  /**
+   * Native iOS / Android apps (apps/mobile). Bundle ids must be unique per store.
+   * digitalGoodsInNativeApps: Apple (App Review 3.1.1) and Google Play require their own
+   * billing for digital content bought inside an app. Options:
+   *   web-checkout — digital items open the website checkout in the browser (allowed for
+   *                  EU storefronts under the DMA and US storefronts; check your markets)
+   *   browse-only  — digital items can be browsed and read ("reader app"), not bought in-app
+   * Physical goods and real-world services (consulting) may always use the shop's own checkout.
+   */
+  apps: z
+    .object({
+      scheme: z.string().regex(/^[a-z][a-z0-9+.-]*$/).optional(),
+      ios: z.object({ bundleId: z.string() }).optional(),
+      android: z.object({ package: z.string() }).optional(),
+      digitalGoodsInNativeApps: z.enum(['web-checkout', 'browse-only']).default('web-checkout'),
+    })
+    .prefault({}),
   home: z.object({ sections: z.array(sectionSchema) }),
   seo: z.object({ titleTemplate: z.string().default('%s | {store}'), description: localizedTextSchema.default({}) }).prefault({}),
 });

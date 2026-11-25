@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@factory/core": "workspace:*",
+    "@factory/i18n": "workspace:*",
     "@factory/sdk": "workspace:*",
     "@react-three/drei": "^10.7.0",
     "@react-three/fiber": "^9.4.0",

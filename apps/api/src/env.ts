@@ -18,7 +18,7 @@ export const envSchema = z.object({
   WEB_URL: z.string().url().default('http://localhost:3000'),
   /** Public URL of this API (download links) */
   API_URL: z.string().url().default('http://localhost:4000'),
-  CORS_ORIGINS: z.string().default('http://localhost:3000'),
+  CORS_ORIGINS: z.string().default('http://localhost:3000,http://localhost:8081'),
   AUTO_MIGRATE: z.stringbool().default(true),
   SEED_ON_BOOT: z.stringbool().default(true),
   /** Where digital files live (local disk adapter). Missing files are served as demo placeholders outside production. */

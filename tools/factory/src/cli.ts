@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 import { parseArgs } from 'node:util';
 import { PRESETS } from '@factory/config';
-import { canvaPull, createStore, defaultIo, listStores, newDiagram, newProduct, validateStore } from './commands.js';
+import { appIcon, canvaPull, createStore, defaultIo, listStores, newDiagram, newProduct, validateStore } from './commands.js';
 
 const HELP = `
 E-Commerce Store Factory 🏭
@@ -16,6 +16,7 @@ Usage: pnpm factory <command> [options]
   product:new <store> <kind> <slug>        scaffold a draft product of a kind
   diagram:new <store> <id>                 scaffold a 3D diagram scene
   canva:pull <store>                       export Canva designs listed in store.json into assets/
+  app:icon <store>                         save the iOS/Android app icon rendered from the store theme
 
 Run a store:  STORE=<id> pnpm dev
 `;
@@ -61,6 +62,10 @@ async function main() {
     case 'diagram:new':
       if (!a || !b) throw new Error('usage: diagram:new <store> <id>');
       newDiagram(io, a, b);
+      break;
+    case 'app:icon':
+      if (!a) throw new Error('usage: app:icon <store>');
+      await appIcon(io, a);
       break;
     case 'canva:pull':
       if (!a) throw new Error('usage: canva:pull <store>');

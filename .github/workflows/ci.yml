@@ -13,3 +13,4 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm --filter @factory/web build
+      - run: pnpm mobile:export   # iOS + Android + web bundles of the native app compile

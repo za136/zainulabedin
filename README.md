@@ -6,6 +6,15 @@ Sell printed books, e-books, **interactive 3D books**, electronics, software lic
 
 The flagship demo store **Wissenswerk** ("Bücher, die man begreifen kann") ships in `stores/wissenswerk`.
 
+**Runs everywhere from one codebase and one store blueprint:**
+
+| Platform | How |
+| --- | --- |
+| 🌐 Website (desktop, tablet, phone browsers) | `apps/web` — Next.js, German at `/`, English at `/en` |
+| 📲 Installable app on iPhone/iPad, Android, Windows, macOS, Linux, ChromeOS | the website is a **PWA** (manifest, store-themed icons, service worker, offline page) |
+| 🍏 Native iOS app · 🤖 Native Android app | `apps/mobile` — Expo / React Native, built with EAS for the App Store & Google Play |
+| 🧩 Any other frontend (partners, agents, kiosks) | headless API + typed `@factory/sdk` |
+
 > 👉 **Agents and new developers: read [`HANDOFF.md`](./HANDOFF.md) first.** It explains the architecture, every module, how to extend it, and what is still open.
 
 ---
@@ -23,6 +32,16 @@ pnpm dev            # API on :4000 (embedded Postgres via PGlite), storefront on
 - Payments: a **mock provider** (dev only) and **Vorkasse** (bank transfer) work out of the box; Stripe activates with `STRIPE_SECRET_KEY`.
 - Back office: set `ADMIN_EMAIL` + `ADMIN_PASSWORD` before starting the API, sign in, open `/admin`.
 
+### Native app (iOS / Android)
+
+```bash
+pnpm dev                 # API + website must be running
+pnpm dev:mobile          # Expo dev server → press i (iOS simulator), a (Android emulator), w (web) or scan the QR code with Expo Go
+# Android emulator reaches your machine at 10.0.2.2:  EXPO_PUBLIC_API_URL=http://10.0.2.2:4000 pnpm dev:mobile
+cd apps/mobile && npx eas build -p ios     # / -p android — store builds via Expo Application Services
+```
+The app's name, bundle IDs, icon, splash and colours come from `stores/<id>/store.json` (`STORE=<id>`).
+
 ## The factory
 
 ```bash
@@ -33,6 +52,7 @@ STORE=mein-shop pnpm dev                               # run it
 pnpm factory product:new mein-shop ebook mein-ebook   # scaffold a product
 pnpm factory diagram:new mein-shop kapitel-1          # scaffold a 3D diagram
 pnpm factory canva:pull mein-shop                      # export Canva designs into the store's assets
+pnpm factory app:icon mein-shop                        # save the iOS/Android app icon rendered from the theme
 ```
 
 A store is a folder: `store.json` (identity, Impressum data, markets, tax, shipping, payments, theme, home layout) + `catalog/*.json` + `diagrams/*.json` + `content/<locale>/*.md`. Point `STORE` at another folder and you get another shop — API, storefront, theme, legal pages and catalog all follow.
@@ -46,7 +66,9 @@ A store is a folder: `store.json` (identity, Impressum data, markets, tax, shipp
 | `packages/db` | Drizzle ORM schema & migrations; runs on PostgreSQL (prod) or embedded PGlite (dev/tests); idempotent seeding from a store folder |
 | `apps/api` | Fastify headless commerce API: catalog + German full-text search, carts, checkout, payments, fulfillment, entitlements, subscriptions, bookings, invoices, reviews, admin |
 | `packages/sdk` | Typed, dependency-free API client for any frontend |
-| `apps/web` | Next.js 16 storefront: German at `/`, English at `/en`, themed from `store.json`, three.js 3D-diagram viewer |
+| `apps/web` | Next.js 16 storefront + PWA: German at `/`, English at `/en`, themed from `store.json`, three.js 3D-diagram viewer |
+| `apps/mobile` | Expo / React Native app for iOS, Android (and web): catalog, search, cart, checkout, account library, 3D diagrams |
+| `packages/i18n` | German/English UI texts shared by website and app |
 | `tools/factory` | The factory CLI |
 
 ## Quality gates
@@ -55,7 +77,7 @@ A store is a folder: `store.json` (identity, Impressum data, markets, tax, shipp
 pnpm typecheck && pnpm test && pnpm factory validate --all && pnpm --filter @factory/web build
 ```
 
-79 automated tests (domain rules, seeding, 28 end-to-end API flows on embedded Postgres, factory presets) plus a real-browser journey in `apps/web/e2e/storefront-journey.cjs`.
+81 automated tests (domain rules, seeding, 28 end-to-end API flows on embedded Postgres, factory presets, translation completeness) plus two real-browser journeys: `apps/web/e2e/storefront-journey.cjs` (website) and `apps/mobile/e2e/app-journey.cjs` (app on an emulated iPhone + tablet). iOS and Android bundles compile with `pnpm mobile:export`.
 
 ## Production
 

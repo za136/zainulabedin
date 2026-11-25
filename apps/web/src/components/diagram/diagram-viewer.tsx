@@ -19,7 +19,7 @@ function Loading() {
  * loaded; the same content is rendered as an accessible text outline below it
  * (screen readers, no-WebGL devices, SEO) — required for BFSG accessibility.
  */
-export function DiagramViewer({ scene, height = 520, compact = false, startTour = true }: { scene: DiagramScene; height?: number; compact?: boolean; startTour?: boolean }) {
+export function DiagramViewer({ scene, height = 520, compact = false, startTour = true, fill = false }: { scene: DiagramScene; height?: number; compact?: boolean; startTour?: boolean; /** fill the viewport (embed mode) */ fill?: boolean }) {
   const locale = useLocale();
   const t = useTranslations('diagram');
   const [step, setStep] = useState<number | null>(startTour && scene.steps.length ? 0 : null);
@@ -59,7 +59,7 @@ export function DiagramViewer({ scene, height = 520, compact = false, startTour 
         tabIndex={0}
         aria-label={lt(scene.title, locale)}
         className={`relative overflow-hidden ${full ? 'fixed inset-0 z-[60] rounded-none' : 'rounded-[var(--radius-brand)]'} shadow-xl ring-1 ring-black/10`}
-        style={{ height: full ? '100vh' : height, background: scene.background }}
+        style={{ height: full || fill ? '100dvh' : height, background: scene.background }}
       >
         {webgl ? (
           <DiagramCanvas scene={scene} locale={locale} focus={focus} selected={selected} onSelect={setSelected} stepCamera={current?.camera} autoRotate={step === null && !selected} />
@@ -122,7 +122,7 @@ export function DiagramViewer({ scene, height = 520, compact = false, startTour 
       </div>
 
       {/* Accessible outline */}
-      <details className="mt-3 text-sm text-muted-foreground">
+      <details hidden={fill} className="mt-3 text-sm text-muted-foreground">
         <summary className="cursor-pointer select-none">{lt(scene.title, locale)} — Text</summary>
         <ol className="mt-2 list-decimal space-y-1 pl-6">
           {scene.steps.map((s) => (

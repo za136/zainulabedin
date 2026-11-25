@@ -272,6 +272,7 @@ export interface StorePublic {
   home: { sections: HomeSection[] };
   seo: { titleTemplate: string; description: LocalizedText };
   features: { guestCheckout: boolean; reviews: boolean; wishlist: boolean; b2b: boolean; marketplace: boolean };
+  apps: { scheme?: string; ios?: { bundleId: string }; android?: { package: string }; digitalGoodsInNativeApps: 'web-checkout' | 'browse-only' };
   catalog: { enabledKinds: ProductKind[] };
   kinds: Partial<Record<ProductKind, ProductKindDefinition>>;
   shipping: { zones: { id: string; name: LocalizedText; countries: string[]; rates: { id: string; name: LocalizedText; price: Partial<Record<Currency, number>>; freeAbove?: Partial<Record<Currency, number>>; minDays: number; maxDays: number }[] }[] };

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -6,6 +6,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { PrivacyNotice } from '@/components/layout/header-controls';
+import { RegisterServiceWorker } from '@/components/pwa/register-sw';
 import { routing } from '@/i18n/routing';
 import { getStore } from '@/lib/api';
 import { lt } from '@/lib/format';
@@ -20,7 +21,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(store.url),
     alternates: { languages: Object.fromEntries(store.locales.supported.map((l) => [l, l === store.locales.default ? '/' : `/${l}`])) },
     openGraph: { siteName: store.name, locale: locale === 'de' ? 'de_DE' : 'en_GB', type: 'website' },
+    manifest: '/manifest.webmanifest',
+    icons: { icon: [{ url: '/app-icon/32', sizes: '32x32', type: 'image/png' }, { url: '/app-icon/192', sizes: '192x192', type: 'image/png' }], apple: [{ url: '/app-icon/180', sizes: '180x180' }] },
+    appleWebApp: { capable: true, title: store.name, statusBarStyle: 'default' },
+    formatDetection: { telephone: false },
   };
+}
+
+export async function generateViewport(): Promise<Viewport> {
+  const store = await getStore();
+  return { themeColor: store.theme.colors.primary, width: 'device-width', initialScale: 1, viewportFit: 'cover' };
 }
 
 /** Maps store.json → theme to CSS variables consumed by Tailwind (see globals.css). */
@@ -58,6 +68,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
           <main id="main">{children}</main>
           <Footer store={store} />
           <PrivacyNotice text={t('privacyNotice')} ok={t('ok')} />
+          <RegisterServiceWorker />
         </NextIntlClientProvider>
       </body>
     </html>

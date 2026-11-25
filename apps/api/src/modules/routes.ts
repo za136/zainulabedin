@@ -58,6 +58,7 @@ export async function registerRoutes(app: FastifyInstance, ctx: AppContext) {
       home: cfg.home,
       seo: cfg.seo,
       features: cfg.features,
+      apps: cfg.apps,
       catalog: { enabledKinds: cfg.catalog.enabledKinds },
       kinds: Object.fromEntries(cfg.catalog.enabledKinds.map((k) => [k, PRODUCT_KIND_DEFINITIONS[k]])),
       shipping: cfg.shipping,

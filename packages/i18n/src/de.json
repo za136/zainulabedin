@@ -13,7 +13,27 @@
     "language": "Sprache",
     "deliverTo": "Lieferland"
   },
-  "countries": { "DE": "Deutschland", "AT": "Österreich", "CH": "Schweiz", "LI": "Liechtenstein", "BE": "Belgien", "NL": "Niederlande", "LU": "Luxemburg", "FR": "Frankreich", "IT": "Italien", "ES": "Spanien", "PL": "Polen", "CZ": "Tschechien", "DK": "Dänemark", "SE": "Schweden", "FI": "Finnland", "IE": "Irland", "PT": "Portugal", "US": "USA", "GB": "Vereinigtes Königreich" },
+  "countries": {
+    "DE": "Deutschland",
+    "AT": "Österreich",
+    "CH": "Schweiz",
+    "LI": "Liechtenstein",
+    "BE": "Belgien",
+    "NL": "Niederlande",
+    "LU": "Luxemburg",
+    "FR": "Frankreich",
+    "IT": "Italien",
+    "ES": "Spanien",
+    "PL": "Polen",
+    "CZ": "Tschechien",
+    "DK": "Dänemark",
+    "SE": "Schweden",
+    "FI": "Finnland",
+    "IE": "Irland",
+    "PT": "Portugal",
+    "US": "USA",
+    "GB": "Vereinigtes Königreich"
+  },
   "footer": {
     "vatNote": "Alle Preise inkl. gesetzl. MwSt., zzgl. Versandkosten. Bücher unterliegen der Buchpreisbindung.",
     "legal": "Rechtliches",
@@ -88,12 +108,21 @@
     "lessons": "{count, plural, one {# Lektion} other {# Lektionen}}",
     "previewLesson": "Vorschau",
     "benefits": "Das ist enthalten",
-    "per": { "week": "Woche", "month": "Monat", "year": "Jahr" },
+    "per": {
+      "week": "Woche",
+      "month": "Monat",
+      "year": "Jahr"
+    },
     "perInterval": "pro {interval}",
     "isbn": "ISBN",
     "pages": "Seiten",
     "binding": "Einband",
-    "bindings": { "hardcover": "Gebunden", "paperback": "Taschenbuch", "spiral": "Spiralbindung", "other": "Sonstiges" },
+    "bindings": {
+      "hardcover": "Gebunden",
+      "paperback": "Taschenbuch",
+      "spiral": "Spiralbindung",
+      "other": "Sonstiges"
+    },
     "publisher": "Verlag",
     "language": "Sprache",
     "by": "von {names}",
@@ -102,10 +131,18 @@
     "duration": "Dauer",
     "minutes": "{count} Min.",
     "location": "Ort",
-    "locations": { "online": "Online (Video)", "onsite": "Vor Ort", "hybrid": "Vor Ort oder online" },
+    "locations": {
+      "online": "Online (Video)",
+      "onsite": "Vor Ort",
+      "hybrid": "Vor Ort oder online"
+    },
     "deliverables": "Leistungsumfang",
     "level": "Niveau",
-    "levels": { "beginner": "Einsteiger", "intermediate": "Fortgeschritten", "advanced": "Experte" },
+    "levels": {
+      "beginner": "Einsteiger",
+      "intermediate": "Fortgeschritten",
+      "advanced": "Experte"
+    },
     "certificate": "Mit Zertifikat",
     "formats": "Formate",
     "watermark": "Personalisiertes Wasserzeichen statt hartem DRM",
@@ -132,7 +169,13 @@
     "results": "{count, plural, =0 {Keine Ergebnisse} one {# Ergebnis} other {# Ergebnisse}}",
     "all": "Alle",
     "sort": "Sortieren",
-    "sorts": { "relevance": "Relevanz", "newest": "Neueste", "price_asc": "Preis aufsteigend", "price_desc": "Preis absteigend", "title": "Titel A–Z" },
+    "sorts": {
+      "relevance": "Relevanz",
+      "newest": "Neueste",
+      "price_asc": "Preis aufsteigend",
+      "price_desc": "Preis absteigend",
+      "title": "Titel A–Z"
+    },
     "empty": "Keine Produkte gefunden. Versuchen Sie einen anderen Suchbegriff.",
     "prev": "Zurück",
     "next": "Weiter",
@@ -206,7 +249,15 @@
     "processing": "Bestellung wird übermittelt …",
     "waiverHint": "Ohne diese Zustimmung stellen wir digitale Inhalte erst nach Ablauf der 14-tägigen Widerrufsfrist bereit.",
     "secure": "Sichere, verschlüsselte Übertragung",
-    "methods": { "paypal": "PayPal", "klarna": "Klarna", "card": "Kreditkarte", "sepa_debit": "SEPA-Lastschrift", "bank_transfer": "Überweisung", "eps": "EPS", "twint": "TWINT" }
+    "methods": {
+      "paypal": "PayPal",
+      "klarna": "Klarna",
+      "card": "Kreditkarte",
+      "sepa_debit": "SEPA-Lastschrift",
+      "bank_transfer": "Überweisung",
+      "eps": "EPS",
+      "twint": "TWINT"
+    }
   },
   "mockPay": {
     "title": "Testzahlung",
@@ -268,8 +319,23 @@
     "invoice": "Rechnung",
     "includedInSub": "Im Abo enthalten",
     "watermark": "Wasserzeichen",
-    "status": { "pending_payment": "Zahlung ausstehend", "paid": "Bezahlt", "processing": "In Bearbeitung", "partially_fulfilled": "Teilweise geliefert", "fulfilled": "Geliefert", "completed": "Abgeschlossen", "cancelled": "Storniert", "refunded": "Erstattet" },
-    "fulfillment": { "unfulfilled": "Wird vorbereitet", "scheduled": "Geplant", "fulfilled": "Erledigt", "cancelled": "Storniert", "returned": "Zurückgesendet" },
+    "status": {
+      "pending_payment": "Zahlung ausstehend",
+      "paid": "Bezahlt",
+      "processing": "In Bearbeitung",
+      "partially_fulfilled": "Teilweise geliefert",
+      "fulfilled": "Geliefert",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert",
+      "refunded": "Erstattet"
+    },
+    "fulfillment": {
+      "unfulfilled": "Wird vorbereitet",
+      "scheduled": "Geplant",
+      "fulfilled": "Erledigt",
+      "cancelled": "Storniert",
+      "returned": "Zurückgesendet"
+    },
     "tracking": "Sendungsnummer"
   },
   "diagram": {
@@ -322,5 +388,38 @@
     "more": "Mehr erfahren",
     "close": "Schließen",
     "loading": "Wird geladen …"
+  },
+  "app": {
+    "tabs": {
+      "home": "Start",
+      "catalog": "Suche",
+      "cart": "Warenkorb",
+      "account": "Konto"
+    },
+    "buyOnWeb": "Auf der Website kaufen",
+    "buyOnWebNote": "Digitale Inhalte kaufen Sie bequem auf unserer Website – danach stehen sie sofort hier in der App in Ihrer Bibliothek bereit.",
+    "browseOnly": "Digitale Inhalte können in der App gelesen, aber nicht gekauft werden. Bereits gekaufte Inhalte finden Sie in Ihrer Bibliothek.",
+    "settings": "Einstellungen",
+    "language": "Sprache",
+    "country": "Lieferland",
+    "legal": "Rechtliches",
+    "openWebsite": "Website öffnen",
+    "payInBrowser": "Zahlung im Browser abschließen",
+    "refreshStatus": "Zahlungsstatus aktualisieren",
+    "copied": "Kopiert",
+    "copy": "Kopieren",
+    "retry": "Erneut versuchen",
+    "offline": "Keine Verbindung zum Shop. Bitte prüfen Sie Ihre Internetverbindung.",
+    "orderTitle": "Bestellung",
+    "viewAll": "Alle ansehen",
+    "appointments": "Termine",
+    "open": "Öffnen",
+    "yourOrder": "Ihre Bestellung",
+    "confirmCancelTitle": "Abonnement kündigen?",
+    "confirmCancelText": "Die Kündigung wird zum Ende des laufenden Abrechnungszeitraums wirksam.",
+    "keep": "Behalten",
+    "required": "Pflichtfeld",
+    "quantity": "Menge",
+    "version": "Version"
   }
 }

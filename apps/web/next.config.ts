@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const config: NextConfig = {
   // workspace packages ship TypeScript sources
-  transpilePackages: ['@factory/core', '@factory/sdk'],
+  transpilePackages: ['@factory/core', '@factory/sdk', '@factory/i18n'],
   poweredByHeader: false,
   output: process.env.NEXT_OUTPUT === 'standalone' ? 'standalone' : undefined,
   images: { unoptimized: true },

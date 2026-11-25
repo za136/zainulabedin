@@ -2,9 +2,11 @@
   "name": "store-factory",
   "private": true,
   "version": "0.1.0",
-  "description": "E-Commerce Store Factory — German-first, multi-vertical commerce platform template (books, digital goods, subscriptions, courses, services, electronics).",
+  "description": "E-Commerce Store Factory — German-first, multi-vertical commerce platform template for web (PWA), iOS and Android (books, digital goods, subscriptions, courses, services, electronics).",
   "packageManager": "pnpm@10.28.0",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "type": "module",
   "scripts": {
     "dev": "pnpm --parallel --filter @factory/api --filter @factory/web dev",
@@ -16,7 +18,10 @@
     "db:generate": "pnpm --filter @factory/db generate",
     "db:migrate": "pnpm --filter @factory/db migrate",
     "db:seed": "pnpm --filter @factory/db seed",
-    "factory": "tsx tools/factory/src/cli.ts"
+    "factory": "tsx tools/factory/src/cli.ts",
+    "dev:mobile": "pnpm --filter @factory/mobile start",
+    "mobile:web": "pnpm --filter @factory/mobile web",
+    "mobile:export": "pnpm --filter @factory/mobile exec expo export --platform ios --platform android --platform web"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
