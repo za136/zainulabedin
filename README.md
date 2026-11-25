@@ -1,5 +1,10 @@
 # zainulabedin
 
+> **AI agents and developers: start with [`AGENTS.md`](AGENTS.md) (rules) and [`HANDOFF.md`](HANDOFF.md)
+> (state of every factory and project, next actions).** Every factory and project has its own handoff
+> file; `zf handoff status` lists them, `zf handoff check` verifies them, `scripts/verify.sh` tests everything.
+> Testing web, iOS and Android on a laptop: [`docs/testing/mobile-and-web.md`](docs/testing/mobile-and-web.md).
+
 One monorepo for every project: the **software factory**, the **app and website factories**, the
 **content studio**, **research**, and the **ventures** they serve (plastic surgery clinic, facials
 spa, film studio).

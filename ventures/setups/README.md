@@ -20,3 +20,5 @@ Mobile apps also need Node.js 20+ (`npx expo start`).
 - [ ] Domains and hosting for generated sites (any static host: GitHub Pages, Netlify, Cloudflare Pages)
 - [ ] Apple Developer + Google Play accounts for apps (EAS build)
 - [ ] Form / booking backend
+
+> Handoff: see P11 (`docs/projects/P11-lenovo-linux-workstation.md`) and `docs/testing/mobile-and-web.md`.

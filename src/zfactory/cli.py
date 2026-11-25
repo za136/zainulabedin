@@ -7,6 +7,8 @@
   zf studio produce specs/studio/x.toml        content studio
   zf research new "question?" [--title ...]    new research project
   zf research plan research/<slug>             draft a research plan
+  zf handoff check                             verify handoff files (run before you stop)
+  zf handoff status                            status + next action of everything
 
 Add --offline to force template mode (no API calls). Output defaults to ./out/<kind>/<slug>.
 """
@@ -31,10 +33,32 @@ def _out(args, kind: str, name: str) -> Path:
 def cmd_projects(args) -> int:
     path = REPO_ROOT / "projects.toml"
     with open(path, "rb") as f:
-        projects = tomllib.load(f)["project"]
-    for p in sorted(projects, key=lambda p: (p["priority"], p["id"])):
-        print(f"P{p['priority']}  {p['status']:<9} {p['name']:<36} {p['path']}")
-        print(f"    {p['summary']}")
+        reg = tomllib.load(f)
+    for fac in reg.get("factory", []):
+        print(f"{fac['code']:<4} {fac['name']:<46} {fac['handoff']}")
+    print()
+    for p in sorted(reg["project"], key=lambda p: (p["priority"], p["code"])):
+        print(f"[{p['priority']}] {p['code']:<4} {p['status']:<15} {p['name']:<40} {p['handoff']}")
+        print(f"         {p['summary']}")
+    return 0
+
+
+def cmd_handoff_check(args) -> int:
+    from .handoff import check
+    problems = check(REPO_ROOT)
+    for item, errs in problems.items():
+        print(f"FAIL {item}")
+        for e in errs:
+            print(f"     - {e}")
+    if not problems:
+        print("handoffs OK: every factory and project has a complete handoff; agent files in sync")
+    return 1 if problems else 0
+
+
+def cmd_handoff_status(args) -> int:
+    from .handoff import entries, next_action
+    for e in entries(REPO_ROOT):
+        print(f"{e.code:<4} {e.status:<15} {e.name:<46} next: {next_action(REPO_ROOT / e.handoff)}")
     return 0
 
 
@@ -108,6 +132,10 @@ def build_parser() -> argparse.ArgumentParser:
     spec_cmd("app", "build", cmd_app)
     spec_cmd("web", "build", cmd_web)
     spec_cmd("studio", "produce", cmd_studio)
+
+    h = sub.add_parser("handoff", help="handoff files for agents").add_subparsers(dest="action", required=True)
+    h.add_parser("check", help="verify every handoff is complete").set_defaults(func=cmd_handoff_check)
+    h.add_parser("status", help="status and next action of every factory/project").set_defaults(func=cmd_handoff_status)
 
     r = sub.add_parser("research").add_subparsers(dest="action", required=True)
     rn = r.add_parser("new")

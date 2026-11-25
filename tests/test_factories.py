@@ -49,4 +49,4 @@ def test_research(tmp_path):
 def test_cli_projects(capsys):
     assert main(["projects"]) == 0
     out = capsys.readouterr().out
-    assert out.index("Software Factory") < out.index("Content Studio")
+    assert "P01" in out and out.index("Mahn-Agent") < out.index("KlangWerk")

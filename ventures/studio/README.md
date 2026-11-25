@@ -15,3 +15,5 @@ Status: active (pipeline built)
 - [ ] Budget template per production
 - [ ] Call sheet generator
 - [ ] Clinic/spa marketing content series (shared with ventures/facials and ventures/plastic-surgery)
+
+> Handoff: this area is covered by the F4 factory handoff (`docs/factories/F4-content-media-factory.md`) and P05–P07 in `docs/projects/`.

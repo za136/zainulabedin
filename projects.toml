@@ -1,82 +1,229 @@
-# Master registry of everything in this repo. `zf projects` prints it.
-# priority: 1 = highest.
+# Registry of every factory, project and venture. Read by `zf projects` and `zf handoff check`.
+# Codes follow the Google Drive Factory HQ: F# = factory, P## = project (Master Tracker). ZL/V## are repo-only.
+# priority: 1 = highest (F1 software first, then F2/F3 web + apps, then F4/F5, research and ventures).
+
+[[factory]]
+code = "F1"
+name = "Software Factory (Agentic AI)"
+engine = "src/zfactory/software_factory"
+handoff = "docs/factories/F1-software-factory.md"
+
+[[factory]]
+code = "F2"
+name = "Website Factory"
+engine = "src/zfactory/web_factory"
+handoff = "docs/factories/F2-website-factory.md"
+
+[[factory]]
+code = "F3"
+name = "App Factory (iOS & Android)"
+engine = "src/zfactory/app_factory"
+handoff = "docs/factories/F3-app-factory.md"
+
+[[factory]]
+code = "F4"
+name = "Content & Media Factory (Hollywood Studio)"
+engine = "src/zfactory/content_studio"
+handoff = "docs/factories/F4-content-media-factory.md"
+
+[[factory]]
+code = "F5"
+name = "Deep-Tech & Engineering Intelligence Factory"
+engine = "src/zfactory/research"
+handoff = "docs/factories/F5-deeptech-factory.md"
 
 [[project]]
-id = "p01-mahn-agent"
-name = "P01 Mahn-Agent (agentic dunning)"
+code = "P01"
+id = "mahn-agent"
+name = "Mahn-Agent"
+factory = "F1"
 priority = 1
-status = "mvp"
+status = "MVP"
+location = "in-repo"
 path = "apps/mahn-agent"
-summary = "Agentic dunning for DACH receivables: Odoo/ERPNext sync, payment matching, Claude-drafted German reminders, human approval, dashboard."
+handoff = "apps/mahn-agent/HANDOFF.md"
+run = "cd apps/mahn-agent && make install && make demo"
+test = "cd apps/mahn-agent && make test"
+summary = "Agentic dunning for DACH receivables: ERP sync, payment matching, Claude-drafted German reminders, human approval, dashboard."
 
 [[project]]
+code = "P02"
+id = "atlas-erp"
+name = "Atlas ERP"
+factory = "F1"
+priority = 1
+status = "PRD written"
+location = "external repo za136/Atlas-ERP"
+path = "https://github.com/za136/Atlas-ERP"
+handoff = "docs/projects/P02-atlas-erp.md"
+run = "./gradlew build (in Atlas-ERP repo)"
+test = "./gradlew test (in Atlas-ERP repo)"
+summary = "Modular ERP: finance, inventory, procurement, sales on a shared platform (Kotlin)."
+
+[[project]]
+code = "P03"
+id = "aegis-meridian"
+name = "Aegis / Meridian Platform"
+factory = "F1"
+priority = 1
+status = "In development"
+location = "external repo za136/Aegis"
+path = "https://github.com/za136/Aegis"
+handoff = "docs/projects/P03-aegis-meridian.md"
+run = "uv sync (in Aegis repo)"
+test = "uv run pytest (in Aegis repo)"
+summary = "Agentic payments and simulated banking platform with deterministic ledger and bounded agent autonomy."
+
+[[project]]
+code = "P04"
+id = "engineering-intelligence"
+name = "Engineering Intelligence System"
+factory = "F5"
+priority = 3
+status = "Blueprint"
+location = "Drive only"
+path = "docs/projects/P04-engineering-intelligence.md"
+handoff = "docs/projects/P04-engineering-intelligence.md"
+run = ""
+test = ""
+summary = "Multi-domain engineering intelligence orchestrated by agents with human approval."
+
+[[project]]
+code = "P05"
+id = "klangwerk-studio-os"
+name = "KlangWerk Studio OS"
+factory = "F4"
+priority = 3
+status = "Blueprint"
+location = "Drive only"
+path = "docs/projects/P05-klangwerk-studio-os.md"
+handoff = "docs/projects/P05-klangwerk-studio-os.md"
+run = ""
+test = ""
+summary = "Autonomous AI music studio: songs, albums, release kits and distribution for DACH."
+
+[[project]]
+code = "P06"
+id = "videoforge-ai"
+name = "VideoForge AI"
+factory = "F4"
+priority = 3
+status = "PRD"
+location = "Drive only"
+path = "docs/projects/P06-videoforge-ai.md"
+handoff = "docs/projects/P06-videoforge-ai.md"
+run = ""
+test = ""
+summary = "AI video production app with a multi-agent blueprint."
+
+[[project]]
+code = "P07"
+id = "micro-drama-channels"
+name = "Micro-drama & channel network"
+factory = "F4"
+priority = 3
+status = "Planning"
+location = "Drive + studio engine"
+path = "src/zfactory/content_studio"
+handoff = "docs/projects/P07-micro-drama-channels.md"
+run = "zf studio produce specs/studio/short-film.toml --offline"
+test = "pytest -q tests/test_factories.py -k studio"
+summary = "Micro-drama series and channels on YouTube, Instagram, Facebook."
+
+[[project]]
+code = "P08"
+id = "showroom-sites"
+name = "Product showroom & e-commerce sites"
+factory = "F2"
+priority = 2
+status = "Planning"
+location = "foundations in apps/zainlabs/web"
+path = "apps/zainlabs/web"
+handoff = "docs/projects/P08-showroom-ecommerce-sites.md"
+run = "cd apps/zainlabs/web && npm install && npm run dev"
+test = "cd apps/zainlabs/web && npm run build"
+summary = "Showroom and shop sites for songs, 3D, film and process optimisation."
+
+[[project]]
+code = "P09"
+id = "companion-apps"
+name = "Companion mobile apps"
+factory = "F3"
+priority = 2
+status = "Planning"
+location = "foundations in apps/zainlabs/mobile"
+path = "apps/zainlabs/mobile"
+handoff = "docs/projects/P09-companion-apps.md"
+run = "cd apps/zainlabs/mobile && npm install && npx expo start"
+test = "cd apps/zainlabs/mobile && npx tsc --noEmit"
+summary = "iOS/Android companion apps: media player + showroom, then product clients."
+
+[[project]]
+code = "P10"
+id = "portfolio"
+name = "Portfolio & showcase presence"
+factory = "Brand"
+priority = 2
+status = "In development"
+location = "apps/zainlabs"
+path = "apps/zainlabs"
+handoff = "docs/projects/P10-portfolio.md"
+run = "cd apps/zainlabs/web && npm run dev"
+test = "cd apps/zainlabs/web && npm run build"
+summary = "Portfolio site, blog, LinkedIn, Upwork."
+
+[[project]]
+code = "P11"
+id = "lenovo-workstation"
+name = "Lenovo Linux studio workstation"
+factory = "Infra"
+priority = 2
+status = "To do"
+location = "owner hardware"
+path = "docs/projects/P11-lenovo-linux-workstation.md"
+handoff = "docs/projects/P11-lenovo-linux-workstation.md"
+run = ""
+test = "scripts/verify.sh (on the new machine)"
+summary = "Back up, install Linux, set up the dev + content toolchain."
+
+[[project]]
+code = "ZL"
 id = "zainlabs-platform"
 name = "ZAIN LABS website + iOS/Android app"
+factory = "F2+F3"
 priority = 2
-status = "active"
+status = "In development"
+location = "in-repo"
 path = "apps/zainlabs"
-summary = "Main platform: Next.js website with 3D hero + public API, Expo app for iOS/Android, one shared content source for every stream and project."
+handoff = "apps/zainlabs/HANDOFF.md"
+run = "cd apps/zainlabs/web && npm run dev; cd apps/zainlabs/mobile && npx expo start"
+test = "see apps/zainlabs/HANDOFF.md"
+summary = "Main platform: website with 3D hero + API, Expo app, shared content for every stream and project."
 
 [[project]]
-id = "software-factory"
-name = "Software Factory"
-priority = 1
-status = "active"
-path = "src/zfactory/software_factory"
-summary = "Spec (TOML) -> plan -> code -> tests -> auto-fix loop. Produces working repos from a written spec."
-
-[[project]]
-id = "app-factory"
-name = "Mobile App Factory"
-priority = 2
-status = "active"
-path = "src/zfactory/app_factory"
-summary = "Spec -> Expo / React Native app (iOS + Android) with tabs, list/detail/form/content screens."
-
-[[project]]
-id = "web-factory"
-name = "Website Factory"
-priority = 2
-status = "active"
-path = "src/zfactory/web_factory"
-summary = "Brief -> static multi-page website. Vertical presets: aesthetic/plastic-surgery clinic, facials spa, film studio, SaaS."
-
-[[project]]
-id = "content-studio"
-name = "Hollywood-style Content Studio"
-priority = 3
-status = "active"
-path = "src/zfactory/content_studio"
-summary = "Logline -> treatment -> screenplay -> shot list -> storyboard prompts -> production schedule."
-
-[[project]]
-id = "research"
-name = "Research Projects"
-priority = 3
-status = "active"
-path = "src/zfactory/research"
-summary = "Scaffold research projects (question, hypotheses, methods, sources, findings) and generate research plans."
-
-[[project]]
+code = "V01"
 id = "venture-plastic-surgery"
-name = "Plastic Surgery Clinic (venture)"
+name = "Plastic surgery clinic (venture)"
+factory = "Venture"
 priority = 3
-status = "planning"
+status = "Concept"
+location = "in-repo specs"
 path = "ventures/plastic-surgery"
-summary = "Business plan + site/app specs; built with web-factory and app-factory."
+handoff = "ventures/plastic-surgery/HANDOFF.md"
+run = "zf web build specs/sites/aesthetic-clinic.toml --offline"
+test = "pytest -q tests/test_factories.py"
+summary = "Business plan checklist + site/app specs."
 
 [[project]]
+code = "V02"
 id = "venture-facials"
-name = "Facials / Skin Spa (venture)"
+name = "Facials / skin spa (venture)"
+factory = "Venture"
 priority = 3
-status = "planning"
+status = "Concept"
+location = "in-repo specs"
 path = "ventures/facials"
-summary = "Business plan + site/app specs; built with web-factory and app-factory."
-
-[[project]]
-id = "setups"
-name = "Setups (dev, studio, ops)"
-priority = 3
-status = "planning"
-path = "ventures/setups"
-summary = "Dev environment, studio gear and operations checklists."
+handoff = "ventures/facials/HANDOFF.md"
+run = "zf web build specs/sites/facials-spa.toml --offline"
+test = "pytest -q tests/test_factories.py"
+summary = "Business plan checklist + site/app specs."

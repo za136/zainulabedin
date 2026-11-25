@@ -1,3 +1,16 @@
+# Agent instructions: ZAIN LABS app (apps/zainlabs/mobile)
+
+Read the repo root `AGENTS.md` and `apps/zainlabs/HANDOFF.md` first.
+
+Project specifics (override the generic Expo notes below where they differ):
+- Routes live in `app/` (not `src/app/`); non-route code is in `src/` (`theme.ts`, `content.tsx`, `components.tsx`), imported as `@/…`.
+- Content comes from `../content` (`@zainlabs/content`); never hard-code projects here.
+- Inside `Link asChild`, give the child a flat style object (`StyleSheet.flatten`), not an array or function: arrays crash on web.
+- In sandboxes that block api.expo.dev, prefix Expo CLI commands with `EXPO_OFFLINE=1`.
+- Verify: `npx tsc --noEmit` and `EXPO_OFFLINE=1 npx expo export --platform web`.
+
+---
+
 This is an Expo/React Native mobile application. Prioritize mobile-first patterns, performance, and cross-platform compatibility.
 
 ## Expo has changed — do not trust your training data
