@@ -1,0 +1,52 @@
+[film]
+title = "Last Light"
+logline = "On the final night before her family's cinema is demolished, a projectionist screens one last film and discovers it holds a message from her late father."
+genre = "Drama"
+format = "short"
+runtime_min = 12
+tone = "Warm, nostalgic, quietly magical. Cinema Paradiso meets Aftersun."
+visual_style = "35mm, tungsten practicals, deep shadows, projector-beam haze"
+
+[[character]]
+name = "Mira"
+description = "30s, projectionist, guarded, carries her father's watch."
+
+[[character]]
+name = "Sam"
+description = "Teen usher, chatty, the last employee."
+
+[[location]]
+name = "Projection booth"
+description = "Cramped, warm, film cans stacked to the ceiling."
+
+[[location]]
+name = "Auditorium"
+description = "300 empty red seats, peeling gold paint."
+
+[[beat]]
+title = "Closing night"
+summary = "Mira threads the final reel as Sam counts the near-empty till."
+location = "Projection booth"
+time = "NIGHT"
+characters = ["Mira", "Sam"]
+
+[[beat]]
+title = "The wrong reel"
+summary = "The film on screen is not the one listed: it's home footage of Mira as a child."
+location = "Auditorium"
+time = "NIGHT"
+characters = ["Mira", "Sam"]
+
+[[beat]]
+title = "The message"
+summary = "Her father speaks to camera, to her, years ago. Mira stops the projector to listen again."
+location = "Projection booth"
+time = "NIGHT"
+characters = ["Mira"]
+
+[[beat]]
+title = "Last light"
+summary = "Dawn. Mira and Sam watch the final frame in the empty auditorium, then walk out together."
+location = "Auditorium"
+time = "DAWN"
+characters = ["Mira", "Sam"]

@@ -1,0 +1,8 @@
+[site]
+name = "Aura Aesthetics"
+preset = "aesthetic-clinic"
+city = "London"
+phone = "+44 20 0000 0000"
+email = "hello@example.com"
+about = "A surgeon-led clinic offering surgical and non-surgical treatments, with honest consultations and personalised plans."
+# form_action = "https://formspree.io/f/your-id"

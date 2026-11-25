@@ -1,0 +1,24 @@
+[app]
+name = "Glow Skin Studio"
+bundle_id = "com.glowskinstudio.app"
+primary = "#5e9c84"
+
+[[screen]]
+name = "Facials"
+kind = "list"
+items = [
+  { title = "Signature Facial", subtitle = "60 min", body = "Cleanse, exfoliate, extract, mask and hydrate." },
+  { title = "HydraFacial", subtitle = "45 min", body = "Deep cleanse and hydration, no downtime." },
+  { title = "Chemical Peel", subtitle = "30 min", body = "Patch test required for first-time clients." },
+]
+
+[[screen]]
+name = "Book"
+kind = "form"
+fields = ["Name", "Phone", "Facial", "Date"]
+submit_label = "Book now"
+
+[[screen]]
+name = "Skin Tips"
+kind = "content"
+body = "Wear SPF daily. Avoid exfoliating for 48 hours after a peel. Stay hydrated."

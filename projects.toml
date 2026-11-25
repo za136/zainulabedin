@@ -1,0 +1,66 @@
+# Master registry of everything in this repo. `zf projects` prints it.
+# priority: 1 = highest.
+
+[[project]]
+id = "software-factory"
+name = "Software Factory"
+priority = 1
+status = "active"
+path = "src/zfactory/software_factory"
+summary = "Spec (TOML) -> plan -> code -> tests -> auto-fix loop. Produces working repos from a written spec."
+
+[[project]]
+id = "app-factory"
+name = "Mobile App Factory"
+priority = 2
+status = "active"
+path = "src/zfactory/app_factory"
+summary = "Spec -> Expo / React Native app (iOS + Android) with tabs, list/detail/form/content screens."
+
+[[project]]
+id = "web-factory"
+name = "Website Factory"
+priority = 2
+status = "active"
+path = "src/zfactory/web_factory"
+summary = "Brief -> static multi-page website. Vertical presets: aesthetic/plastic-surgery clinic, facials spa, film studio, SaaS."
+
+[[project]]
+id = "content-studio"
+name = "Hollywood-style Content Studio"
+priority = 3
+status = "active"
+path = "src/zfactory/content_studio"
+summary = "Logline -> treatment -> screenplay -> shot list -> storyboard prompts -> production schedule."
+
+[[project]]
+id = "research"
+name = "Research Projects"
+priority = 3
+status = "active"
+path = "src/zfactory/research"
+summary = "Scaffold research projects (question, hypotheses, methods, sources, findings) and generate research plans."
+
+[[project]]
+id = "venture-plastic-surgery"
+name = "Plastic Surgery Clinic (venture)"
+priority = 3
+status = "planning"
+path = "ventures/plastic-surgery"
+summary = "Business plan + site/app specs; built with web-factory and app-factory."
+
+[[project]]
+id = "venture-facials"
+name = "Facials / Skin Spa (venture)"
+priority = 3
+status = "planning"
+path = "ventures/facials"
+summary = "Business plan + site/app specs; built with web-factory and app-factory."
+
+[[project]]
+id = "setups"
+name = "Setups (dev, studio, ops)"
+priority = 3
+status = "planning"
+path = "ventures/setups"
+summary = "Dev environment, studio gear and operations checklists."

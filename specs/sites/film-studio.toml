@@ -1,0 +1,5 @@
+[site]
+name = "Zain Pictures"
+preset = "film-studio"
+about = "An independent studio developing feature films, commercials and music videos."
+email = "studio@example.com"

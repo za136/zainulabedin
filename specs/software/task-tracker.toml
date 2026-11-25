@@ -1,0 +1,19 @@
+[project]
+name = "Task Tracker"
+language = "python"
+description = "A small task tracker library with a CLI, persisted to a JSON file."
+
+[[feature]]
+name = "add task"
+description = "Add a task with a title and optional due date."
+acceptance = ["Returns a task with a unique id", "Rejects an empty title"]
+
+[[feature]]
+name = "complete task"
+description = "Mark a task as done by id."
+acceptance = ["Completed tasks report done = True", "Unknown id raises KeyError"]
+
+[[feature]]
+name = "list tasks"
+description = "List tasks, optionally only open ones, sorted by due date."
+acceptance = ["Open filter hides completed tasks", "Tasks without due date sort last"]

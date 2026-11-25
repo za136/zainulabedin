@@ -1,0 +1,26 @@
+[app]
+name = "Aura Aesthetics"
+bundle_id = "com.auraaesthetics.app"
+primary = "#b08968"
+
+[[screen]]
+name = "Treatments"
+kind = "list"
+items = [
+  { title = "Rhinoplasty", subtitle = "Surgical", body = "Consultation required. Recovery typically 1-2 weeks before returning to work." },
+  { title = "Facelift", subtitle = "Surgical", body = "Consultation required." },
+  { title = "Botox", subtitle = "Non-surgical", body = "15-30 minute appointment." },
+  { title = "Dermal Fillers", subtitle = "Non-surgical", body = "Results assessed at a 2-week review." },
+]
+
+[[screen]]
+name = "Book"
+kind = "form"
+fields = ["Full name", "Phone", "Email", "Treatment", "Preferred date"]
+submit_label = "Request consultation"
+submit_url = ""
+
+[[screen]]
+name = "Aftercare"
+kind = "content"
+body = "Follow the written aftercare plan from your clinician. Contact the clinic immediately if you notice signs of infection, severe pain or swelling. In an emergency call your local emergency number."
