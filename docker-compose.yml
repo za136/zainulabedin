@@ -1,0 +1,33 @@
+# Full stack: Postgres + API + storefront.   docker compose up --build
+# Switch store: STORE=my-shop docker compose up --build
+services:
+  db:
+    image: postgres:16-alpine
+    environment: { POSTGRES_USER: factory, POSTGRES_PASSWORD: factory, POSTGRES_DB: factory }
+    volumes: [db:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U factory"], interval: 5s, retries: 10 }
+
+  api:
+    build: { context: ., target: api }
+    environment:
+      DATABASE_URL: postgres://factory:factory@db:5432/factory
+      STORE: ${STORE:-wissenswerk}
+      APP_SECRET: ${APP_SECRET:-compose-dev-secret-change-me}
+      NODE_ENV: ${NODE_ENV:-development}   # "production" disables the mock payment provider
+      WEB_URL: http://localhost:3000
+      API_URL: http://localhost:4000
+      CORS_ORIGINS: http://localhost:3000
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin-password-123}
+      STORAGE_DIR: /app/storage
+    volumes: [files:/app/storage]
+    ports: ["4000:4000"]
+    depends_on: { db: { condition: service_healthy } }
+
+  web:
+    build: { context: ., target: web }
+    environment: { API_URL: http://api:4000 }
+    ports: ["3000:3000"]
+    depends_on: [api]
+
+volumes: { db: {}, files: {} }

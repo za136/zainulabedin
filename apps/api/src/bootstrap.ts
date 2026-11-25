@@ -1,4 +1,6 @@
-import { loadStore, resolveStoreDir } from '@factory/config';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { findRepoRoot, loadStore, resolveStoreDir } from '@factory/config';
 import { createDb, migrate, seedStore, type DbHandle } from '@factory/db';
 import { sql } from 'drizzle-orm';
 import type { AppContext } from './context.js';
@@ -14,6 +16,13 @@ import { id } from '@factory/core';
  * where adapters are chosen (DB driver, mailer, VAT validator, payment providers).
  */
 export async function bootstrap(overrides: { env?: Partial<Env>; mailer?: Mailer; now?: () => Date } = {}): Promise<{ ctx: AppContext; handle: DbHandle }> {
+  // repo-root .env (never in tests); real environment variables win
+  const dotenv = join(findRepoRoot(), '.env');
+  if (process.env.NODE_ENV !== 'test' && existsSync(dotenv)) {
+    const before = { ...process.env };
+    process.loadEnvFile(dotenv);
+    Object.assign(process.env, before);
+  }
   const env = { ...loadEnv(), ...overrides.env } as Env;
   const store = loadStore(env.STORE_DIR ? env.STORE_DIR : resolveStoreDir({ STORE: env.STORE }));
   const handle = await createDb(env.DATABASE_URL ?? `pglite://./.data/${store.config.id}`);

@@ -27,6 +27,7 @@
     "fastify-plugin": "^5.0.0",
     "fastify-type-provider-zod": "^6.1.0",
     "stripe": "^19.0.0",
+    "tsx": "^4.20.0",
     "zod": "^4.1.12"
   }
 }
