@@ -1,0 +1,35 @@
+{
+  "name": "@factory/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "German-first storefront for the store factory (Next.js App Router, next-intl, Tailwind v4, three.js diagrams). Themed entirely from store.json via the API.",
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@factory/core": "workspace:*",
+    "@factory/sdk": "workspace:*",
+    "@react-three/drei": "^10.7.0",
+    "@react-three/fiber": "^9.4.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.80.0",
+    "marked": "^18.3.0",
+    "next": "^16.0.0",
+    "next-intl": "^4.4.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "server-only": "^0.0.1",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/three": "^0.187.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

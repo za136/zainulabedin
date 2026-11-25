@@ -276,7 +276,7 @@ export interface StorePublic {
   kinds: Partial<Record<ProductKind, ProductKindDefinition>>;
   shipping: { zones: { id: string; name: LocalizedText; countries: string[]; rates: { id: string; name: LocalizedText; price: Partial<Record<Currency, number>>; freeAbove?: Partial<Record<Currency, number>>; minDays: number; maxDays: number }[] }[] };
   tax: { originCountry: string; smallBusiness: boolean };
-  payments: { id: string; label: { de: string; en: string }; methods: string[] }[];
+  payments: { id: string; label: { de: string; en: string }; methods: string[]; bank?: { accountHolder: string; iban: string; bic?: string; bankName?: string } }[];
   orderButtonLabel: { de: string; en: string };
   diagrams: { id: string; title: LocalizedText }[];
 }

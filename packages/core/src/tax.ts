@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { roundHalfUp, type BasisPoints } from './money.js';
+import { roundHalfUp, type BasisPoints } from './money';
 
 /**
  * Tax categories. Every product (or variant) carries one; the rate is resolved

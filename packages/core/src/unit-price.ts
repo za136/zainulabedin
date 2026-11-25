@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { roundHalfUp } from './money.js';
+import { roundHalfUp } from './money';
 
 /**
  * Grundpreis (unit price) according to § 4 PAngV: goods sold by weight, volume,

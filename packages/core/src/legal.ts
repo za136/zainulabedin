@@ -1,4 +1,4 @@
-import { kindDef, type ProductKind } from './product-kinds.js';
+import { kindDef, type ProductKind } from './product-kinds';
 
 /**
  * German/EU consumer-law rules that shape the checkout.

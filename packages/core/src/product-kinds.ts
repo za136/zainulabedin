@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { localizedTextSchema } from './i18n.js';
-import type { TaxCategory } from './tax.js';
+import { localizedTextSchema } from './i18n';
+import type { TaxCategory } from './tax';
 
 /**
  * PRODUCT KIND REGISTRY

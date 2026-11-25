@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { localizedTextSchema } from './i18n.js';
-import type { Currency } from './money.js';
+import { localizedTextSchema } from './i18n';
+import type { Currency } from './money';
 
 export const shippingRateSchema = z.object({
   id: z.string(),

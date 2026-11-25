@@ -62,7 +62,7 @@ export async function registerRoutes(app: FastifyInstance, ctx: AppContext) {
       kinds: Object.fromEntries(cfg.catalog.enabledKinds.map((k) => [k, PRODUCT_KIND_DEFINITIONS[k]])),
       shipping: cfg.shipping,
       tax: { originCountry: cfg.tax.originCountry, smallBusiness: cfg.tax.smallBusiness },
-      payments: ctx.payments.list().map((p) => ({ id: p.id, label: p.label, methods: p.methods })),
+      payments: ctx.payments.list().map((p) => ({ id: p.id, label: p.label, methods: p.methods, ...('bank' in p ? { bank: (p as { bank: unknown }).bank } : {}) })),
       orderButtonLabel: ORDER_BUTTON_LABEL,
       diagrams: [...ctx.store.diagrams.values()].map((d) => ({ id: d.id, title: d.title })),
     };

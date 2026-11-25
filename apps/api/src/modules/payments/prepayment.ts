@@ -5,7 +5,7 @@ export class PrepaymentProvider implements PaymentProvider {
   id = 'prepayment';
   label = { de: 'Vorkasse (Überweisung)', en: 'Bank transfer (prepayment)' };
   methods = ['bank_transfer'];
-  constructor(private bank: { accountHolder: string; iban: string; bic?: string; bankName?: string }) {}
+  constructor(public bank: { accountHolder: string; iban: string; bic?: string; bankName?: string }) {}
   async createPayment(order: PaymentOrder) {
     return {
       action: { type: 'bank_transfer' as const, ...this.bank, reference: order.number, amount: order.total, currency: order.currency },

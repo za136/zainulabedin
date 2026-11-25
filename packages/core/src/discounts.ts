@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { allocate, percentOf } from './money.js';
-import { PRODUCT_KINDS, type ProductKind } from './product-kinds.js';
-import type { Currency } from './money.js';
+import { allocate, percentOf } from './money';
+import { PRODUCT_KINDS, type ProductKind } from './product-kinds';
+import type { Currency } from './money';
 
 export const couponSchema = z.object({
   code: z.string().min(2).transform((s) => s.toUpperCase()),

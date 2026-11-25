@@ -1,8 +1,8 @@
-import { allocate, type BasisPoints, type Currency } from './money.js';
-import { applyCoupon, type Coupon, type CouponProblem } from './discounts.js';
-import type { ProductKind } from './product-kinds.js';
-import { quoteShipping, type ShippingQuote, type ShippingZone } from './shipping.js';
-import { adjustGrossPrice, lookupRate, resolveTax, taxFromGross, type TaxCategory, type TaxContext, type TaxSettings, type TaxTreatment } from './tax.js';
+import { allocate, type BasisPoints, type Currency } from './money';
+import { applyCoupon, type Coupon, type CouponProblem } from './discounts';
+import type { ProductKind } from './product-kinds';
+import { quoteShipping, type ShippingQuote, type ShippingZone } from './shipping';
+import { adjustGrossPrice, lookupRate, resolveTax, taxFromGross, type TaxCategory, type TaxContext, type TaxSettings, type TaxTreatment } from './tax';
 
 export interface PricingLineInput {
   id: string;
