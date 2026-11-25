@@ -14,7 +14,7 @@ export default function StreamScreen() {
     <ScrollView contentContainerStyle={st.page}>
       <Stack.Screen options={{ title: s.name }} />
       <View style={st.head}>
-        <Eyebrow>{`${s.code} · ${s.tagline}`}</Eyebrow>
+        <Eyebrow onDark>{`${s.code} · ${s.tagline}`}</Eyebrow>
         <Text style={st.h1}>{s.name}</Text>
         <Text style={st.lead}>{s.description}</Text>
         {s.capabilities.map((c) => (

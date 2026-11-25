@@ -35,9 +35,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]" && pytest -q
+        working-directory: apps/zainlabs/api
+      - run: node apps/zainlabs/scripts/guard.mjs
       - run: npm ci && npm run check
         working-directory: apps/zainlabs/content
-      - run: npm ci && npm run typecheck && npm run build
+      - run: npm ci && npm run typecheck && npm run build && npx playwright install --with-deps chromium && npm run test:e2e
         working-directory: apps/zainlabs/web
       - run: npm ci && npm run typecheck && npx expo export --platform web
         working-directory: apps/zainlabs/mobile

@@ -25,6 +25,7 @@ export function Footer() {
           <h4>Studio</h4>
           <Link href="/projects">All projects</Link>
           <Link href="/contact">Contact</Link>
+          <Link href="/newsletter">Newsletter</Link>
           <a href="/api/content">Public API</a>
         </div>
         <div>

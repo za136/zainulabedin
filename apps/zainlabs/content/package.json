@@ -6,7 +6,8 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "check": "tsx src/check.ts"
+    "check": "tsx scripts/check.ts",
+    "export": "tsx scripts/export.ts"
   },
   "devDependencies": {
     "tsx": "^4.23.15"

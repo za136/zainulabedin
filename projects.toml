@@ -196,9 +196,9 @@ status = "In development"
 location = "in-repo"
 path = "apps/zainlabs"
 handoff = "apps/zainlabs/HANDOFF.md"
-run = "cd apps/zainlabs/web && npm run dev; cd apps/zainlabs/mobile && npx expo start"
-test = "see apps/zainlabs/HANDOFF.md"
-summary = "Main platform: website with 3D hero + API, Expo app, shared content for every stream and project."
+run = "cd apps/zainlabs && make install && make dev"
+test = "cd apps/zainlabs && make test && make e2e"
+summary = "Main platform: FastAPI backend (content, leads, newsletter, admin), Next.js website with 3D hero, Expo app; shared content and typed API client."
 
 [[project]]
 code = "V01"

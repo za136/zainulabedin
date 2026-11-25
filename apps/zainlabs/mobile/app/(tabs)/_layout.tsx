@@ -11,7 +11,7 @@ export default function TabLayout() {
         headerShown: false,
         tabBarStyle: { backgroundColor: colors.ink, borderTopWidth: 0, height: 64, paddingTop: 6 },
         tabBarActiveTintColor: colors.paper,
-        tabBarInactiveTintColor: "#77766f",
+        tabBarInactiveTintColor: colors.mutedOnDark,
         tabBarLabelStyle: { fontSize: 12, fontWeight: "600" },
         tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 16 }}>{glyph[route.name] ?? "•"}</Text>,
       })}

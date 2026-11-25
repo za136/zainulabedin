@@ -4,6 +4,7 @@ import { streams } from "./streams";
 import type { Project, Stream, StreamSlug } from "./types";
 
 export * from "./types";
+export * from "./api";
 export { projects, site, streams };
 
 export const getStream = (slug: string): Stream | undefined => streams.find((s) => s.slug === slug);

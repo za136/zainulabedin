@@ -14,10 +14,15 @@ step() { # name, command
 
 step "zfactory tests + handoff check" "$PY -m pytest -q && PYTHONPATH=src $PY -m zfactory handoff check"
 step "Mahn-Agent tests" "cd apps/mahn-agent && $PY -m pytest -q"
+step "ZAIN LABS API tests (incl. contract guards)" "cd apps/zainlabs/api && $PY -m pytest -q"
 if command -v npm >/dev/null; then
+  step "ZAIN LABS guard (anti-hallucination rules)" "node apps/zainlabs/scripts/guard.mjs"
   step "ZAIN LABS content check" "cd apps/zainlabs/content && { [ -d node_modules ] || npm ci --no-audit --no-fund; } && npm run check"
   if [ "$QUICK" != "--quick" ]; then
     step "ZAIN LABS website typecheck + build" "cd apps/zainlabs/web && { [ -d node_modules ] || npm ci --no-audit --no-fund; } && npx tsc --noEmit && npx next build"
+    # browser smoke tests: uses PW_CHROMIUM_EXECUTABLE if set, else Playwright's own Chromium (npx playwright install chromium)
+    if [ -z "${PW_CHROMIUM_EXECUTABLE:-}" ]; then PW_CHROMIUM_EXECUTABLE=$(ls -d /opt/pw-browsers/chromium-*/chrome-linux*/chrome 2>/dev/null | head -1); export PW_CHROMIUM_EXECUTABLE; fi
+    step "ZAIN LABS website e2e smoke tests" "cd apps/zainlabs/web && npm run test:e2e"
     step "ZAIN LABS app typecheck + web export" "cd apps/zainlabs/mobile && { [ -d node_modules ] || npm ci --no-audit --no-fund; } && npx tsc --noEmit && EXPO_OFFLINE=1 CI=1 npx expo export --platform web --output-dir /tmp/zainlabs-mobile-export"
   fi
 else

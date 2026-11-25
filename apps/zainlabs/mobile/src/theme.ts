@@ -6,8 +6,10 @@ export const colors = {
   paper2: "#e9e6e0",
   card: "#ffffff",
   line: "#d9d5cd",
-  muted: "#8b8a86",
-  accent: "#d7261e",
+  muted: "#6f6e69", // secondary text on light
+  mutedOnDark: "#8b8a86", // secondary text on ink
+  accent: "#d4241d", // fills, buttons, red text on light
+  accentOnDark: "#ff4d42", // small red text on ink
 };
 
 export const font = {

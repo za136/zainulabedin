@@ -35,11 +35,13 @@ export function StatusBadge({ status, solid }: { status: string; solid?: boolean
   );
 }
 
-export function Eyebrow({ children }: { children: string }) {
+/** Section kicker. Pass onDark on ink backgrounds (uses the brighter accent for contrast). */
+export function Eyebrow({ children, onDark }: { children: string; onDark?: boolean }) {
+  const color = onDark ? colors.accentOnDark : colors.accent;
   return (
     <View style={s.eyebrow}>
-      <Asterisk size={11} />
-      <Text style={s.eyebrowText}>{children.toUpperCase()}</Text>
+      <Asterisk size={11} color={color} />
+      <Text style={[s.eyebrowText, { color }]}>{children.toUpperCase()}</Text>
     </View>
   );
 }

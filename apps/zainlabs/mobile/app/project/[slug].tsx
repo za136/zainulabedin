@@ -14,7 +14,7 @@ export default function ProjectScreen() {
     <ScrollView contentContainerStyle={st.page}>
       <Stack.Screen options={{ title: p.title }} />
       <View style={st.head}>
-        <Eyebrow>{`${s?.code ?? ""} · ${s?.name ?? ""}${p.code ? ` · ${p.code}` : ""}`}</Eyebrow>
+        <Eyebrow onDark>{`${s?.code ?? ""} · ${s?.name ?? ""}${p.code ? ` · ${p.code}` : ""}`}</Eyebrow>
         <Text style={st.h1}>{p.title}</Text>
         <Text style={st.lead}>{p.summary}</Text>
         <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>

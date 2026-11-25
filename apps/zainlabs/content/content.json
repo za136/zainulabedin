@@ -1,0 +1,413 @@
+{
+  "version": 1,
+  "site": {
+    "name": "ZAIN LABS",
+    "claim": "Engineering agentic AI, apps and media for DACH.",
+    "intro": "One studio, five production lines. We turn researched ideas into working software, websites, mobile apps, films and music for businesses and audiences in Germany, Austria and Switzerland.",
+    "location": "Germany · Austria · Switzerland",
+    "email": "hello@zainlabs.example",
+    "process": [
+      {
+        "title": "Research",
+        "text": "Every product starts from a researched brief, not a hunch: market, users, regulation in DACH."
+      },
+      {
+        "title": "Specification",
+        "text": "A written PRD with decisions, assumptions and open questions before the first line of code."
+      },
+      {
+        "title": "Build",
+        "text": "Shared templates, agents and CI let each new product start at 60% instead of zero."
+      },
+      {
+        "title": "Evaluate",
+        "text": "Tests, golden cases and human review gates. Nothing consequential happens without approval."
+      },
+      {
+        "title": "Launch",
+        "text": "Shipped as a public demo, website, app or release, with metrics fed back into the next build."
+      }
+    ]
+  },
+  "streams": [
+    {
+      "slug": "software",
+      "code": "F1",
+      "name": "Software",
+      "tagline": "Agentic AI products",
+      "description": "A reusable pipeline that turns researched ideas into PRDs and then into working agentic-AI products for DACH businesses: multi-agent workflows, ERP-connected automations, APIs and dashboards.",
+      "capabilities": [
+        "Agentic workflows",
+        "ERP connectors (Odoo, ERPNext)",
+        "Evaluation harnesses",
+        "Human-in-the-loop approval"
+      ]
+    },
+    {
+      "slug": "web",
+      "code": "F2",
+      "name": "Websites",
+      "tagline": "3D, SEO and AI-search ready",
+      "description": "One generator for modern showroom and e-commerce sites: shared design system, content model and deploy pipeline, so a new product gets a site in a day.",
+      "capabilities": [
+        "Design systems",
+        "3D product viewers",
+        "SEO & AI-search optimisation",
+        "Static and e-commerce sites"
+      ]
+    },
+    {
+      "slug": "apps",
+      "code": "F3",
+      "name": "Mobile Apps",
+      "tagline": "iOS and Android from one codebase",
+      "description": "Cross-platform apps that reuse the website design system and the software back ends: navigation, auth, theming, offline cache and store release pipeline included.",
+      "capabilities": [
+        "Expo / React Native",
+        "Offline-first content",
+        "Media and 3D modules",
+        "EAS build & submit"
+      ]
+    },
+    {
+      "slug": "studio",
+      "code": "F4",
+      "name": "Studio",
+      "tagline": "Film, music and channel content",
+      "description": "A mostly automated, Linux-based studio toolbox for micro dramas, songs, albums and channel content for DACH audiences, from idea to script, storyboard, edit and release.",
+      "capabilities": [
+        "Script → storyboard → shot list",
+        "AI-assisted music production",
+        "Render & edit presets",
+        "Release kits"
+      ]
+    },
+    {
+      "slug": "deeptech",
+      "code": "F5",
+      "name": "Deep-Tech",
+      "tagline": "Engineering intelligence & research",
+      "description": "Long-horizon research and engineering intelligence across manufacturing, maintenance, supply chain, CAD and imaging, plus the market research behind every other stream.",
+      "capabilities": [
+        "Engineering intelligence",
+        "Decision & assumption ledgers",
+        "DACH ecosystem research",
+        "Prototype experiments"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "slug": "mahn-agent",
+      "code": "P01",
+      "title": "Mahn-Agent",
+      "stream": "software",
+      "status": "MVP",
+      "year": 2026,
+      "featured": true,
+      "summary": "Agentic dunning for DACH SMEs: finds overdue invoices, drafts German reminders, sends only with human approval.",
+      "description": [
+        "Mahn-Agent connects to Odoo or ERPNext, matches incoming payments and decides which invoices need a Zahlungserinnerung, a Mahnung or a final reminder.",
+        "Money is never computed by the model. Statutory interest and fees for Germany, Austria and Switzerland are calculated in code; a Claude agent writes the letter from verified facts, and a validator rejects any invented amount or premature threat.",
+        "Every letter waits in an approval queue. Payments that arrive in the meantime stop the send automatically."
+      ],
+      "highlights": [
+        "§ 288 BGB / UGB / OR interest rules",
+        "Validator feedback loop",
+        "Approval queue & audit log",
+        "Odoo · ERPNext connectors"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Claude",
+        "Postgres",
+        "Docker"
+      ],
+      "links": [
+        {
+          "label": "Source",
+          "url": "https://github.com/za136/zainulabedin/tree/main/apps/mahn-agent"
+        }
+      ]
+    },
+    {
+      "slug": "aegis-meridian",
+      "code": "P03",
+      "title": "Aegis / Meridian",
+      "stream": "software",
+      "status": "In development",
+      "year": 2026,
+      "featured": true,
+      "summary": "Agentic payments and simulated banking platform with a deterministic double-entry ledger and bounded agent autonomy.",
+      "description": [
+        "Specialised agent squads for onboarding, payment repair, financial-crime investigation, reconciliation and disputes operate on the edge of a deterministic banking core.",
+        "Agents act only through typed tools behind a gateway with autonomy levels A0 to A3, kill switches and a human approval inbox."
+      ],
+      "highlights": [
+        "Double-entry ledger invariants",
+        "ISO 20022 payment saga",
+        "MCP tool gateway",
+        "Evaluation harness"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Next.js",
+        "Postgres + pgvector",
+        "Redpanda"
+      ],
+      "links": [
+        {
+          "label": "Source",
+          "url": "https://github.com/za136/Aegis"
+        }
+      ]
+    },
+    {
+      "slug": "atlas-erp",
+      "code": "P02",
+      "title": "Atlas ERP",
+      "stream": "software",
+      "status": "In development",
+      "year": 2026,
+      "summary": "Modular ERP for small and mid-sized businesses: finance, inventory, procurement and sales on one platform.",
+      "description": [
+        "Atlas ERP is built as separate domain modules (finance, inventory, procurement, sales) on a shared platform layer, specified in a full product requirements document."
+      ],
+      "highlights": [
+        "Modular domains",
+        "Shared platform layer",
+        "PRD-driven"
+      ],
+      "stack": [
+        "Kotlin",
+        "Gradle"
+      ],
+      "links": [
+        {
+          "label": "Source",
+          "url": "https://github.com/za136/Atlas-ERP"
+        }
+      ]
+    },
+    {
+      "slug": "software-factory",
+      "title": "Software Factory pipeline",
+      "stream": "software",
+      "status": "In development",
+      "year": 2026,
+      "summary": "Spec to plan to code to tests with an automatic repair loop: the engine behind every product here.",
+      "description": [
+        "A command-line factory that turns a written spec into a working, tested project. With Claude it plans, writes and repairs code until the tests pass; without a key it produces a clean scaffold."
+      ],
+      "highlights": [
+        "Plan → build → test → fix",
+        "Offline template mode",
+        "Build reports"
+      ],
+      "stack": [
+        "Python",
+        "Claude",
+        "pytest"
+      ],
+      "links": [
+        {
+          "label": "Source",
+          "url": "https://github.com/za136/zainulabedin"
+        }
+      ]
+    },
+    {
+      "slug": "zainlabs-platform",
+      "title": "ZAIN LABS website & app",
+      "stream": "web",
+      "status": "In development",
+      "year": 2026,
+      "summary": "This platform: one content source feeding the website, its API and the iOS/Android app.",
+      "description": [
+        "Designed from Canva templates and built as a Next.js website with a real-time 3D hero and an Expo app for iOS and Android. Both read the same content, so a new project appears everywhere at once."
+      ],
+      "highlights": [
+        "Shared content package",
+        "Public JSON API",
+        "3D hero (three.js)",
+        "Impressum & privacy pages"
+      ],
+      "stack": [
+        "Next.js",
+        "three.js",
+        "Expo",
+        "TypeScript"
+      ],
+      "links": []
+    },
+    {
+      "slug": "clinic-websites",
+      "title": "Aesthetic clinic & skin spa sites",
+      "stream": "web",
+      "status": "Concept",
+      "year": 2026,
+      "summary": "Website templates for plastic-surgery clinics and facial spas with booking forms and medical disclaimers.",
+      "description": [
+        "Generated by the website factory from a short brief. Copy avoids outcome guarantees and every page carries the required disclaimer."
+      ],
+      "highlights": [
+        "Clinic & spa presets",
+        "Booking form",
+        "Compliance-aware copy"
+      ],
+      "stack": [
+        "Python generator",
+        "HTML/CSS"
+      ],
+      "links": []
+    },
+    {
+      "slug": "zainlabs-app",
+      "title": "ZAIN LABS mobile app",
+      "stream": "apps",
+      "status": "In development",
+      "year": 2026,
+      "featured": true,
+      "summary": "The studio in your pocket: every stream, project and release, with an offline cache and a direct line to the team.",
+      "description": [
+        "Built with Expo for iOS and Android from the same design system as the website. Content syncs from the public API and stays available offline."
+      ],
+      "highlights": [
+        "iOS + Android",
+        "Offline content",
+        "Contact from the app"
+      ],
+      "stack": [
+        "Expo",
+        "React Native",
+        "TypeScript"
+      ],
+      "links": []
+    },
+    {
+      "slug": "client-companion-apps",
+      "title": "Clinic & spa companion apps",
+      "stream": "apps",
+      "status": "Concept",
+      "year": 2026,
+      "summary": "Treatment menus, booking requests and aftercare information for aesthetic clinics and skin studios.",
+      "description": [
+        "Generated by the app factory from a spec: list, form and content screens with a shared theme."
+      ],
+      "highlights": [
+        "Treatment catalogue",
+        "Booking requests",
+        "Aftercare content"
+      ],
+      "stack": [
+        "Expo",
+        "expo-router"
+      ],
+      "links": []
+    },
+    {
+      "slug": "reborn",
+      "title": "Reborn",
+      "stream": "studio",
+      "status": "In development",
+      "year": 2026,
+      "featured": true,
+      "summary": "A music release by Zayn, produced with the studio's AI-assisted music pipeline.",
+      "description": [
+        "Song, cover art and release kit produced in the Studio stream for DACH channels."
+      ],
+      "highlights": [
+        "Music release",
+        "Cover & visuals",
+        "Channel content"
+      ],
+      "stack": [
+        "AI music tools",
+        "Canva",
+        "ffmpeg"
+      ],
+      "links": []
+    },
+    {
+      "slug": "last-light",
+      "title": "Last Light",
+      "stream": "studio",
+      "status": "Concept",
+      "year": 2026,
+      "summary": "A 12-minute drama: on the last night of her family's cinema, a projectionist finds a message from her late father.",
+      "description": [
+        "Developed with the studio pipeline: bible, treatment, Fountain screenplay, shot list, storyboard prompts and shoot schedule."
+      ],
+      "highlights": [
+        "Short film",
+        "Full pre-production pack"
+      ],
+      "stack": [
+        "Studio pipeline"
+      ],
+      "links": []
+    },
+    {
+      "slug": "videoforge",
+      "title": "VideoForge AI",
+      "stream": "studio",
+      "status": "PRD",
+      "year": 2026,
+      "summary": "Multi-agent video production: from idea to edited, platform-ready cuts.",
+      "description": [
+        "Specified in a master PRD with a multi-agent architecture for scripting, generation and editing."
+      ],
+      "highlights": [
+        "Multi-agent editing",
+        "9:16 · 16:9 · 1:1 presets"
+      ],
+      "stack": [
+        "Agents",
+        "ffmpeg"
+      ],
+      "links": []
+    },
+    {
+      "slug": "engineering-orchestrator",
+      "title": "Autonomous Engineering Orchestrator",
+      "stream": "deeptech",
+      "status": "Concept",
+      "year": 2026,
+      "summary": "An engineering-intelligence system that coordinates domain agents across manufacturing, maintenance and supply chain.",
+      "description": [
+        "Blueprint stage: decision ledger, assumptions register and domain packs designed to be reused across industries."
+      ],
+      "highlights": [
+        "Domain packs",
+        "Decision ledger",
+        "Contracts-first architecture"
+      ],
+      "stack": [
+        "Agents",
+        "Python"
+      ],
+      "links": []
+    },
+    {
+      "slug": "dach-ecosystem-maps",
+      "title": "DACH AI & deep-tech ecosystem maps",
+      "stream": "deeptech",
+      "status": "Released",
+      "year": 2026,
+      "summary": "Research maps of the AI and deep-tech ecosystems in Germany, Austria, Switzerland, Liechtenstein and Luxembourg.",
+      "description": [
+        "Market intelligence that feeds every other stream: who builds what, where, and which programmes support it."
+      ],
+      "highlights": [
+        "5 country maps",
+        "Swiss directory"
+      ],
+      "stack": [
+        "Research"
+      ],
+      "links": []
+    }
+  ]
+}

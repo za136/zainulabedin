@@ -14,6 +14,8 @@ export default function Datenschutz() {
       <p>When you visit the site, the server processes technical data (IP address, time, requested page, browser) to deliver the site and keep it secure (Art. 6(1)(f) GDPR). <span className="todo">Name your hosting provider and log retention period.</span></p>
       <h2>Contact form and app contact</h2>
       <p>If you contact us, we store your name, email, company and message to answer your request, based on your consent (Art. 6(1)(a) GDPR) and pre-contractual measures (Art. 6(1)(b)). Data is deleted when it is no longer needed, at the latest after <span className="todo">retention period</span>.</p>
+      <h2>Newsletter</h2>
+      <p>If you subscribe, we store your email address and the time of your consent. You only receive the newsletter after confirming the link we email you (double opt-in). Every email contains an unsubscribe link; unconfirmed requests are deleted after 7 days.</p>
       <h2>Cookies and tracking</h2>
       <p>This site sets no tracking cookies and uses no third-party analytics. Fonts are served locally; no requests go to Google Fonts.</p>
       <h2>Your rights</h2>

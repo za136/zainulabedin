@@ -1,64 +1,73 @@
-# ZAIN LABS platform (website + iOS/Android app): Handoff
+# ZAIN LABS platform (backend + website + iOS/Android app): Handoff
 
 > Factory: F2 + F3 (covers P10 brand/portfolio, seeds P08 and P09) · Status: In development · Last updated: 2026-11-25 by Claude Code
 
 ## Summary
-The main ZAIN LABS presence: a Next.js website with a real-time 3D hero and public JSON API, and an
-Expo app for iOS and Android. One content package (`content/`) feeds both, so every stream and
-project is entered once. Design taken from Canva templates in the owner's account.
+The main ZAIN LABS presence. A FastAPI **backend** (content API, leads, GDPR-compliant newsletter with double
+opt-in, admin, OpenAPI contract), a Next.js **website** with a real-time 3D hero, and an Expo **app** for iOS
+and Android. One content package feeds all three. Design from Canva templates in the owner's account.
+**Division of work:** backend and contracts were built by Claude Code; the frontend will be developed further
+by Gemini under the binding rules in `docs/FRONTEND_SPEC.md`.
 
 ## Current status
-Verified on 2026-11-25:
-- `content`: `npm run check` → 5 streams, 13 projects, no errors.
-- `web`: `npm run build` (31 routes), served with `next start`, screenshots of home and project page,
-  3D hero renders (Chromium + SwiftShader), `/api/content` returns 5 streams / 13 projects,
-  `/api/contact` validates and stores requests.
-- `mobile`: `npx tsc --noEmit`, `npx expo export --platform web`; on an emulated iPhone 15 viewport all
-  tabs and detail screens render, content syncs live from the API ("Up to date"), and the contact form
-  stored a request with `source: "app"`.
+Verified on 2026-11-25 (commands in "How to test"):
+- Backend: 17 tests pass: content endpoints and ETag, contact validation/honeypot/rate limit/owner mail and
+  webhook, newsletter double opt-in incl. expiry and no-enumeration, admin auth/update/erase/purge/audit,
+  committed `openapi.json` = code, client endpoints ⊆ contract, no direct `fetch("/api/…")` in frontends.
+- Website: type check, production build (30 routes), **58 Playwright smoke tests** (desktop + phone): every route
+  renders, one h1, no console errors, **no third-party requests**, no placeholder text, only real projects linked,
+  contact form sends the exact contract payload and shows server field errors, consent unticked, honeypot off-screen,
+  newsletter status pages.
+- Integration (real servers): website form → proxy → backend stored the lead; newsletter signup → confirmation
+  email (.eml) → link → redirect to `/newsletter?status=confirmed` → subscriber confirmed; app (Expo web export on an
+  emulated iPhone) synced live content from the backend and sent a lead with `source: "app"`.
+- Guard (`scripts/guard.mjs`): dependencies approved, no forbidden patterns, web/app tokens equal, legal pages present.
+- Accessibility: colour contrast measured and fixed (tokens `--muted`, `--muted-on-dark`, `--accent`, `--accent-on-dark`).
 
-NOT verified: native iOS/Android builds and real devices; Lighthouse scores; production hosting.
+NOT verified: native iOS/Android builds and real devices; Lighthouse scores; production hosting; SMTP with a real
+mail server (outbox only); Postgres for this API (SQLite tested; Postgres driver is an optional extra).
 
 ## Where things are
-- `content/src/` (projects.ts, streams.ts, site.ts, types.ts, check.ts), `web/` (app/, components/, lib/),
-  `mobile/` (app/ routes, src/ theme, content sync, components).
-- Brand assets: `web/public/brand/hero-3d.jpg`, `web/app/icon.png`, `mobile/assets/`.
+- `api/` backend (`src/zainlabs_api/`: schemas = contract, routes/, services.py, models.py), `api/openapi.json`.
+- `content/src/` data + `api.ts` typed client; `content/content.json` (generated).
+- `web/` (app/, components/, lib/api.ts, tests/e2e/), `mobile/` (app/ routes, src/).
+- `docs/FRONTEND_SPEC.md` (binding frontend rules), `docs/API.md`, `docs/decisions/ADR-001..003`, `docs/design/*.jpg`.
+- `scripts/guard.mjs`, `scripts/approved-dependencies.json`, `Makefile`.
 - Canva designs (owner account): "Infographic - DACH Tech Impact", "Infographic - Step One",
   "Mobile App UI with Geometric Form", "Your Story - ZAIN LABS".
-- Drive: "P10 · Portfolio & showcase presence — Project Brief", "P08", "P09", F2/F3 Agent Briefs.
 
 ## How to run
 ```bash
-cd apps/zainlabs/web && npm install && npm run dev                       # http://localhost:3000
-cd apps/zainlabs/mobile && npm install && cp .env.example .env && npx expo start
+cd apps/zainlabs && make install && make dev     # API :8100 (/docs) + website :3000
+make mobile                                      # Expo Go on your phone; see docs/testing/mobile-and-web.md (repo root)
 ```
-Phone testing on Linux / no Mac: `docs/testing/mobile-and-web.md` (repo root).
 
 ## How to test
 ```bash
-cd apps/zainlabs/content && npm install && npm run check
-cd apps/zainlabs/web && npm run typecheck && npm run build
-cd apps/zainlabs/mobile && npx tsc --noEmit && EXPO_OFFLINE=1 npx expo export --platform web
+cd apps/zainlabs && make test && make e2e        # or from the repo root: scripts/verify.sh
 ```
 
 ## Decisions
-- 2026-11-25 · Name "ZAIN LABS", English UI with DACH focus (owner's choice).
-- 2026-11-25 · Visual direction: German/Swiss professional, black + off-white + signal red, real-time 3D.
-- 2026-11-25 · Content as TypeScript in a local package (`file:` dependency), not a CMS · zero cost, typed, reviewable.
-- 2026-11-25 · No Google Fonts, no tracking · GDPR-friendly by default.
-- 2026-11-25 · In expo-router, `Link asChild` children need flat style objects (arrays/functions break on web).
+- ADR-001 Separate backend service; frontends only via the typed client; contract guards.
+- ADR-002 GDPR by design: no IPs stored, unticked consent, double opt-in, retention purge, erasure, audit.
+- ADR-003 Content as typed code exported to JSON.
+- 2026-11-25 · Name "ZAIN LABS", English UI with DACH focus; German/Swiss visual style; real-time 3D (owner).
+- 2026-11-25 · Frontend will be continued by Gemini → strict spec, guard script, e2e tests, reference screenshots.
+- 2026-11-25 · Contrast: two accent and two muted tones (light/dark backgrounds), measured ≥ 4.5:1.
 
 ## Open questions and blockers
-- Impressum and privacy notice need the owner's real data (yellow placeholders) · owner: Zain · blocks publishing.
-- Contact email `hello@zainlabs.example` is a placeholder · owner: Zain.
-- Domain and hosting · owner: Zain.
-- P10 brief originally planned Google Sites; this Next.js site can replace it. Owner to confirm.
+- Impressum/Datenschutz need the owner's real data (yellow placeholders): blocks publishing · owner: Zain.
+- Contact email `hello@zainlabs.example`, domain, hosting (website + API) · owner: Zain.
+- Mail provider for production (SMTP credentials) · owner: Zain.
+- i18n approach (German/English switch) needs owner approval (FRONTEND_SPEC §7).
 
 ## Next actions
-1. Owner runs the app on a phone with Expo Go (testing guide) and reports issues here.
-2. Fill Impressum/Datenschutz, set the real contact email and `NEXT_PUBLIC_SITE_URL`, deploy the website.
-3. Add German translations (de/en switch) for web and app.
-4. Add real project screenshots/demos per project (P10 "collect demos" action).
+1. Frontend (Gemini): pick the first item of `docs/FRONTEND_SPEC.md` §7 that the owner approves; follow §2 workflow.
+2. Backend: Dockerfile + compose for API + website (Postgres optional), and a production deployment guide.
+3. Backend: admin UI or CLI listing for leads (`zainlabs-api leads`) so the owner does not need curl.
+4. Owner: test the app with Expo Go; fill Impressum/Datenschutz; choose hosting.
 
 ## Session log
-- 2026-11-25 · Claude Code · designs generated in Canva, website + app coded and connected · verified as above.
+- 2026-11-25 · Claude Code · Canva designs → website + app; connected via shared content.
+- 2026-11-25 · Claude Code · moved backend into `api/` (FastAPI), typed client, contract + guard tests, e2e tests,
+  FRONTEND_SPEC for Gemini, contrast fixes, reference screenshots · all checks above pass.

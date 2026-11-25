@@ -1,0 +1,14 @@
+{
+  "_comment": "Dependencies the owner has approved. Adding one requires the owner's OK, then add it here. Checked by scripts/guard.mjs.",
+  "web": {
+    "dependencies": ["@react-three/fiber", "@zainlabs/content", "next", "react", "react-dom", "three"],
+    "devDependencies": ["@playwright/test", "@types/node", "@types/react", "@types/react-dom", "@types/three", "typescript"]
+  },
+  "mobile": {
+    "dependencies": ["@expo/metro-runtime", "@react-native-async-storage/async-storage", "@zainlabs/content", "expo",
+      "expo-constants", "expo-image", "expo-linking", "expo-router", "expo-status-bar", "react", "react-dom",
+      "react-native", "react-native-safe-area-context", "react-native-screens", "react-native-web"],
+    "devDependencies": ["@types/react", "typescript"]
+  },
+  "content": { "dependencies": [], "devDependencies": ["tsx"] }
+}

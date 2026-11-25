@@ -10,7 +10,7 @@ export default function Studio() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.ink }} edges={["top"]}>
       <ScrollView contentContainerStyle={st.page}>
-        <Eyebrow>{`${studio?.code ?? "F4"} · Studio`}</Eyebrow>
+        <Eyebrow onDark>{`${studio?.code ?? "F4"} · Studio`}</Eyebrow>
         <Text style={st.h1}>Film, music & channel content.</Text>
         <Text style={st.lead}>{studio?.description}</Text>
         <View style={{ gap: 12, marginTop: 8 }}>

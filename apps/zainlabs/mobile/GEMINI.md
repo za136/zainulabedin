@@ -1,13 +1,17 @@
 # Agent instructions: ZAIN LABS app (apps/zainlabs/mobile)
 
-Read the repo root `AGENTS.md` and `apps/zainlabs/HANDOFF.md` first.
+Read the repo root `AGENTS.md`, `apps/zainlabs/docs/FRONTEND_SPEC.md` (binding rules R-…; app rules R-RN-*)
+and `apps/zainlabs/HANDOFF.md` first. Reference screens: `apps/zainlabs/docs/design/app-*.jpg`.
 
 Project specifics (override the generic Expo notes below where they differ):
 - Routes live in `app/` (not `src/app/`); non-route code is in `src/` (`theme.ts`, `content.tsx`, `components.tsx`), imported as `@/…`.
 - Content comes from `../content` (`@zainlabs/content`); never hard-code projects here.
+- Backend only through `api` / `sendContact` from `src/content.tsx` (typed client). Endpoints: `apps/zainlabs/docs/API.md`.
+- No new dependencies or native modules without the owner's approval (`apps/zainlabs/scripts/approved-dependencies.json`).
+- Colors only from `src/theme.ts`; on dark backgrounds use `colors.accentOnDark` / `colors.mutedOnDark`.
 - Inside `Link asChild`, give the child a flat style object (`StyleSheet.flatten`), not an array or function: arrays crash on web.
 - In sandboxes that block api.expo.dev, prefix Expo CLI commands with `EXPO_OFFLINE=1`.
-- Verify: `npx tsc --noEmit` and `EXPO_OFFLINE=1 npx expo export --platform web`.
+- Verify: `npx tsc --noEmit`, `EXPO_OFFLINE=1 npx expo export --platform web --output-dir /tmp/zl-export`, and `node ../scripts/guard.mjs`.
 
 ---
 

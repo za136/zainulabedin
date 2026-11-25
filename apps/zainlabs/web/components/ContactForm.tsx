@@ -1,27 +1,36 @@
 "use client";
 
 import { useState } from "react";
-import { streams } from "@zainlabs/content";
+import { streams, type StreamSlug } from "@zainlabs/content";
+import { api } from "@/lib/api";
 
 export function ContactForm({ project }: { project?: string }) {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
   const [error, setError] = useState("");
+  const [fields, setFields] = useState<Record<string, string>>({});
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setState("sending");
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...data, consent: data.consent === "on", source: "web" }),
-    }).catch(() => null);
-    if (res?.ok) {
+    const form = new FormData(e.currentTarget);
+    const text = (k: string) => String(form.get(k) ?? "").trim();
+    const result = await api.sendContact({
+      name: text("name"),
+      email: text("email"),
+      company: text("company") || undefined,
+      stream: text("stream") as StreamSlug,
+      project: project || undefined,
+      message: text("message"),
+      consent: form.get("consent") === "on",
+      source: "web",
+      website: text("website"),
+    });
+    if (result.ok) {
       setState("ok");
-      e.currentTarget?.reset();
     } else {
       setState("error");
-      setError((await res?.json().catch(() => null))?.error ?? "Network error. Please try again.");
+      setError(result.error);
+      setFields(result.fields ?? {});
     }
   }
 
@@ -42,7 +51,14 @@ export function ContactForm({ project }: { project?: string }) {
         <input type="checkbox" name="consent" required />
         I agree that ZAIN LABS stores my details to answer this request (see the privacy notice). I can withdraw at any time.
       </label>
-      {state === "error" && <p className="notice err">{error}</p>}
+      {state === "error" && (
+        <div className="notice err" role="alert">
+          <p>{error}</p>
+          {Object.keys(fields).length > 1 && (
+            <ul>{Object.entries(fields).map(([k, v]) => <li key={k}>{k}: {v}</li>)}</ul>
+          )}
+        </div>
+      )}
       <button className="btn" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send message →"}</button>
     </form>
   );

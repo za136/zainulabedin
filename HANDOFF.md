@@ -32,7 +32,7 @@ verifies every handoff is complete.
 | P09 | Companion mobile apps | F3 | Planning (foundations built) | `apps/zainlabs/mobile` | [P09](docs/projects/P09-companion-apps.md) |
 | P10 | Portfolio & showcase presence | Brand | In development | `apps/zainlabs` | [P10](docs/projects/P10-portfolio.md) |
 | P11 | Lenovo Linux studio workstation | Infra | To do | owner's hardware | [P11](docs/projects/P11-lenovo-linux-workstation.md) |
-| ZL | ZAIN LABS website + iOS/Android app | F2+F3 | In development, build + emulated run verified | `apps/zainlabs` | [ZL](apps/zainlabs/HANDOFF.md) |
+| ZL | ZAIN LABS backend + website + iOS/Android app | F2+F3 | In development: backend 17 tests, website 58 e2e tests, integration verified; frontend continues with Gemini under `apps/zainlabs/docs/FRONTEND_SPEC.md` | `apps/zainlabs` | [ZL](apps/zainlabs/HANDOFF.md) |
 | V01 | Plastic surgery clinic (venture) | – | Concept | `ventures/plastic-surgery` | [V01](ventures/plastic-surgery/HANDOFF.md) |
 | V02 | Facials / skin spa (venture) | – | Concept | `ventures/facials` | [V02](ventures/facials/HANDOFF.md) |
 
@@ -44,14 +44,15 @@ exist only in this repo.
    branch reaches GitHub. Until then the work exists in the session container and in the git bundle
    sent to the owner.
 2. Owner: test the ZAIN LABS app on a phone with Expo Go (`docs/testing/mobile-and-web.md`).
+   Frontend agents (Gemini): read `apps/zainlabs/docs/FRONTEND_SPEC.md` before touching `apps/zainlabs/web` or `mobile`.
 3. P01: run the Claude eval with an API key; set up an ERPNext/Odoo test instance.
 4. P11: install Linux on the Lenovo and run `scripts/verify.sh` there.
 5. F1 Phase 2: extract shared modules (LLM client, approval queue, audit log) into `packages/`.
 6. Fill Impressum/Datenschutz and deploy the ZAIN LABS website.
 
 ## Environment notes for agents
-- **Verify everything:** `scripts/verify.sh` (Python factories, Mahn-Agent, content check, website
-  build, app typecheck + web export). Last full run: see Session log.
+- **Verify everything:** `scripts/verify.sh` (Python factories + handoff check, Mahn-Agent, ZAIN LABS API,
+  guard, content check, website build, website e2e, app typecheck + web export). Last full run: see Session log.
 - **Git:** work branch `claude/multi-project-repo-setup-7ofpx7`. Pushing from Claude Code cloud
   sessions currently fails with HTTP 403 (GitHub App not installed on the repo). Owner said pushing
   is not required for now; commit locally.

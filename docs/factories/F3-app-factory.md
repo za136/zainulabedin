@@ -30,6 +30,7 @@ Testing on the owner's hardware (Linux, no Mac): see `docs/testing/mobile-and-we
 `npx tsc --noEmit && npx expo export --platform web` in `apps/zainlabs/mobile`.
 
 ## Decisions
+- 2026-11-25 · ZAIN LABS backend moved to `apps/zainlabs/api` (FastAPI); frontends use only the typed client; Gemini continues the frontend under `apps/zainlabs/docs/FRONTEND_SPEC.md` (binding).
 - 2026-11-25 · Expo (managed) + expo-router · one codebase, cloud builds for iOS without a Mac.
 - 2026-11-25 · Content bundled in the app + cached + synced from `/api/content` · works offline.
 - 2026-11-25 · Expo CLI needs `EXPO_OFFLINE=1` in sandboxes that block api.expo.dev.
@@ -44,4 +45,5 @@ Testing on the owner's hardware (Linux, no Mac): see `docs/testing/mobile-and-we
 3. Add i18n (de/en) and an `eas.json` with development/preview/production profiles.
 
 ## Session log
+- 2026-11-25 · Claude Code · backend split, contract/guard/e2e tests, frontend spec for Gemini · verified (see apps/zainlabs/HANDOFF.md).
 - 2026-11-25 · Claude Code · Expo app from Canva template, connected to website API · typecheck/export/emulated run OK.

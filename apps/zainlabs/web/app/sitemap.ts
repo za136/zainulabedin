@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/projects",
     "/contact",
+    "/newsletter",
     ...streams.map((s) => `/streams/${s.slug}`),
     ...projects.map((p) => `/projects/${p.slug}`),
   ].map((path) => ({ url: `${SITE_URL}${path}` }));

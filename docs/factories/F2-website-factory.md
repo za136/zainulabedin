@@ -31,6 +31,7 @@ zf web build specs/sites/aesthetic-clinic.toml --offline   # static generator
 `cd apps/zainlabs/web && npm run typecheck && npm run build`; `pytest -q` in the repo root.
 
 ## Decisions
+- 2026-11-25 · ZAIN LABS backend moved to `apps/zainlabs/api` (FastAPI); frontends use only the typed client; Gemini continues the frontend under `apps/zainlabs/docs/FRONTEND_SPEC.md` (binding).
 - 2026-11-25 · Next.js App Router + plain CSS design tokens (no CSS framework) · small, fast, no build plugins.
 - 2026-11-25 · System font stack, no Google Fonts · GDPR (no third-party requests) and zero cost.
 - 2026-11-25 · 3D with three.js + locally generated environment map, no HDR downloads.
@@ -45,4 +46,5 @@ zf web build specs/sites/aesthetic-clinic.toml --offline   # static generator
 3. P08: first showroom page template (product, collection, release) on the shared content model.
 
 ## Session log
+- 2026-11-25 · Claude Code · backend split, contract/guard/e2e tests, frontend spec for Gemini · verified (see apps/zainlabs/HANDOFF.md).
 - 2026-11-25 · Claude Code · web factory presets; ZAIN LABS website from Canva templates · build + screenshots OK.

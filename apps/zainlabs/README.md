@@ -1,37 +1,40 @@
-# ZAIN LABS: website + iOS/Android app
+# ZAIN LABS: backend + website + iOS/Android app
 
-The main platform where every stream and project lives: one content source feeds the website, its
-public API and the mobile app. Design taken from Canva templates (see "Design source" below).
+The main platform where every stream and project lives. One content source feeds the website, the
+backend API and the mobile app. Design taken from Canva templates (see "Design source" below).
 
-```
-content/   @zainlabs/content: streams, projects, site copy (single source of truth)
-web/       Next.js 16 website + JSON API + real-time 3D hero (three.js)
-mobile/    Expo SDK 58 app for iOS and Android (expo-router), syncs from the API, works offline
-```
+**Agents:** frontend work follows [`docs/FRONTEND_SPEC.md`](docs/FRONTEND_SPEC.md) (binding), backend work
+[`docs/API.md`](docs/API.md) and [`docs/decisions/`](docs/decisions). State and next steps: [`HANDOFF.md`](HANDOFF.md).
 
 ```
-                 content/src/projects.ts  ← add a project here
-                        │
-         ┌──────────────┴──────────────┐
-   web (Next.js)                  mobile (Expo)
-   pages + /api/content  ──sync──►  bundled copy → cache → live
-   /api/contact  ◄──────────────── contact form (source: "app")
+content/   @zainlabs/content: streams, projects, site copy + the typed API client (src/api.ts)
+api/       FastAPI backend (port 8100): content API, leads, newsletter double opt-in, admin, OpenAPI contract
+web/       Next.js 16 website (port 3000) with real-time 3D hero; /api/* is proxied to the backend
+mobile/    Expo SDK 58 app for iOS and Android; syncs from the backend, works offline
+scripts/   guard.mjs (anti-hallucination rules) + approved-dependencies.json
+docs/      FRONTEND_SPEC.md, API.md, decisions/ (ADRs), design/ (reference screenshots)
+```
+
+```
+     content/src/*.ts ──npm run export──► content/content.json
+          │ (build time)                        │
+          ▼                                     ▼
+   web (Next.js :3000) ──/api/* proxy──► api (FastAPI :8100) ◄── mobile (Expo)
+   pages, forms                          content, leads, newsletter, admin
 ```
 
 ## Run it
 
 ```bash
-# 1. website + API  →  http://localhost:3000
-cd apps/zainlabs/web && npm install && npm run dev
-
-# 2. app  →  press i (iOS simulator), a (Android emulator), or scan the QR code with Expo Go
-cd apps/zainlabs/mobile && npm install && cp .env.example .env && npx expo start
-#    on a real phone set EXPO_PUBLIC_API_URL in .env to your computer's LAN IP, e.g. http://192.168.1.20:3000
-#    in the browser: npx expo start --web
-
-# content check (duplicate slugs, unknown streams, https links)
-cd apps/zainlabs/content && npm install && npm run check
+cd apps/zainlabs
+make install        # Python venv for the API + npm install for content, web, mobile
+make dev            # backend http://localhost:8100 (/docs) + website http://localhost:3000
+make mobile         # Expo: scan the QR code with Expo Go (set EXPO_PUBLIC_API_URL=http://<LAN-IP>:8100 in mobile/.env)
+make test           # guard, content check, API tests, website build, app export
+make e2e            # browser smoke tests (first time: cd web && npx playwright install chromium)
 ```
+Admin (leads, subscribers): set `ZL_ADMIN_TOKEN` (generate with `api/.venv/bin/zainlabs-api new-admin-token`),
+then e.g. `curl -H "Authorization: Bearer $ZL_ADMIN_TOKEN" localhost:8100/api/admin/leads`.
 
 Production builds: `cd web && npm run build && npm start` (any Node host or Vercel). Store builds for the
 app: `npx eas build --platform ios|android` and `npx eas submit` (needs an Expo account plus Apple
@@ -39,21 +42,14 @@ Developer / Google Play accounts).
 
 ## Add a project or stream
 
-Edit `content/src/projects.ts` (or `streams.ts`), run `npm run check` in `content/`, done. The website
-shows it at once; the app picks it up on its next sync (pull to refresh), and new app builds ship it
-in the bundled offline copy.
+Edit `content/src/projects.ts` (or `streams.ts`), then `make export` (writes `content.json`, runs the checks).
+The website shows it after the next build; the API serves it immediately; the app picks it up on its next
+sync (pull to refresh) and new app builds ship it in the bundled offline copy.
 
 ## API
 
-| Method | Path | Purpose |
-|---|---|---|
-| GET | `/api/content` | everything (site, streams, projects); the app syncs from here |
-| GET | `/api/streams` | streams with project counts |
-| GET | `/api/projects?stream=software` | projects, optionally by stream |
-| GET | `/api/projects/{slug}` | one project |
-| POST | `/api/contact` | contact request `{name, email, company?, stream, message, consent: true}`; stored in `data/contact-requests.jsonl`, optionally forwarded to `CONTACT_WEBHOOK_URL` |
-
-Env (web): `NEXT_PUBLIC_SITE_URL`, `CONTACT_STORE_DIR`, `CONTACT_WEBHOOK_URL`, `CORS_ORIGIN`.
+See [`docs/API.md`](docs/API.md) (summary) and `api/openapi.json` (contract, checked by tests).
+Environment variables: `api/.env.example`, `mobile/.env.example`; website: `API_INTERNAL_URL` (backend URL for the proxy, default http://localhost:8100), `NEXT_PUBLIC_SITE_URL`.
 
 ## Design source (Canva)
 
@@ -72,4 +68,5 @@ the still in `web/public/brand/hero-3d.jpg` and `mobile/assets/brand/hero-3d.jpg
 - Fill in the **Impressum** (`web/app/impressum/page.tsx`; required in Germany, § 5 DDG) and review
   the privacy notice (`web/app/datenschutz/page.tsx`). Placeholders are highlighted in yellow.
 - Replace `hello@zainlabs.example` in `content/src/site.ts` and set `NEXT_PUBLIC_SITE_URL`.
-- Point the contact form at your inbox or CRM with `CONTACT_WEBHOOK_URL`.
+- Set `ZL_ADMIN_TOKEN`, `ZL_OWNER_EMAIL` (lead notifications) and SMTP settings (`api/.env.example`); optionally `ZL_LEAD_WEBHOOK_URL`.
+- Schedule `zainlabs-api purge` (e.g. daily cron) for the retention policy.

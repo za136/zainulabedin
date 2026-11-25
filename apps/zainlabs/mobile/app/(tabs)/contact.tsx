@@ -18,7 +18,7 @@ export default function Contact() {
   async function submit() {
     setError("");
     setState("sending");
-    const r = await sendContact({ ...form, stream, consent });
+    const r = await sendContact({ ...form, company: form.company || undefined, stream, consent });
     if (r.ok) setState("ok");
     else {
       setState("idle");

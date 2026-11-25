@@ -4,10 +4,11 @@
  * Adding a project in content/src/projects.ts updates the website immediately and the app on next sync.
  */
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { contentBundle, type ContentBundle, type Project, type StreamSlug } from "@zainlabs/content";
+import { contentBundle, createApi, type ContactInput, type ContentBundle, type Project, type StreamSlug } from "@zainlabs/content";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-export const API_URL = (process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3000").replace(/\/$/, "");
+export const API_URL = (process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:8100").replace(/\/$/, "");
+export const api = createApi(API_URL);
 const CACHE_KEY = "zainlabs.content.v1";
 
 type Source = "bundled" | "cache" | "live";
@@ -32,22 +33,13 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
 
   const refresh = useCallback(async () => {
     setSyncing(true);
-    try {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 8000);
-      const res = await fetch(`${API_URL}/api/content`, { signal: controller.signal });
-      clearTimeout(timer);
-      const data = await res.json();
-      if (res.ok && isBundle(data)) {
-        setContent(data);
-        setSource("live");
-        await AsyncStorage.setItem(CACHE_KEY, JSON.stringify(data));
-      }
-    } catch {
-      // offline or API unreachable: keep cached / bundled content
-    } finally {
-      setSyncing(false);
+    const result = await api.getContent(); // offline or API unreachable: keep cached / bundled content
+    if (result.ok && isBundle(result.data)) {
+      setContent(result.data);
+      setSource("live");
+      await AsyncStorage.setItem(CACHE_KEY, JSON.stringify(result.data)).catch(() => undefined);
     }
+    setSyncing(false);
   }, []);
 
   useEffect(() => {
@@ -85,16 +77,7 @@ export function useContent() {
   };
 }
 
-export async function sendContact(payload: Record<string, unknown>): Promise<{ ok: boolean; error?: string }> {
-  try {
-    const res = await fetch(`${API_URL}/api/contact`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...payload, source: "app" }),
-    });
-    const data = await res.json().catch(() => ({}));
-    return res.ok ? { ok: true } : { ok: false, error: data.error ?? `HTTP ${res.status}` };
-  } catch {
-    return { ok: false, error: "No connection. Please try again when you are online." };
-  }
+export async function sendContact(input: Omit<ContactInput, "source">): Promise<{ ok: boolean; error?: string }> {
+  const result = await api.sendContact({ ...input, source: "app" });
+  return result.ok ? { ok: true } : { ok: false, error: result.error };
 }
