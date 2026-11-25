@@ -1,0 +1,230 @@
+{
+  "$schema": "../../../packages/config/catalog.schema.json",
+  "products": [
+    {
+      "slug": "wissenswerk-reader-7",
+      "kind": "physical",
+      "featured": true,
+      "categories": [
+        "elektronik"
+      ],
+      "brand": "Wissenswerk",
+      "title": {
+        "de": "Wissenswerk Reader 7",
+        "en": "Wissenswerk Reader 7"
+      },
+      "subtitle": {
+        "de": "E-Reader mit 7\"-E-Ink-Display",
+        "en": "E-reader with 7\" e-ink display"
+      },
+      "description": {
+        "de": "Augenschonendes E-Ink-Display mit 300 ppi, warmes Licht, wasserdicht nach IPX8 und wochenlange Akkulaufzeit. Liest EPUB, PDF und deine Wissenswerk-Bibliothek.",
+        "en": "Eye-friendly 300 ppi e-ink display, warm light, IPX8 waterproof and weeks of battery life. Reads EPUB, PDF and your Wissenswerk library."
+      },
+      "attributes": {
+        "brand": "Wissenswerk",
+        "warrantyMonths": 24,
+        "weeeRegNo": "DE 00000000",
+        "gpsr": {
+          "manufacturer": "Wissenswerk Devices GmbH (Platzhalter)",
+          "address": "Musterstraße 1, 10115 Berlin, Deutschland",
+          "contact": "produktsicherheit@wissenswerk.example",
+          "safetyInformation": {
+            "de": "Vor Nässe schützen. Nur mit geeignetem USB-C-Netzteil laden. Enthält einen Lithium-Ionen-Akku.",
+            "en": "Protect from moisture. Charge only with a suitable USB-C power supply. Contains a lithium-ion battery."
+          }
+        },
+        "specs": {
+          "Display": {
+            "de": "7 Zoll E-Ink, 300 ppi",
+            "en": "7 inch e-ink, 300 ppi"
+          },
+          "Akku / Battery": {
+            "de": "bis zu 6 Wochen",
+            "en": "up to 6 weeks"
+          },
+          "Wasserschutz / Water": "IPX8",
+          "Anschluss / Port": "USB-C"
+        }
+      },
+      "variants": [
+        {
+          "sku": "WR7-32-BLK",
+          "title": {
+            "de": "32 GB, Schwarz",
+            "en": "32 GB, black"
+          },
+          "options": {
+            "Speicher": "32 GB",
+            "Farbe": "Schwarz"
+          },
+          "prices": {
+            "EUR": 17900,
+            "CHF": 19330
+          },
+          "stock": 40,
+          "weightGrams": 410
+        },
+        {
+          "sku": "WR7-64-BLK",
+          "title": {
+            "de": "64 GB, Schwarz",
+            "en": "64 GB, black"
+          },
+          "options": {
+            "Speicher": "64 GB",
+            "Farbe": "Schwarz"
+          },
+          "prices": {
+            "EUR": 19900,
+            "CHF": 21490
+          },
+          "stock": 12,
+          "weightGrams": 410
+        },
+        {
+          "sku": "WR7-64-SND",
+          "title": {
+            "de": "64 GB, Sand",
+            "en": "64 GB, sand"
+          },
+          "options": {
+            "Speicher": "64 GB",
+            "Farbe": "Sand"
+          },
+          "prices": {
+            "EUR": 19900,
+            "CHF": 21490
+          },
+          "stock": 3,
+          "weightGrams": 410
+        }
+      ],
+      "tags": [
+        "neu"
+      ]
+    },
+    {
+      "slug": "fokus-anc-kopfhoerer",
+      "kind": "physical",
+      "featured": true,
+      "categories": [
+        "elektronik"
+      ],
+      "brand": "Klangwerk",
+      "title": {
+        "de": "Fokus ANC Kopfhörer",
+        "en": "Focus ANC headphones"
+      },
+      "subtitle": {
+        "de": "Over-Ear mit aktiver Geräuschunterdrückung",
+        "en": "Over-ear with active noise cancelling"
+      },
+      "description": {
+        "de": "Konzentriert lesen, lernen und arbeiten: adaptive Geräuschunterdrückung, 40 Stunden Akkulaufzeit und Multipoint-Bluetooth.",
+        "en": "Read, learn and work with focus: adaptive noise cancelling, 40 hours of battery and multipoint Bluetooth."
+      },
+      "attributes": {
+        "brand": "Klangwerk",
+        "warrantyMonths": 24,
+        "weeeRegNo": "DE 00000000",
+        "gpsr": {
+          "manufacturer": "Wissenswerk Devices GmbH (Platzhalter)",
+          "address": "Musterstraße 1, 10115 Berlin, Deutschland",
+          "contact": "produktsicherheit@wissenswerk.example",
+          "safetyInformation": {
+            "de": "Vor Nässe schützen. Nur mit geeignetem USB-C-Netzteil laden. Enthält einen Lithium-Ionen-Akku.",
+            "en": "Protect from moisture. Charge only with a suitable USB-C power supply. Contains a lithium-ion battery."
+          }
+        },
+        "specs": {
+          "Akku / Battery": {
+            "de": "40 Stunden",
+            "en": "40 hours"
+          },
+          "Bluetooth": "5.4 Multipoint",
+          "Gewicht / Weight": "254 g"
+        }
+      },
+      "variants": [
+        {
+          "sku": "ANC-BLK",
+          "options": {
+            "Farbe": "Schwarz"
+          },
+          "prices": {
+            "EUR": 14900,
+            "CHF": 16090
+          },
+          "compareAt": {
+            "EUR": 17900,
+            "CHF": 19300
+          },
+          "stock": 25,
+          "weightGrams": 480
+        },
+        {
+          "sku": "ANC-WHT",
+          "options": {
+            "Farbe": "Weiß"
+          },
+          "prices": {
+            "EUR": 14900,
+            "CHF": 16090
+          },
+          "compareAt": {
+            "EUR": 17900,
+            "CHF": 19300
+          },
+          "stock": 0,
+          "weightGrams": 480
+        }
+      ]
+    },
+    {
+      "slug": "usb-c-ladegeraet-65w",
+      "kind": "physical",
+      "categories": [
+        "elektronik"
+      ],
+      "brand": "Wissenswerk",
+      "title": {
+        "de": "USB-C Ladegerät 65 W GaN",
+        "en": "USB-C charger 65 W GaN"
+      },
+      "description": {
+        "de": "Kompaktes GaN-Netzteil mit zwei USB-C-Ports – lädt Laptop, Reader und Telefon. Hinweis: Im Lieferumfang der Geräte ist kein Netzteil enthalten.",
+        "en": "Compact GaN power supply with two USB-C ports — charges laptop, reader and phone."
+      },
+      "attributes": {
+        "brand": "Wissenswerk",
+        "warrantyMonths": 24,
+        "weeeRegNo": "DE 00000000",
+        "gpsr": {
+          "manufacturer": "Wissenswerk Devices GmbH (Platzhalter)",
+          "address": "Musterstraße 1, 10115 Berlin, Deutschland",
+          "contact": "produktsicherheit@wissenswerk.example",
+          "safetyInformation": {
+            "de": "Vor Nässe schützen. Nur mit geeignetem USB-C-Netzteil laden. Enthält einen Lithium-Ionen-Akku.",
+            "en": "Protect from moisture. Charge only with a suitable USB-C power supply. Contains a lithium-ion battery."
+          }
+        },
+        "specs": {
+          "Leistung / Power": "65 W",
+          "Ports": "2× USB-C PD 3.1"
+        }
+      },
+      "variants": [
+        {
+          "sku": "CHG-65",
+          "prices": {
+            "EUR": 3990,
+            "CHF": 4310
+          },
+          "stock": 200,
+          "weightGrams": 140
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@factory/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pure commerce domain: money, tax (DACH/EU/OSS), pricing, discounts (Buchpreisbindung-aware), shipping, legal rules, product-kind registry, order state machine. No I/O.",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  }
+}

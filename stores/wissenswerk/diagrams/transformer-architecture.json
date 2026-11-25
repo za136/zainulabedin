@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../packages/config/diagram.schema.json",
+  "id": "transformer-architecture",
+  "version": 1,
+  "title": { "de": "Die Transformer-Architektur", "en": "The transformer architecture" },
+  "description": { "de": "Wie Sprachmodelle Text in Bedeutung verwandeln.", "en": "How language models turn text into meaning." },
+  "background": "#0a0f1c",
+  "camera": { "position": [9, 5, 11], "target": [0, 2, 0] },
+  "groups": [
+    { "id": "input", "label": { "de": "Eingabe", "en": "Input" }, "color": "#22d3ee" },
+    { "id": "block", "label": { "de": "Transformer-Block (×N)", "en": "Transformer block (×N)" }, "color": "#818cf8" },
+    { "id": "output", "label": { "de": "Ausgabe", "en": "Output" }, "color": "#34d399" }
+  ],
+  "nodes": [
+    { "id": "tokens", "label": { "de": "Tokens", "en": "Tokens" }, "detail": { "de": "Text wird in Teilwörter zerlegt: „Wissens|werk“.", "en": "Text is split into sub-words: “Wissens|werk”." }, "shape": "box", "position": [0, -3, 0], "scale": [3, 0.3, 1], "color": "#22d3ee", "group": "input" },
+    { "id": "embed", "label": { "de": "Embeddings + Position", "en": "Embeddings + position" }, "detail": { "de": "Jedes Token wird zu einem Vektor; Positionsinformation kommt hinzu.", "en": "Each token becomes a vector; positional information is added." }, "shape": "box", "position": [0, -1.5, 0], "scale": [3, 0.4, 1], "color": "#06b6d4", "group": "input" },
+    { "id": "attn", "label": { "de": "Multi-Head Attention", "en": "Multi-head attention" }, "detail": { "de": "Jedes Token schaut auf alle anderen und gewichtet, was relevant ist.", "en": "Every token looks at all others and weighs what is relevant." }, "shape": "octahedron", "position": [0, 0.5, 0], "scale": 1.1, "color": "#818cf8", "group": "block" },
+    { "id": "norm1", "label": { "de": "Add & Norm", "en": "Add & norm" }, "shape": "box", "position": [0, 1.8, 0], "scale": [2.4, 0.2, 0.8], "color": "#a5b4fc", "group": "block" },
+    { "id": "ffn", "label": { "de": "Feed-Forward", "en": "Feed-forward" }, "detail": { "de": "Ein kleines neuronales Netz pro Token – hier steckt viel „Wissen“.", "en": "A small neural network per token — much of the 'knowledge' lives here." }, "shape": "box", "position": [0, 3, 0], "scale": [2, 0.8, 0.8], "color": "#6366f1", "group": "block" },
+    { "id": "norm2", "label": { "de": "Add & Norm", "en": "Add & norm" }, "shape": "box", "position": [0, 4.2, 0], "scale": [2.4, 0.2, 0.8], "color": "#a5b4fc", "group": "block" },
+    { "id": "residual", "label": { "de": "Residual-Strom", "en": "Residual stream" }, "detail": { "de": "Informationen fließen an jeder Schicht vorbei und werden nur ergänzt.", "en": "Information flows past every layer and is only added to." }, "shape": "capsule", "position": [-2.8, 1.5, 0], "scale": [0.4, 2.8, 0.4], "color": "#f472b6", "group": "block" },
+    { "id": "head", "label": { "de": "Softmax über Vokabular", "en": "Softmax over vocabulary" }, "detail": { "de": "Wahrscheinlichkeiten für das nächste Token.", "en": "Probabilities for the next token." }, "shape": "cone", "position": [0, 6, 0], "scale": 0.9, "color": "#34d399", "group": "output" }
+  ],
+  "edges": [
+    { "from": "tokens", "to": "embed", "flow": true, "color": "#67e8f9" },
+    { "from": "embed", "to": "attn", "flow": true, "color": "#a5b4fc" },
+    { "from": "attn", "to": "norm1", "flow": true, "color": "#a5b4fc" },
+    { "from": "norm1", "to": "ffn", "flow": true, "color": "#a5b4fc" },
+    { "from": "ffn", "to": "norm2", "flow": true, "color": "#a5b4fc" },
+    { "from": "norm2", "to": "head", "flow": true, "color": "#6ee7b7" },
+    { "from": "embed", "to": "residual", "style": "dashed", "color": "#f9a8d4", "directed": false },
+    { "from": "residual", "to": "norm2", "style": "dashed", "color": "#f9a8d4" }
+  ],
+  "steps": [
+    { "id": "t1", "title": { "de": "Vom Text zum Token", "en": "From text to tokens" }, "narration": { "de": "Ein Satz wird in Tokens zerlegt und jedes Token in einen Vektor übersetzt.", "en": "A sentence is split into tokens and each token is translated into a vector." }, "focus": ["tokens", "embed"], "camera": { "position": [5, -1, 7], "target": [0, -2, 0] } },
+    { "id": "t2", "title": { "de": "Aufmerksamkeit", "en": "Attention" }, "narration": { "de": "Attention ist das Herzstück: Wörter tauschen Kontext aus, egal wie weit sie auseinander stehen.", "en": "Attention is the core: words exchange context no matter how far apart they are." }, "focus": ["attn"], "camera": { "position": [4, 1.5, 5], "target": [0, 0.5, 0] } },
+    { "id": "t3", "title": { "de": "Nachdenken pro Token", "en": "Per-token thinking" }, "narration": { "de": "Das Feed-Forward-Netz verarbeitet jedes Token einzeln weiter.", "en": "The feed-forward network further processes each token individually." }, "focus": ["ffn", "norm1", "norm2"], "camera": { "position": [5, 4, 6], "target": [0, 3, 0] } },
+    { "id": "t4", "title": { "de": "Der Residual-Strom", "en": "The residual stream" }, "narration": { "de": "Jede Schicht liest aus dem Strom und schreibt ihr Ergebnis hinein.", "en": "Each layer reads from the stream and writes its result back." }, "focus": ["residual"], "camera": { "position": [-6, 2, 6], "target": [-2.8, 1.5, 0] } },
+    { "id": "t5", "title": { "de": "Das nächste Wort", "en": "The next word" }, "narration": { "de": "Am Ende steht eine Wahrscheinlichkeitsverteilung über alle möglichen nächsten Tokens.", "en": "At the end there is a probability distribution over all possible next tokens." }, "focus": ["head"], "camera": { "position": [4, 7, 6], "target": [0, 6, 0] } }
+  ]
+}

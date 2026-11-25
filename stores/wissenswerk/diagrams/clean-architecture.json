@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../packages/config/diagram.schema.json",
+  "id": "clean-architecture",
+  "version": 1,
+  "title": { "de": "Saubere Architektur in Schichten", "en": "Clean architecture in layers" },
+  "background": "#0d1117",
+  "camera": { "position": [0, 9, 10], "target": [0, 0, 0] },
+  "nodes": [
+    { "id": "entities", "label": { "de": "Entitäten", "en": "Entities" }, "detail": { "de": "Die Geschäftsregeln – unabhängig von allem.", "en": "Business rules — independent of everything." }, "shape": "sphere", "position": [0, 0, 0], "scale": 1.2, "color": "#fbbf24" },
+    { "id": "usecases", "label": { "de": "Anwendungsfälle", "en": "Use cases" }, "shape": "torus", "position": [0, 0, 0], "scale": 2.2, "color": "#f87171" },
+    { "id": "adapters", "label": { "de": "Adapter", "en": "Adapters" }, "shape": "torus", "position": [0, 0, 0], "scale": 3.4, "color": "#4ade80" },
+    { "id": "frameworks", "label": { "de": "Frameworks & Treiber", "en": "Frameworks & drivers" }, "shape": "torus", "position": [0, 0, 0], "scale": 4.6, "color": "#60a5fa" },
+    { "id": "db", "label": { "de": "Datenbank", "en": "Database" }, "shape": "cylinder", "position": [6, 0, 2], "scale": 0.7, "color": "#93c5fd" },
+    { "id": "web", "label": { "de": "Web-UI", "en": "Web UI" }, "shape": "box", "position": [-6, 0, 2], "scale": 0.8, "color": "#93c5fd" }
+  ],
+  "edges": [
+    { "from": "web", "to": "adapters", "flow": true, "color": "#86efac" },
+    { "from": "db", "to": "adapters", "flow": true, "color": "#86efac" },
+    { "from": "adapters", "to": "usecases", "flow": true, "color": "#fca5a5" },
+    { "from": "usecases", "to": "entities", "flow": true, "color": "#fde68a" }
+  ],
+  "steps": [
+    { "id": "c1", "title": { "de": "Die Abhängigkeitsregel", "en": "The dependency rule" }, "narration": { "de": "Abhängigkeiten zeigen immer nach innen – der Kern kennt die Außenwelt nicht.", "en": "Dependencies always point inwards — the core knows nothing about the outside." }, "focus": ["entities", "usecases"] },
+    { "id": "c2", "title": { "de": "Austauschbare Details", "en": "Replaceable details" }, "narration": { "de": "Datenbank und UI sind Details am Rand und lassen sich austauschen.", "en": "Database and UI are details on the edge and can be replaced." }, "focus": ["db", "web", "frameworks"] }
+  ]
+}

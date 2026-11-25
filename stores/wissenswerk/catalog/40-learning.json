@@ -1,0 +1,295 @@
+{
+  "$schema": "../../../packages/config/catalog.schema.json",
+  "products": [
+    {
+      "slug": "moderne-web-architektur-kurs",
+      "kind": "course",
+      "featured": true,
+      "categories": [
+        "kurse"
+      ],
+      "title": {
+        "de": "Moderne Web-Architektur",
+        "en": "Modern Web Architecture"
+      },
+      "subtitle": {
+        "de": "Videokurs mit 3D-Diagrammen · 6 Std.",
+        "en": "Video course with 3D diagrams · 6 h"
+      },
+      "description": {
+        "de": "Von HTTP bis Edge Computing: Lerne, wie skalierbare Webanwendungen aufgebaut sind – mit Praxisprojekten, Quiz und Zertifikat.",
+        "en": "From HTTP to edge computing: learn how scalable web applications are built — with practice projects, quizzes and a certificate."
+      },
+      "attributes": {
+        "level": "intermediate",
+        "language": "de",
+        "certificate": true,
+        "instructors": [
+          "Zain ul Abedin"
+        ],
+        "modules": [
+          {
+            "id": "m1",
+            "title": {
+              "de": "Grundlagen",
+              "en": "Fundamentals"
+            },
+            "lessons": [
+              {
+                "id": "l1",
+                "title": {
+                  "de": "Was passiert bei einem Request?",
+                  "en": "What happens during a request?"
+                },
+                "durationMinutes": 12,
+                "preview": true
+              },
+              {
+                "id": "l2",
+                "title": {
+                  "de": "DNS & TLS",
+                  "en": "DNS & TLS"
+                },
+                "durationMinutes": 18
+              }
+            ]
+          },
+          {
+            "id": "m2",
+            "title": {
+              "de": "Skalierung",
+              "en": "Scaling"
+            },
+            "lessons": [
+              {
+                "id": "l3",
+                "title": {
+                  "de": "Caching & CDNs",
+                  "en": "Caching & CDNs"
+                },
+                "durationMinutes": 22
+              },
+              {
+                "id": "l4",
+                "title": {
+                  "de": "Datenbanken skalieren",
+                  "en": "Scaling databases"
+                },
+                "durationMinutes": 30
+              }
+            ]
+          },
+          {
+            "id": "m3",
+            "title": {
+              "de": "Architektur",
+              "en": "Architecture"
+            },
+            "lessons": [
+              {
+                "id": "l5",
+                "title": {
+                  "de": "Monolith vs. Microservices",
+                  "en": "Monolith vs. microservices"
+                },
+                "durationMinutes": 25
+              },
+              {
+                "id": "l6",
+                "title": {
+                  "de": "Abschlussprojekt",
+                  "en": "Final project"
+                },
+                "durationMinutes": 90
+              }
+            ]
+          }
+        ]
+      },
+      "variants": [
+        {
+          "sku": "C-WEBARCH",
+          "prices": {
+            "EUR": 14900,
+            "CHF": 16090
+          }
+        }
+      ]
+    },
+    {
+      "slug": "ki-fuer-entscheider",
+      "kind": "course",
+      "categories": [
+        "kurse"
+      ],
+      "title": {
+        "de": "KI für Entscheider",
+        "en": "AI for Decision Makers"
+      },
+      "subtitle": {
+        "de": "Kompaktkurs · 2 Std.",
+        "en": "Compact course · 2 h"
+      },
+      "description": {
+        "de": "Was Sprachmodelle können, was nicht – und wie du KI-Projekte rechtssicher (EU AI Act, DSGVO) startest.",
+        "en": "What language models can and can't do — and how to start AI projects compliantly (EU AI Act, GDPR)."
+      },
+      "attributes": {
+        "level": "beginner",
+        "language": "de",
+        "certificate": true,
+        "instructors": [
+          "Dr. Lena Hoffmann"
+        ],
+        "modules": [
+          {
+            "id": "m1",
+            "title": {
+              "de": "Überblick",
+              "en": "Overview"
+            },
+            "lessons": [
+              {
+                "id": "l1",
+                "title": {
+                  "de": "Wie LLMs denken",
+                  "en": "How LLMs think"
+                },
+                "durationMinutes": 20,
+                "preview": true
+              },
+              {
+                "id": "l2",
+                "title": {
+                  "de": "EU AI Act in 20 Minuten",
+                  "en": "EU AI Act in 20 minutes"
+                },
+                "durationMinutes": 20
+              }
+            ]
+          }
+        ]
+      },
+      "variants": [
+        {
+          "sku": "C-KIENT",
+          "prices": {
+            "EUR": 7900,
+            "CHF": 8530
+          }
+        }
+      ]
+    },
+    {
+      "slug": "architektur-review",
+      "kind": "service",
+      "featured": true,
+      "categories": [
+        "beratung"
+      ],
+      "title": {
+        "de": "Architektur-Review (90 Min.)",
+        "en": "Architecture review (90 min)"
+      },
+      "subtitle": {
+        "de": "Persönliche Videoberatung",
+        "en": "Personal video consultation"
+      },
+      "description": {
+        "de": "Wir analysieren gemeinsam deine Systemarchitektur und liefern eine schriftliche Empfehlung mit priorisierten Maßnahmen.",
+        "en": "Together we analyse your system architecture and deliver a written recommendation with prioritised actions."
+      },
+      "attributes": {
+        "durationMinutes": 90,
+        "location": "online",
+        "bookingRequired": true,
+        "deliverables": [
+          {
+            "de": "90 Minuten Video-Session",
+            "en": "90-minute video session"
+          },
+          {
+            "de": "Schriftlicher Bericht (PDF)",
+            "en": "Written report (PDF)"
+          },
+          {
+            "de": "Follow-up per E-Mail",
+            "en": "Follow-up via email"
+          }
+        ]
+      },
+      "variants": [
+        {
+          "sku": "SRV-ARCH-90",
+          "prices": {
+            "EUR": 29000,
+            "CHF": 31320
+          }
+        }
+      ],
+      "slots": [
+        {
+          "startsAt": "+2d09:00",
+          "durationMinutes": 90
+        },
+        {
+          "startsAt": "+2d14:00",
+          "durationMinutes": 90
+        },
+        {
+          "startsAt": "+4d10:00",
+          "durationMinutes": 90
+        },
+        {
+          "startsAt": "+7d16:00",
+          "durationMinutes": 90
+        }
+      ]
+    },
+    {
+      "slug": "ki-team-workshop",
+      "kind": "service",
+      "categories": [
+        "beratung"
+      ],
+      "title": {
+        "de": "KI-Workshop für Teams (1 Tag)",
+        "en": "AI workshop for teams (1 day)"
+      },
+      "subtitle": {
+        "de": "Vor Ort in DACH oder remote",
+        "en": "On-site in DACH or remote"
+      },
+      "description": {
+        "de": "Ein Tag, ein Team, ein klarer Plan: Use-Cases finden, bewerten und einen Prototyp bauen.",
+        "en": "One day, one team, one clear plan: find and assess use cases and build a prototype."
+      },
+      "attributes": {
+        "durationMinutes": 420,
+        "location": "hybrid",
+        "bookingRequired": true
+      },
+      "variants": [
+        {
+          "sku": "SRV-WS-1D",
+          "prices": {
+            "EUR": 249000,
+            "CHF": 268920
+          }
+        }
+      ],
+      "slots": [
+        {
+          "startsAt": "+14d09:00",
+          "durationMinutes": 420,
+          "capacity": 1
+        },
+        {
+          "startsAt": "+21d09:00",
+          "durationMinutes": 420,
+          "capacity": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "$schema": "../../../packages/config/catalog.schema.json",
+  "products": [
+    {
+      "slug": "diagramstudio-pro",
+      "kind": "license",
+      "featured": true,
+      "categories": [
+        "software"
+      ],
+      "title": {
+        "de": "DiagramStudio Pro",
+        "en": "DiagramStudio Pro"
+      },
+      "subtitle": {
+        "de": "3D-Diagramme für Bücher, Lehre und Präsentationen",
+        "en": "3D diagrams for books, teaching and presentations"
+      },
+      "description": {
+        "de": "Das Werkzeug hinter unseren interaktiven Büchern: Erstelle 3D-Szenen mit geführten Touren, exportiere sie als JSON und binde sie überall ein. Dauerlizenz inkl. 12 Monaten Updates.",
+        "en": "The tool behind our interactive books: create 3D scenes with guided tours, export them as JSON and embed them anywhere. Perpetual licence incl. 12 months of updates."
+      },
+      "attributes": {
+        "platforms": [
+          "Windows",
+          "macOS",
+          "Linux",
+          "Web"
+        ],
+        "seats": 1,
+        "keyPrefix": "DSP",
+        "files": [
+          {
+            "key": "diagramstudio-setup.zip",
+            "name": "diagramstudio-setup.zip",
+            "format": "zip"
+          }
+        ]
+      },
+      "variants": [
+        {
+          "sku": "DSP-1",
+          "title": {
+            "de": "Einzelplatz",
+            "en": "Single seat"
+          },
+          "options": {
+            "Plätze": "1"
+          },
+          "prices": {
+            "EUR": 8900,
+            "CHF": 9610
+          }
+        },
+        {
+          "sku": "DSP-5",
+          "title": {
+            "de": "Team (5 Plätze)",
+            "en": "Team (5 seats)"
+          },
+          "options": {
+            "Plätze": "5"
+          },
+          "prices": {
+            "EUR": 34900,
+            "CHF": 37690
+          }
+        }
+      ]
+    },
+    {
+      "slug": "architektur-vorlagen",
+      "kind": "digital_download",
+      "categories": [
+        "software"
+      ],
+      "title": {
+        "de": "Architektur-Vorlagenpaket",
+        "en": "Architecture template pack"
+      },
+      "description": {
+        "de": "40 Vorlagen für Architekturentscheidungen (ADR), C4-Diagramme und Review-Checklisten – als Markdown, PDF und Miro-Board.",
+        "en": "40 templates for architecture decision records (ADR), C4 diagrams and review checklists — as Markdown, PDF and Miro board."
+      },
+      "attributes": {
+        "files": [
+          {
+            "key": "architektur-vorlagen.zip",
+            "name": "architektur-vorlagen.zip",
+            "format": "zip",
+            "sizeBytes": 18400000
+          }
+        ],
+        "maxDownloads": 10
+      },
+      "variants": [
+        {
+          "sku": "DL-ARCH-1",
+          "prices": {
+            "EUR": 2900,
+            "CHF": 3130
+          }
+        }
+      ]
+    },
+    {
+      "slug": "wissenswerk-plus",
+      "kind": "subscription",
+      "featured": true,
+      "categories": [
+        "interaktiv"
+      ],
+      "title": {
+        "de": "Wissenswerk Plus",
+        "en": "Wissenswerk Plus"
+      },
+      "subtitle": {
+        "de": "Alle 3D-Bücher im Abo",
+        "en": "All 3D books in one subscription"
+      },
+      "description": {
+        "de": "Unbegrenzter Zugriff auf alle interaktiven 3D-Ausgaben, jeden Monat neue Diagramm-Touren und 10 % Rabatt auf Kurse. Monatlich kündbar.",
+        "en": "Unlimited access to all interactive 3D editions, new diagram tours every month and 10 % off courses. Cancel monthly."
+      },
+      "attributes": {
+        "benefits": [
+          {
+            "de": "Alle interaktiven 3D-Bücher",
+            "en": "All interactive 3D books"
+          },
+          {
+            "de": "Neue Touren jeden Monat",
+            "en": "New tours every month"
+          },
+          {
+            "de": "Monatlich kündbar",
+            "en": "Cancel monthly"
+          }
+        ],
+        "grantsAccessTo": [
+          "wie-das-internet-funktioniert-3d",
+          "sprachmodelle-verstehen-3d",
+          "saubere-architektur-3d"
+        ]
+      },
+      "taxCategory": "digital_services",
+      "variants": [
+        {
+          "sku": "PLUS-M",
+          "title": {
+            "de": "Monatlich",
+            "en": "Monthly"
+          },
+          "options": {
+            "Laufzeit": "Monat"
+          },
+          "prices": {
+            "EUR": 999,
+            "CHF": 1080
+          },
+          "billing": {
+            "interval": "month",
+            "intervalCount": 1,
+            "trialDays": 14
+          }
+        },
+        {
+          "sku": "PLUS-Y",
+          "title": {
+            "de": "Jährlich (2 Monate gratis)",
+            "en": "Yearly (2 months free)"
+          },
+          "options": {
+            "Laufzeit": "Jahr"
+          },
+          "prices": {
+            "EUR": 9990,
+            "CHF": 10790
+          },
+          "billing": {
+            "interval": "year",
+            "intervalCount": 1,
+            "trialDays": 14
+          }
+        }
+      ]
+    }
+  ]
+}

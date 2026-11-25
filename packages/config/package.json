@@ -1,0 +1,21 @@
+{
+  "name": "@factory/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Store blueprint: the zod schema for store.json, loader for a store folder, presets used by the factory CLI.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema.ts",
+    "./presets": "./src/presets.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "schema": "tsx src/emit-json-schema.ts"
+  },
+  "dependencies": {
+    "@factory/core": "workspace:*",
+    "zod": "^4.1.12"
+  }
+}

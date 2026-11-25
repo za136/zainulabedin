@@ -1,0 +1,168 @@
+{
+  "$schema": "../../packages/config/store.schema.json",
+  "id": "wissenswerk",
+  "name": "Wissenswerk",
+  "tagline": {
+    "de": "Bücher, die man begreifen kann – und alles, was Wissen zum Werkzeug macht.",
+    "en": "Books you can grasp — and everything that turns knowledge into a tool."
+  },
+  "url": "http://localhost:3000",
+  "locales": { "default": "de", "supported": ["de", "en"] },
+  "markets": [
+    { "country": "DE", "currency": "EUR", "default": true },
+    { "country": "AT", "currency": "EUR" },
+    { "country": "CH", "currency": "CHF" }
+  ],
+  "legal": {
+    "company": "Wissenswerk GmbH (Platzhalter)",
+    "street": "Musterstraße 1",
+    "zip": "10115",
+    "city": "Berlin",
+    "country": "DE",
+    "email": "hallo@wissenswerk.example",
+    "phone": "+49 30 000000",
+    "managingDirectors": ["Zain ul Abedin"],
+    "registerCourt": "Amtsgericht Charlottenburg",
+    "registerNumber": "HRB 000000 B",
+    "vatId": "DE000000000",
+    "responsibleForContent": "Zain ul Abedin, Anschrift wie oben",
+    "packagingRegisterNo": "DE0000000000000",
+    "weeeRegNo": "DE 00000000",
+    "disputeResolution": {
+      "de": "Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
+      "en": "We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board."
+    }
+  },
+  "tax": {
+    "originCountry": "DE",
+    "oss": true,
+    "registrations": [],
+    "smallBusiness": false,
+    "priceStrategy": "gross-constant"
+  },
+  "catalog": {
+    "enabledKinds": ["physical", "book", "ebook", "interactive_book", "digital_download", "license", "subscription", "course", "service"],
+    "priceBindingDefault": true,
+    "lowStockThreshold": 5
+  },
+  "shipping": {
+    "zones": [
+      {
+        "id": "de",
+        "name": { "de": "Deutschland", "en": "Germany" },
+        "countries": ["DE"],
+        "rates": [
+          { "id": "dhl", "name": { "de": "DHL Paket (klimaneutral)", "en": "DHL parcel (carbon neutral)" }, "carrier": "DHL", "price": { "EUR": 495 }, "freeAbove": { "EUR": 4900 }, "minDays": 1, "maxDays": 3 },
+          { "id": "dhl-express", "name": { "de": "DHL Express", "en": "DHL Express" }, "carrier": "DHL", "price": { "EUR": 1490 }, "minDays": 1, "maxDays": 1 }
+        ]
+      },
+      {
+        "id": "at",
+        "name": { "de": "Österreich", "en": "Austria" },
+        "countries": ["AT"],
+        "rates": [
+          { "id": "dhl-at", "name": { "de": "DHL Paket Österreich", "en": "DHL parcel Austria" }, "carrier": "DHL", "price": { "EUR": 890 }, "freeAbove": { "EUR": 7900 }, "minDays": 2, "maxDays": 4 }
+        ]
+      },
+      {
+        "id": "ch",
+        "name": { "de": "Schweiz & Liechtenstein", "en": "Switzerland & Liechtenstein" },
+        "countries": ["CH", "LI"],
+        "rates": [
+          { "id": "post-ch", "name": { "de": "Die Post (verzollt)", "en": "Swiss Post (duty paid)" }, "carrier": "Post CH", "price": { "CHF": 1490, "EUR": 1490 }, "minDays": 3, "maxDays": 6 }
+        ]
+      },
+      {
+        "id": "eu",
+        "name": { "de": "EU", "en": "EU" },
+        "countries": ["BE", "NL", "LU", "FR", "IT", "ES", "PL", "CZ", "DK", "SE", "FI", "IE", "PT"],
+        "rates": [
+          { "id": "dhl-eu", "name": { "de": "DHL Paket International", "en": "DHL parcel international" }, "carrier": "DHL", "price": { "EUR": 1290 }, "minDays": 3, "maxDays": 7 }
+        ]
+      }
+    ]
+  },
+  "payments": {
+    "providers": [
+      { "id": "mock", "enabled": true },
+      { "id": "stripe", "enabled": false, "methods": ["card", "paypal", "klarna", "sepa_debit", "eps", "twint"] },
+      { "id": "prepayment", "enabled": true, "bank": { "accountHolder": "Wissenswerk GmbH", "iban": "DE02120300000000202051", "bic": "BYLADEM1001", "bankName": "Deutsche Kreditbank" } }
+    ]
+  },
+  "orders": { "numberPrefix": "WW" },
+  "features": { "guestCheckout": true, "reviews": true, "wishlist": true, "b2b": true, "marketplace": false },
+  "theme": {
+    "preset": "editorial",
+    "colors": {
+      "background": "#fbfaf7",
+      "foreground": "#14161f",
+      "muted": "#f1eee7",
+      "mutedForeground": "#5d6170",
+      "border": "#e4dfd3",
+      "primary": "#1d2b6b",
+      "primaryForeground": "#ffffff",
+      "accent": "#f2a93b",
+      "accentForeground": "#1b1405",
+      "success": "#1f7a4a",
+      "danger": "#b42318"
+    },
+    "radius": "0.9rem",
+    "fonts": { "heading": "Fraunces", "body": "Inter" },
+    "logo": { "text": "Wissenswerk", "mark": "W" }
+  },
+  "design": {
+    "source": "local",
+    "canva": { "assets": [] }
+  },
+  "home": {
+    "sections": [
+      {
+        "type": "hero",
+        "title": { "de": "Bücher, die man begreifen kann.", "en": "Books you can actually grasp." },
+        "subtitle": {
+          "de": "Fachbücher, E-Books und interaktive 3D-Ausgaben, dazu Kurse, Werkzeuge und Beratung – alles aus einer Hand.",
+          "en": "Technical books, e-books and interactive 3D editions, plus courses, tools and consulting — all in one place."
+        },
+        "cta": { "label": { "de": "3D-Bücher entdecken", "en": "Discover 3D books" }, "href": "/products?kind=interactive_book" },
+        "secondaryCta": { "label": { "de": "Ganzes Sortiment", "en": "Full catalogue" }, "href": "/products" },
+        "diagram": "how-the-internet-works"
+      },
+      { "type": "kinds", "title": { "de": "Ein Shop für alles, was Wissen schafft", "en": "One store for everything that creates knowledge" } },
+      { "type": "products", "title": { "de": "Empfehlungen der Redaktion", "en": "Editor's picks" }, "query": { "featured": true, "limit": 8 } },
+      {
+        "type": "diagram",
+        "title": { "de": "Lesen in drei Dimensionen", "en": "Reading in three dimensions" },
+        "text": {
+          "de": "Jede interaktive Ausgabe enthält geführte 3D-Touren durch die Kernideen des Buches. Drehen, zoomen, Schritt für Schritt verstehen – probier es direkt hier aus.",
+          "en": "Every interactive edition ships with guided 3D tours through the book's core ideas. Rotate, zoom, understand step by step — try it right here."
+        },
+        "diagram": "transformer-architecture"
+      },
+      { "type": "products", "title": { "de": "Online-Kurse & Abos", "en": "Online courses & memberships" }, "query": { "kind": "course", "limit": 4 } },
+      { "type": "categories", "title": { "de": "Stöbern nach Themen", "en": "Browse by topic" } },
+      {
+        "type": "banner",
+        "title": { "de": "Wissenswerk Plus", "en": "Wissenswerk Plus" },
+        "text": { "de": "Alle interaktiven 3D-Bücher und neue Ausgaben jeden Monat – im Abo, monatlich kündbar.", "en": "All interactive 3D books plus new editions every month — cancel monthly." },
+        "cta": { "label": { "de": "Plus ansehen", "en": "See Plus" }, "href": "/products/wissenswerk-plus" },
+        "tone": "primary"
+      },
+      {
+        "type": "usp",
+        "items": [
+          { "icon": "truck", "title": { "de": "Versand aus Deutschland", "en": "Shipped from Germany" }, "text": { "de": "Kostenlos ab 49 € – klimaneutral mit DHL", "en": "Free from €49 — carbon-neutral with DHL" } },
+          { "icon": "shield", "title": { "de": "Sicher bezahlen", "en": "Secure payment" }, "text": { "de": "PayPal, Klarna, SEPA, Karte, Vorkasse", "en": "PayPal, Klarna, SEPA, card, bank transfer" } },
+          { "icon": "undo", "title": { "de": "14 Tage Widerrufsrecht", "en": "14-day withdrawal right" }, "text": { "de": "Fair und transparent nach deutschem Recht", "en": "Fair and transparent under German law" } },
+          { "icon": "book", "title": { "de": "Buchpreisbindung", "en": "Fixed book prices" }, "text": { "de": "Bei uns zahlst du denselben Preis wie überall", "en": "You pay the same price as everywhere" } }
+        ]
+      }
+    ]
+  },
+  "seo": {
+    "titleTemplate": "%s | Wissenswerk",
+    "description": {
+      "de": "Wissenswerk – Fachbücher, E-Books, interaktive 3D-Bücher, Online-Kurse, Software und Beratung. Versand in Deutschland, Österreich und der Schweiz.",
+      "en": "Wissenswerk — technical books, e-books, interactive 3D books, online courses, software and consulting. Shipping to Germany, Austria and Switzerland."
+    }
+  }
+}

@@ -1,0 +1,1230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "tagline": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "de",
+          "en",
+          "fr",
+          "it"
+        ]
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "url": {
+      "default": "http://localhost:3000",
+      "type": "string",
+      "format": "uri"
+    },
+    "locales": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "default": {
+          "default": "de",
+          "type": "string",
+          "enum": [
+            "de",
+            "en",
+            "fr",
+            "it"
+          ]
+        },
+        "supported": {
+          "default": [
+            "de",
+            "en"
+          ],
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "it"
+            ]
+          }
+        }
+      }
+    },
+    "markets": {
+      "default": [
+        {
+          "country": "DE",
+          "currency": "EUR",
+          "default": true
+        },
+        {
+          "country": "AT",
+          "currency": "EUR"
+        },
+        {
+          "country": "CH",
+          "currency": "CHF"
+        }
+      ],
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "EUR",
+              "CHF",
+              "USD",
+              "GBP"
+            ]
+          },
+          "default": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "country",
+          "currency"
+        ]
+      }
+    },
+    "legal": {
+      "type": "object",
+      "properties": {
+        "company": {
+          "type": "string",
+          "description": "Firmenname inkl. Rechtsform, e.g. \"Wissenswerk GmbH\""
+        },
+        "street": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "managingDirectors": {
+          "default": [],
+          "description": "Geschäftsführer / Vertretungsberechtigte",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "registerCourt": {
+          "description": "Registergericht, e.g. \"Amtsgericht München\"",
+          "type": "string"
+        },
+        "registerNumber": {
+          "description": "e.g. \"HRB 123456\"",
+          "type": "string"
+        },
+        "vatId": {
+          "description": "USt-IdNr. (§ 27a UStG)",
+          "type": "string"
+        },
+        "taxNumber": {
+          "type": "string"
+        },
+        "responsibleForContent": {
+          "description": "Verantwortlich i.S.d. § 18 Abs. 2 MStV",
+          "type": "string"
+        },
+        "packagingRegisterNo": {
+          "description": "LUCID registration (VerpackG)",
+          "type": "string"
+        },
+        "weeeRegNo": {
+          "description": "WEEE-Reg.-Nr. (ElektroG) when selling electronics",
+          "type": "string"
+        },
+        "disputeResolution": {
+          "description": "Statement on consumer dispute resolution (VSBG § 36)",
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "it"
+            ]
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "company",
+        "street",
+        "zip",
+        "city",
+        "country",
+        "email"
+      ],
+      "description": "Impressum data (§ 5 DDG)"
+    },
+    "tax": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "originCountry": {
+          "default": "DE",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2
+        },
+        "oss": {
+          "default": true,
+          "type": "boolean"
+        },
+        "registrations": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2
+          }
+        },
+        "smallBusiness": {
+          "default": false,
+          "type": "boolean"
+        },
+        "priceStrategy": {
+          "default": "gross-constant",
+          "type": "string",
+          "enum": [
+            "gross-constant",
+            "net-constant"
+          ]
+        },
+        "rateOverrides": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "enum": [
+                "standard",
+                "reduced",
+                "books",
+                "ebooks",
+                "digital_services",
+                "services",
+                "exempt"
+              ]
+            },
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          }
+        }
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "properties": {
+        "enabledKinds": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "physical",
+              "book",
+              "ebook",
+              "interactive_book",
+              "digital_download",
+              "license",
+              "subscription",
+              "course",
+              "service"
+            ]
+          }
+        },
+        "priceBindingDefault": {
+          "default": true,
+          "type": "boolean"
+        },
+        "lowStockThreshold": {
+          "default": 5,
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "enabledKinds"
+      ]
+    },
+    "shipping": {
+      "default": {
+        "zones": []
+      },
+      "type": "object",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "enum": [
+                    "de",
+                    "en",
+                    "fr",
+                    "it"
+                  ]
+                },
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "countries": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 2
+                }
+              },
+              "rates": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "object",
+                      "propertyNames": {
+                        "type": "string",
+                        "enum": [
+                          "de",
+                          "en",
+                          "fr",
+                          "it"
+                        ]
+                      },
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "carrier": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "object",
+                      "propertyNames": {
+                        "type": "string",
+                        "enum": [
+                          "EUR",
+                          "CHF",
+                          "USD",
+                          "GBP"
+                        ]
+                      },
+                      "additionalProperties": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 9007199254740991
+                      }
+                    },
+                    "freeAbove": {
+                      "type": "object",
+                      "propertyNames": {
+                        "type": "string",
+                        "enum": [
+                          "EUR",
+                          "CHF",
+                          "USD",
+                          "GBP"
+                        ]
+                      },
+                      "additionalProperties": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 9007199254740991
+                      }
+                    },
+                    "maxWeightGrams": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991
+                    },
+                    "minDays": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    },
+                    "maxDays": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "price",
+                    "minDays",
+                    "maxDays"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "countries",
+              "rates"
+            ]
+          }
+        }
+      },
+      "required": [
+        "zones"
+      ]
+    },
+    "payments": {
+      "type": "object",
+      "properties": {
+        "providers": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "const": "mock"
+                  },
+                  "enabled": {
+                    "default": true,
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "const": "stripe"
+                  },
+                  "enabled": {
+                    "default": true,
+                    "type": "boolean"
+                  },
+                  "methods": {
+                    "default": [
+                      "card",
+                      "paypal",
+                      "klarna",
+                      "sepa_debit",
+                      "eps",
+                      "twint"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "const": "prepayment"
+                  },
+                  "enabled": {
+                    "default": true,
+                    "type": "boolean"
+                  },
+                  "bank": {
+                    "type": "object",
+                    "properties": {
+                      "accountHolder": {
+                        "type": "string"
+                      },
+                      "iban": {
+                        "type": "string"
+                      },
+                      "bic": {
+                        "type": "string"
+                      },
+                      "bankName": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "accountHolder",
+                      "iban"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "bank"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "providers"
+      ]
+    },
+    "orders": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "numberPrefix": {
+          "default": "SF",
+          "type": "string",
+          "pattern": "^[A-Z0-9]{1,6}$"
+        }
+      }
+    },
+    "features": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "guestCheckout": {
+          "default": true,
+          "type": "boolean"
+        },
+        "reviews": {
+          "default": true,
+          "type": "boolean"
+        },
+        "wishlist": {
+          "default": true,
+          "type": "boolean"
+        },
+        "b2b": {
+          "default": true,
+          "description": "Allow company customers with VAT ID (reverse charge)",
+          "type": "boolean"
+        },
+        "marketplace": {
+          "default": false,
+          "description": "Multi-vendor: third-party sellers with commission",
+          "type": "boolean"
+        }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "properties": {
+        "preset": {
+          "default": "editorial",
+          "type": "string",
+          "enum": [
+            "editorial",
+            "tech",
+            "minimal",
+            "warm",
+            "bold"
+          ]
+        },
+        "colors": {
+          "default": {},
+          "type": "object",
+          "properties": {
+            "background": {
+              "default": "#ffffff",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "foreground": {
+              "default": "#0f172a",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "muted": {
+              "default": "#f1f5f9",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "mutedForeground": {
+              "default": "#64748b",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "border": {
+              "default": "#e2e8f0",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "primary": {
+              "default": "#1e3a8a",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "primaryForeground": {
+              "default": "#ffffff",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "accent": {
+              "default": "#f59e0b",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "accentForeground": {
+              "default": "#1f2937",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "success": {
+              "default": "#15803d",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            },
+            "danger": {
+              "default": "#b91c1c",
+              "type": "string",
+              "pattern": "^#([0-9a-f]{3}|[0-9a-f]{6})$"
+            }
+          }
+        },
+        "radius": {
+          "default": "0.75rem",
+          "type": "string"
+        },
+        "fonts": {
+          "default": {},
+          "type": "object",
+          "properties": {
+            "heading": {
+              "default": "Fraunces",
+              "type": "string"
+            },
+            "body": {
+              "default": "Inter",
+              "type": "string"
+            }
+          }
+        },
+        "logo": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "src": {
+              "type": "string"
+            },
+            "mark": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "text"
+          ]
+        }
+      },
+      "required": [
+        "logo"
+      ]
+    },
+    "design": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "source": {
+          "default": "local",
+          "type": "string",
+          "enum": [
+            "local",
+            "canva"
+          ]
+        },
+        "canva": {
+          "type": "object",
+          "properties": {
+            "brandKitId": {
+              "type": "string"
+            },
+            "assets": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "designId": {
+                    "type": "string"
+                  },
+                  "output": {
+                    "type": "string"
+                  },
+                  "format": {
+                    "default": "png",
+                    "type": "string",
+                    "enum": [
+                      "png",
+                      "jpg",
+                      "pdf"
+                    ]
+                  }
+                },
+                "required": [
+                  "designId",
+                  "output"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "home": {
+      "type": "object",
+      "properties": {
+        "sections": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "hero"
+                  },
+                  "title": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "enum": [
+                        "de",
+                        "en",
+                        "fr",
+                        "it"
+                      ]
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "subtitle": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "enum": [
+                        "de",
+                        "en",
+                        "fr",
+                        "it"
+                      ]
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "cta": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string",
+                          "enum": [
+                            "de",
+                            "en",
+                            "fr",
+                            "it"
+                          ]
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "href": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "href"
+                    ]
+                  },
+                  "secondaryCta": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string",
+                          "enum": [
+                            "de",
+                            "en",
+                            "fr",
+                            "it"
+                          ]
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "href": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "href"
+                    ]
+                  },
+                  "image": {
+                    "type": "string"
+                  },
+                  "diagram": {
+                    "description": "Diagram scene id rendered live in the hero",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "title"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "kinds"
+                  },
+                  "title": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "enum": [
+                        "de",
+                        "en",
+                        "fr",
+                        "it"
+                      ]
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "kinds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "physical",
+                        "book",
+                        "ebook",
+                        "interactive_book",
+                        "digital_download",
+                        "license",
+                        "subscription",
+                        "course",
+                        "service"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "title"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "categories"
+                  },
+                  "title": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "enum": [
+                        "de",
+                        "en",
+                        "fr",
+                        "it"
+                      ]
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "title"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "products"
+                  },
+                  "title": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "enum": [
+                        "de",
+                        "en",
+                        "fr",
+                        "it"
+                      ]
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "query": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "physical",
+                          "book",
+                          "ebook",
+                          "interactive_book",
+                          "digital_download",
+                          "license",
+                          "subscription",
+                          "course",
+                          "service"
+                        ]
+                      },
+                      "category": {
+                        "type": "string"
+                      },
+                      "featured": {
+                        "type": "boolean"
+                      },
+                      "sort": {
+                        "type": "string",
+                        "enum": [
+                          "newest",
+                          "price_asc",
+                          "price_desc",
+                          "title"
+                        ]
+                      },
+                      "limit": {
+                        "default": 8,
+                        "type": "integer",
+                        "exclusiveMinimum": 0,
+                        "maximum": 24
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "title",
+                  "query"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "usp"
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "object",
+                          "propertyNames": {
+                            "type": "string",
+                            "enum": [
+                              "de",
+                              "en",
+                              "fr",
+                              "it"
+                            ]
+                          },
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "text": {
+                          "type": "object",
+                          "propertyNames": {
+                            "type": "string",
+                            "enum": [
+                              "de",
+                              "en",
+                              "fr",
+                              "it"
+                            ]
+                          },
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "required": [
+                        "icon",
+                        "title",
+                        "text"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "items"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "banner"
+                  },
+                  "title": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "enum": [
+                        "de",
+                        "en",
+                        "fr",
+                        "it"
+                      ]
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "text": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "enum": [
+                        "de",
+                        "en",
+                        "fr",
+                        "it"
+                      ]
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "cta": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string",
+                          "enum": [
+                            "de",
+                            "en",
+                            "fr",
+                            "it"
+                          ]
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "href": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "href"
+                    ]
+                  },
+                  "image": {
+                    "type": "string"
+                  },
+                  "tone": {
+                    "default": "primary",
+                    "type": "string",
+                    "enum": [
+                      "primary",
+                      "accent",
+                      "muted"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "title"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "diagram"
+                  },
+                  "title": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "enum": [
+                        "de",
+                        "en",
+                        "fr",
+                        "it"
+                      ]
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "text": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "enum": [
+                        "de",
+                        "en",
+                        "fr",
+                        "it"
+                      ]
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "diagram": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "title",
+                  "diagram"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "sections"
+      ]
+    },
+    "seo": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "titleTemplate": {
+          "default": "%s | {store}",
+          "type": "string"
+        },
+        "description": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "it"
+            ]
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "legal",
+    "catalog",
+    "payments",
+    "theme",
+    "home"
+  ]
+}

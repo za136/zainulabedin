@@ -1,0 +1,720 @@
+{
+  "$schema": "../../../packages/config/catalog.schema.json",
+  "categories": [
+    {
+      "slug": "fachbuecher",
+      "name": {
+        "de": "Fachbücher",
+        "en": "Technical books"
+      },
+      "description": {
+        "de": "Tiefes Wissen, verständlich erklärt.",
+        "en": "Deep knowledge, clearly explained."
+      },
+      "position": 0
+    },
+    {
+      "slug": "informatik",
+      "parent": "fachbuecher",
+      "name": {
+        "de": "Informatik & Software",
+        "en": "Computer science & software"
+      },
+      "position": 0
+    },
+    {
+      "slug": "ki-daten",
+      "parent": "fachbuecher",
+      "name": {
+        "de": "KI & Daten",
+        "en": "AI & data"
+      },
+      "position": 1
+    },
+    {
+      "slug": "interaktiv",
+      "name": {
+        "de": "Interaktive 3D-Bücher",
+        "en": "Interactive 3D books"
+      },
+      "description": {
+        "de": "Bücher mit begehbaren 3D-Diagrammen.",
+        "en": "Books with explorable 3D diagrams."
+      },
+      "position": 1
+    },
+    {
+      "slug": "e-books",
+      "name": {
+        "de": "E-Books",
+        "en": "E-books"
+      },
+      "position": 2
+    },
+    {
+      "slug": "romane",
+      "name": {
+        "de": "Romane & Sachbuch",
+        "en": "Fiction & non-fiction"
+      },
+      "position": 3
+    },
+    {
+      "slug": "elektronik",
+      "name": {
+        "de": "Elektronik",
+        "en": "Electronics"
+      },
+      "description": {
+        "de": "Lesegeräte, Audio und Zubehör.",
+        "en": "E-readers, audio and accessories."
+      },
+      "position": 4
+    },
+    {
+      "slug": "software",
+      "name": {
+        "de": "Software & Tools",
+        "en": "Software & tools"
+      },
+      "position": 5
+    },
+    {
+      "slug": "kurse",
+      "name": {
+        "de": "Online-Kurse",
+        "en": "Online courses"
+      },
+      "position": 6
+    },
+    {
+      "slug": "beratung",
+      "name": {
+        "de": "Beratung & Workshops",
+        "en": "Consulting & workshops"
+      },
+      "position": 7
+    }
+  ],
+  "products": [
+    {
+      "slug": "wie-das-internet-funktioniert",
+      "kind": "book",
+      "featured": true,
+      "categories": [
+        "informatik",
+        "fachbuecher"
+      ],
+      "title": {
+        "de": "Wie das Internet funktioniert",
+        "en": "How the Internet Works"
+      },
+      "subtitle": {
+        "de": "Vom Klick bis zum Rechenzentrum",
+        "en": "From click to data centre"
+      },
+      "description": {
+        "de": "Was passiert eigentlich, wenn du Enter drückst? Dieses Buch folgt einer einzigen Anfrage auf ihrer Reise um die Welt – über DNS, Router, Glasfaser und Rechenzentren. Verständlich, präzise und mit über 80 Abbildungen.",
+        "en": "What actually happens when you press enter? This book follows a single request on its journey around the world — through DNS, routers, fibre and data centres. Accessible, precise and with more than 80 figures."
+      },
+      "priceBound": true,
+      "attributes": {
+        "isbn": "978-3-000000-01-1",
+        "authors": [
+          "Zain ul Abedin"
+        ],
+        "publisher": "Wissenswerk Verlag",
+        "language": "de",
+        "pages": 288,
+        "binding": "paperback",
+        "edition": "1. Auflage",
+        "publishedAt": "2026-09-01",
+        "interactiveEditionSlug": "wie-das-internet-funktioniert-3d"
+      },
+      "variants": [
+        {
+          "sku": "B-0-01-1",
+          "prices": {
+            "EUR": 3490,
+            "CHF": 3770
+          },
+          "stock": 120,
+          "weightGrams": 650
+        }
+      ],
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "slug": "wie-das-internet-funktioniert-ebook",
+      "kind": "ebook",
+      "categories": [
+        "e-books",
+        "informatik"
+      ],
+      "title": {
+        "de": "Wie das Internet funktioniert (E-Book)",
+        "en": "How the Internet Works (E-Book)"
+      },
+      "subtitle": {
+        "de": "Vom Klick bis zum Rechenzentrum",
+        "en": "From click to data centre"
+      },
+      "description": {
+        "de": "Was passiert eigentlich, wenn du Enter drückst? Dieses Buch folgt einer einzigen Anfrage auf ihrer Reise um die Welt – über DNS, Router, Glasfaser und Rechenzentren. Verständlich, präzise und mit über 80 Abbildungen.",
+        "en": "What actually happens when you press enter? This book follows a single request on its journey around the world — through DNS, routers, fibre and data centres. Accessible, precise and with more than 80 figures."
+      },
+      "priceBound": true,
+      "attributes": {
+        "isbn": "978-3-000000-01-9",
+        "authors": [
+          "Zain ul Abedin"
+        ],
+        "publisher": "Wissenswerk Verlag",
+        "language": "de",
+        "pages": 288,
+        "files": [
+          {
+            "key": "wie-das-internet-funktioniert.epub",
+            "name": "wie-das-internet-funktioniert.epub",
+            "format": "epub"
+          },
+          {
+            "key": "wie-das-internet-funktioniert.pdf",
+            "name": "wie-das-internet-funktioniert.pdf",
+            "format": "pdf"
+          }
+        ],
+        "watermark": true,
+        "interactiveEditionSlug": "wie-das-internet-funktioniert-3d"
+      },
+      "variants": [
+        {
+          "sku": "E-0-01-1",
+          "prices": {
+            "EUR": 2799,
+            "CHF": 3020
+          }
+        }
+      ]
+    },
+    {
+      "slug": "wie-das-internet-funktioniert-3d",
+      "kind": "interactive_book",
+      "featured": true,
+      "categories": [
+        "interaktiv",
+        "informatik"
+      ],
+      "title": {
+        "de": "Wie das Internet funktioniert – 3D-Edition",
+        "en": "How the Internet Works — 3D edition"
+      },
+      "subtitle": {
+        "de": "Interaktive Ausgabe mit begehbaren 3D-Diagrammen",
+        "en": "Interactive edition with explorable 3D diagrams"
+      },
+      "description": {
+        "de": "Was passiert eigentlich, wenn du Enter drückst? Dieses Buch folgt einer einzigen Anfrage auf ihrer Reise um die Welt – über DNS, Router, Glasfaser und Rechenzentren. Verständlich, präzise und mit über 80 Abbildungen. Inklusive geführter 3D-Touren zu jedem Kapitel – im Browser, ohne Installation.",
+        "en": "What actually happens when you press enter? This book follows a single request on its journey around the world — through DNS, routers, fibre and data centres. Accessible, precise and with more than 80 figures. Including guided 3D tours for every chapter — in your browser, nothing to install."
+      },
+      "priceBound": true,
+      "attributes": {
+        "authors": [
+          "Zain ul Abedin"
+        ],
+        "language": "de",
+        "diagrams": [
+          "how-the-internet-works"
+        ],
+        "previewDiagram": "how-the-internet-works",
+        "chapters": [
+          {
+            "id": "1",
+            "title": {
+              "de": "Die Adresse",
+              "en": "The address"
+            },
+            "diagram": "how-the-internet-works"
+          },
+          {
+            "id": "2",
+            "title": {
+              "de": "Namensauflösung",
+              "en": "Name resolution"
+            },
+            "diagram": "how-the-internet-works"
+          },
+          {
+            "id": "3",
+            "title": {
+              "de": "Pakete auf Reisen",
+              "en": "Packets travel"
+            }
+          },
+          {
+            "id": "5",
+            "title": {
+              "de": "Im Rechenzentrum",
+              "en": "In the data centre"
+            }
+          }
+        ],
+        "files": [
+          {
+            "key": "wie-das-internet-funktioniert.epub",
+            "name": "wie-das-internet-funktioniert.epub",
+            "format": "epub"
+          }
+        ]
+      },
+      "variants": [
+        {
+          "sku": "I-0-01-1",
+          "prices": {
+            "EUR": 3990,
+            "CHF": 4310
+          }
+        }
+      ],
+      "tags": [
+        "3d",
+        "neu"
+      ]
+    },
+    {
+      "slug": "sprachmodelle-verstehen",
+      "kind": "book",
+      "featured": true,
+      "categories": [
+        "ki-daten",
+        "fachbuecher"
+      ],
+      "title": {
+        "de": "Sprachmodelle verstehen",
+        "en": "Understanding Language Models"
+      },
+      "subtitle": {
+        "de": "Transformer, Attention & Co. ohne Formelchaos",
+        "en": "Transformers, attention & co. without formula chaos"
+      },
+      "description": {
+        "de": "Große Sprachmodelle prägen unseren Alltag. Dieses Buch erklärt Schritt für Schritt, wie sie funktionieren – von Tokens über Attention bis zum Training – und was das für Unternehmen bedeutet.",
+        "en": "Large language models shape our daily lives. This book explains step by step how they work — from tokens to attention to training — and what that means for businesses."
+      },
+      "priceBound": true,
+      "attributes": {
+        "isbn": "978-3-000000-02-8",
+        "authors": [
+          "Zain ul Abedin",
+          "Dr. Lena Hoffmann"
+        ],
+        "publisher": "Wissenswerk Verlag",
+        "language": "de",
+        "pages": 352,
+        "binding": "hardcover",
+        "edition": "1. Auflage",
+        "publishedAt": "2026-09-01",
+        "interactiveEditionSlug": "sprachmodelle-verstehen-3d"
+      },
+      "variants": [
+        {
+          "sku": "B-0-02-8",
+          "prices": {
+            "EUR": 3990,
+            "CHF": 4310
+          },
+          "stock": 120,
+          "weightGrams": 650
+        }
+      ],
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "slug": "sprachmodelle-verstehen-ebook",
+      "kind": "ebook",
+      "categories": [
+        "e-books",
+        "ki-daten"
+      ],
+      "title": {
+        "de": "Sprachmodelle verstehen (E-Book)",
+        "en": "Understanding Language Models (E-Book)"
+      },
+      "subtitle": {
+        "de": "Transformer, Attention & Co. ohne Formelchaos",
+        "en": "Transformers, attention & co. without formula chaos"
+      },
+      "description": {
+        "de": "Große Sprachmodelle prägen unseren Alltag. Dieses Buch erklärt Schritt für Schritt, wie sie funktionieren – von Tokens über Attention bis zum Training – und was das für Unternehmen bedeutet.",
+        "en": "Large language models shape our daily lives. This book explains step by step how they work — from tokens to attention to training — and what that means for businesses."
+      },
+      "priceBound": true,
+      "attributes": {
+        "isbn": "978-3-000000-02-9",
+        "authors": [
+          "Zain ul Abedin",
+          "Dr. Lena Hoffmann"
+        ],
+        "publisher": "Wissenswerk Verlag",
+        "language": "de",
+        "pages": 352,
+        "files": [
+          {
+            "key": "sprachmodelle-verstehen.epub",
+            "name": "sprachmodelle-verstehen.epub",
+            "format": "epub"
+          },
+          {
+            "key": "sprachmodelle-verstehen.pdf",
+            "name": "sprachmodelle-verstehen.pdf",
+            "format": "pdf"
+          }
+        ],
+        "watermark": true,
+        "interactiveEditionSlug": "sprachmodelle-verstehen-3d"
+      },
+      "variants": [
+        {
+          "sku": "E-0-02-8",
+          "prices": {
+            "EUR": 2999,
+            "CHF": 3240
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sprachmodelle-verstehen-3d",
+      "kind": "interactive_book",
+      "featured": true,
+      "categories": [
+        "interaktiv",
+        "ki-daten"
+      ],
+      "title": {
+        "de": "Sprachmodelle verstehen – 3D-Edition",
+        "en": "Understanding Language Models — 3D edition"
+      },
+      "subtitle": {
+        "de": "Interaktive Ausgabe mit begehbaren 3D-Diagrammen",
+        "en": "Interactive edition with explorable 3D diagrams"
+      },
+      "description": {
+        "de": "Große Sprachmodelle prägen unseren Alltag. Dieses Buch erklärt Schritt für Schritt, wie sie funktionieren – von Tokens über Attention bis zum Training – und was das für Unternehmen bedeutet. Inklusive geführter 3D-Touren zu jedem Kapitel – im Browser, ohne Installation.",
+        "en": "Large language models shape our daily lives. This book explains step by step how they work — from tokens to attention to training — and what that means for businesses. Including guided 3D tours for every chapter — in your browser, nothing to install."
+      },
+      "priceBound": true,
+      "attributes": {
+        "authors": [
+          "Zain ul Abedin",
+          "Dr. Lena Hoffmann"
+        ],
+        "language": "de",
+        "diagrams": [
+          "transformer-architecture"
+        ],
+        "previewDiagram": "transformer-architecture",
+        "chapters": [],
+        "files": [
+          {
+            "key": "sprachmodelle-verstehen.epub",
+            "name": "sprachmodelle-verstehen.epub",
+            "format": "epub"
+          }
+        ]
+      },
+      "variants": [
+        {
+          "sku": "I-0-02-8",
+          "prices": {
+            "EUR": 4490,
+            "CHF": 4850
+          }
+        }
+      ],
+      "tags": [
+        "3d",
+        "neu"
+      ]
+    },
+    {
+      "slug": "saubere-architektur",
+      "kind": "book",
+      "featured": false,
+      "categories": [
+        "informatik",
+        "fachbuecher"
+      ],
+      "title": {
+        "de": "Saubere Software-Architektur",
+        "en": "Clean Software Architecture"
+      },
+      "subtitle": {
+        "de": "Systeme bauen, die sich ändern lassen",
+        "en": "Building systems that can change"
+      },
+      "description": {
+        "de": "Ein praxisnaher Leitfaden für Architekturen, die mit dem Geschäft wachsen: Schichten, Grenzen, Abhängigkeiten und Entscheidungen.",
+        "en": "A practical guide to architectures that grow with the business: layers, boundaries, dependencies and decisions."
+      },
+      "priceBound": true,
+      "attributes": {
+        "isbn": "978-3-000000-03-5",
+        "authors": [
+          "Zain ul Abedin"
+        ],
+        "publisher": "Wissenswerk Verlag",
+        "language": "de",
+        "pages": 312,
+        "binding": "paperback",
+        "edition": "1. Auflage",
+        "publishedAt": "2026-09-01",
+        "interactiveEditionSlug": "saubere-architektur-3d"
+      },
+      "variants": [
+        {
+          "sku": "B-0-03-5",
+          "prices": {
+            "EUR": 3690,
+            "CHF": 3990
+          },
+          "stock": 120,
+          "weightGrams": 650
+        }
+      ],
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "slug": "saubere-architektur-ebook",
+      "kind": "ebook",
+      "categories": [
+        "e-books",
+        "informatik"
+      ],
+      "title": {
+        "de": "Saubere Software-Architektur (E-Book)",
+        "en": "Clean Software Architecture (E-Book)"
+      },
+      "subtitle": {
+        "de": "Systeme bauen, die sich ändern lassen",
+        "en": "Building systems that can change"
+      },
+      "description": {
+        "de": "Ein praxisnaher Leitfaden für Architekturen, die mit dem Geschäft wachsen: Schichten, Grenzen, Abhängigkeiten und Entscheidungen.",
+        "en": "A practical guide to architectures that grow with the business: layers, boundaries, dependencies and decisions."
+      },
+      "priceBound": true,
+      "attributes": {
+        "isbn": "978-3-000000-03-9",
+        "authors": [
+          "Zain ul Abedin"
+        ],
+        "publisher": "Wissenswerk Verlag",
+        "language": "de",
+        "pages": 312,
+        "files": [
+          {
+            "key": "saubere-architektur.epub",
+            "name": "saubere-architektur.epub",
+            "format": "epub"
+          },
+          {
+            "key": "saubere-architektur.pdf",
+            "name": "saubere-architektur.pdf",
+            "format": "pdf"
+          }
+        ],
+        "watermark": true,
+        "interactiveEditionSlug": "saubere-architektur-3d"
+      },
+      "variants": [
+        {
+          "sku": "E-0-03-5",
+          "prices": {
+            "EUR": 2899,
+            "CHF": 3130
+          }
+        }
+      ]
+    },
+    {
+      "slug": "saubere-architektur-3d",
+      "kind": "interactive_book",
+      "featured": true,
+      "categories": [
+        "interaktiv",
+        "informatik"
+      ],
+      "title": {
+        "de": "Saubere Software-Architektur – 3D-Edition",
+        "en": "Clean Software Architecture — 3D edition"
+      },
+      "subtitle": {
+        "de": "Interaktive Ausgabe mit begehbaren 3D-Diagrammen",
+        "en": "Interactive edition with explorable 3D diagrams"
+      },
+      "description": {
+        "de": "Ein praxisnaher Leitfaden für Architekturen, die mit dem Geschäft wachsen: Schichten, Grenzen, Abhängigkeiten und Entscheidungen. Inklusive geführter 3D-Touren zu jedem Kapitel – im Browser, ohne Installation.",
+        "en": "A practical guide to architectures that grow with the business: layers, boundaries, dependencies and decisions. Including guided 3D tours for every chapter — in your browser, nothing to install."
+      },
+      "priceBound": true,
+      "attributes": {
+        "authors": [
+          "Zain ul Abedin"
+        ],
+        "language": "de",
+        "diagrams": [
+          "clean-architecture"
+        ],
+        "previewDiagram": "clean-architecture",
+        "chapters": [],
+        "files": [
+          {
+            "key": "saubere-architektur.epub",
+            "name": "saubere-architektur.epub",
+            "format": "epub"
+          }
+        ]
+      },
+      "variants": [
+        {
+          "sku": "I-0-03-5",
+          "prices": {
+            "EUR": 4190,
+            "CHF": 4530
+          }
+        }
+      ],
+      "tags": [
+        "3d",
+        "neu"
+      ]
+    },
+    {
+      "slug": "der-algorithmus-des-herbstes",
+      "kind": "book",
+      "categories": [
+        "romane"
+      ],
+      "title": {
+        "de": "Der Algorithmus des Herbstes",
+        "en": "The Algorithm of Autumn"
+      },
+      "subtitle": {
+        "de": "Roman",
+        "en": "A novel"
+      },
+      "description": {
+        "de": "Eine Programmiererin in Leipzig entdeckt, dass ihr Code Gedichte schreibt – und dass jemand mitliest. Ein leiser, kluger Roman über Sprache, Maschinen und Nähe.",
+        "en": "A programmer in Leipzig discovers that her code writes poems — and that someone is reading along. A quiet, clever novel about language, machines and closeness."
+      },
+      "priceBound": true,
+      "attributes": {
+        "isbn": "978-3-000000-10-3",
+        "authors": [
+          "Mara Lindqvist"
+        ],
+        "publisher": "Wissenswerk Verlag",
+        "language": "de",
+        "pages": 416,
+        "binding": "hardcover",
+        "publishedAt": "2026-08-15"
+      },
+      "variants": [
+        {
+          "sku": "B-000103",
+          "prices": {
+            "EUR": 2400,
+            "CHF": 2590
+          },
+          "stock": 60,
+          "weightGrams": 720
+        }
+      ],
+      "featured": true,
+      "tags": [
+        "roman"
+      ]
+    },
+    {
+      "slug": "designing-data-systems-en",
+      "kind": "book",
+      "categories": [
+        "ki-daten",
+        "fachbuecher"
+      ],
+      "title": {
+        "de": "Designing Data Systems (englische Ausgabe)",
+        "en": "Designing Data Systems"
+      },
+      "subtitle": {
+        "de": "Import – keine Buchpreisbindung",
+        "en": "Imported edition"
+      },
+      "description": {
+        "de": "Die englischsprachige Originalausgabe. Importierte fremdsprachige Bücher unterliegen in der Regel nicht der deutschen Buchpreisbindung – daher gelten hier auch Gutscheine.",
+        "en": "The original English edition. Imported foreign-language books are generally not subject to German fixed book prices — so coupons apply here."
+      },
+      "priceBound": false,
+      "attributes": {
+        "isbn": "978-1-000000-11-0",
+        "authors": [
+          "A. N. Author"
+        ],
+        "publisher": "Example Press",
+        "language": "en",
+        "pages": 600,
+        "binding": "paperback"
+      },
+      "variants": [
+        {
+          "sku": "B-IMP-110",
+          "prices": {
+            "EUR": 4590,
+            "CHF": 4960
+          },
+          "compareAt": {
+            "EUR": 4990,
+            "CHF": 5390
+          },
+          "stock": 4,
+          "weightGrams": 1100
+        }
+      ],
+      "tags": [
+        "import"
+      ]
+    }
+  ],
+  "coupons": [
+    {
+      "code": "WILLKOMMEN10",
+      "type": "percent",
+      "value": 1000,
+      "active": true
+    },
+    {
+      "code": "VERSANDFREI",
+      "type": "free_shipping",
+      "value": 0,
+      "active": true
+    },
+    {
+      "code": "TECH20",
+      "type": "fixed",
+      "value": 2000,
+      "currency": "EUR",
+      "minSubtotal": 10000,
+      "appliesToKinds": [
+        "physical"
+      ],
+      "active": true
+    }
+  ]
+}

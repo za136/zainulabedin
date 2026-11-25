@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../packages/config/diagram.schema.json",
+  "id": "how-the-internet-works",
+  "version": 1,
+  "title": { "de": "Wie das Internet funktioniert", "en": "How the internet works" },
+  "description": { "de": "Der Weg einer Anfrage vom Browser bis zum Server und zurück.", "en": "The journey of a request from the browser to the server and back." },
+  "background": "#0b1020",
+  "camera": { "position": [0, 7, 15], "target": [0, 0, 0] },
+  "groups": [
+    { "id": "client", "label": { "de": "Dein Gerät", "en": "Your device" }, "color": "#38bdf8" },
+    { "id": "network", "label": { "de": "Netz", "en": "Network" }, "color": "#a78bfa" },
+    { "id": "server", "label": { "de": "Rechenzentrum", "en": "Data centre" }, "color": "#f59e0b" }
+  ],
+  "nodes": [
+    { "id": "browser", "label": { "de": "Browser", "en": "Browser" }, "detail": { "de": "Du gibst eine Adresse ein. Der Browser muss herausfinden, welcher Computer dahinter steckt.", "en": "You type an address. The browser needs to find out which computer is behind it." }, "shape": "box", "position": [-7, 0, 0], "scale": [1.6, 1, 0.2], "color": "#38bdf8", "group": "client", "chapter": "1" },
+    { "id": "dns", "label": { "de": "DNS-Resolver", "en": "DNS resolver" }, "detail": { "de": "Das Telefonbuch des Internets übersetzt wissenswerk.example in eine IP-Adresse.", "en": "The internet's phone book translates wissenswerk.example into an IP address." }, "shape": "octahedron", "position": [-3.5, 3, -2], "color": "#a78bfa", "group": "network", "chapter": "2" },
+    { "id": "router", "label": { "de": "Router & ISP", "en": "Router & ISP" }, "detail": { "de": "Pakete springen von Router zu Router – jeder kennt nur den nächsten Schritt.", "en": "Packets hop from router to router — each only knows the next step." }, "shape": "cylinder", "position": [-2.5, -0.5, 1], "scale": [0.8, 0.6, 0.8], "color": "#8b5cf6", "group": "network", "chapter": "3" },
+    { "id": "backbone", "label": { "de": "Backbone", "en": "Backbone" }, "detail": { "de": "Glasfaserkabel verbinden Kontinente – auch unter dem Meer.", "en": "Fibre-optic cables connect continents — even under the sea." }, "shape": "torus", "position": [1, 0, 0], "scale": 0.9, "color": "#6366f1", "group": "network", "chapter": "3" },
+    { "id": "cdn", "label": { "de": "CDN-Edge", "en": "CDN edge" }, "detail": { "de": "Kopien statischer Inhalte liegen nah bei dir, z. B. in Frankfurt.", "en": "Copies of static content live close to you, e.g. in Frankfurt." }, "shape": "sphere", "position": [3.5, 2.8, -1.5], "scale": 0.8, "color": "#f472b6", "group": "network", "chapter": "4" },
+    { "id": "lb", "label": { "de": "Load Balancer", "en": "Load balancer" }, "detail": { "de": "Verteilt Anfragen auf viele Server.", "en": "Distributes requests across many servers." }, "shape": "cone", "position": [5, -0.5, 0.5], "scale": 0.8, "color": "#fbbf24", "group": "server", "chapter": "5" },
+    { "id": "app", "label": { "de": "App-Server", "en": "App server" }, "detail": { "de": "Erzeugt die Antwort – z. B. deine Produktseite.", "en": "Generates the response — e.g. your product page." }, "shape": "box", "position": [7.5, 0.8, -0.5], "scale": [1, 1.4, 1], "color": "#f59e0b", "group": "server", "chapter": "5" },
+    { "id": "db", "label": { "de": "Datenbank", "en": "Database" }, "detail": { "de": "Speichert Produkte, Bestellungen und Kundenkonten.", "en": "Stores products, orders and customer accounts." }, "shape": "cylinder", "position": [7.5, -2.2, -0.5], "scale": [0.9, 0.9, 0.9], "color": "#d97706", "group": "server", "chapter": "6" }
+  ],
+  "edges": [
+    { "from": "browser", "to": "dns", "label": { "de": "Name → IP", "en": "Name → IP" }, "style": "dashed", "flow": true, "color": "#c4b5fd" },
+    { "from": "browser", "to": "router", "flow": true, "color": "#93c5fd" },
+    { "from": "router", "to": "backbone", "flow": true, "color": "#a5b4fc" },
+    { "from": "backbone", "to": "cdn", "label": { "de": "Cache-Treffer", "en": "Cache hit" }, "flow": true, "color": "#f9a8d4" },
+    { "from": "backbone", "to": "lb", "flow": true, "color": "#fcd34d" },
+    { "from": "lb", "to": "app", "flow": true, "color": "#fcd34d" },
+    { "from": "app", "to": "db", "label": { "de": "SQL", "en": "SQL" }, "directed": false, "color": "#fdba74" }
+  ],
+  "steps": [
+    { "id": "s1", "title": { "de": "1. Die Adresse", "en": "1. The address" }, "narration": { "de": "Alles beginnt im Browser: Du tippst eine Adresse und drückst Enter.", "en": "It all starts in the browser: you type an address and hit enter." }, "focus": ["browser"], "camera": { "position": [-7, 2, 6], "target": [-7, 0, 0] } },
+    { "id": "s2", "title": { "de": "2. Namensauflösung", "en": "2. Name resolution" }, "narration": { "de": "Der DNS-Resolver liefert die IP-Adresse des Servers – meist in wenigen Millisekunden.", "en": "The DNS resolver returns the server's IP address — usually within milliseconds." }, "focus": ["browser", "dns"], "camera": { "position": [-5, 5, 7], "target": [-4, 1.5, -1] } },
+    { "id": "s3", "title": { "de": "3. Pakete auf Reisen", "en": "3. Packets travel" }, "narration": { "de": "Die Anfrage wird in Pakete zerlegt, die über Router und Backbone-Netze reisen.", "en": "The request is split into packets that travel across routers and backbone networks." }, "focus": ["router", "backbone"], "camera": { "position": [-1, 3, 8], "target": [-0.5, 0, 0] } },
+    { "id": "s4", "title": { "de": "4. Abkürzung CDN", "en": "4. CDN shortcut" }, "narration": { "de": "Bilder und Skripte kommen oft direkt vom nahen CDN-Knoten.", "en": "Images and scripts often come straight from a nearby CDN node." }, "focus": ["cdn"], "camera": { "position": [3, 5, 5], "target": [3.5, 2.5, -1.5] } },
+    { "id": "s5", "title": { "de": "5. Im Rechenzentrum", "en": "5. In the data centre" }, "narration": { "de": "Der Load Balancer wählt einen App-Server, der die Datenbank fragt und die Seite baut.", "en": "The load balancer picks an app server which queries the database and builds the page." }, "focus": ["lb", "app", "db"], "camera": { "position": [9, 2, 8], "target": [6.5, -0.5, 0] } }
+  ]
+}
