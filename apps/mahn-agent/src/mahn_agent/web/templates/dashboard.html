@@ -1,0 +1,34 @@
+{% extends "base.html" %}{% block title %}Übersicht{% endblock %}
+{% block content %}
+<div class="row between">
+  <h1>Forderungsübersicht</h1>
+  <form method="post" action="/mahnlauf"><button class="btn primary">Mahnlauf starten</button></form>
+</div>
+<section class="kpis">
+  <div class="kpi"><span>Offene Forderungen</span><strong>{{ s.total_open_cents|eur }}</strong></div>
+  <div class="kpi warn"><span>Davon überfällig</span><strong>{{ s.overdue_cents|eur }}</strong></div>
+  <a class="kpi" href="/freigaben"><span>Warten auf Freigabe</span><strong>{{ s.pending_approvals }}</strong></a>
+  <a class="kpi danger" href="/faelle"><span>Eskaliert (Entscheidung nötig)</span><strong>{{ s.escalated_cases }}</strong></a>
+  <a class="kpi" href="/zahlungen"><span>Unklare Zahlungen</span><strong>{{ s.unmatched_payments }}</strong></a>
+</section>
+<div class="grid2">
+<section class="card">
+  <h2>Altersstruktur</h2>
+  {% for label, cents in s.aging.items() %}
+  <div class="bar-row"><span class="bar-label">{{ label }}{% if label != "nicht fällig" %} Tage{% endif %}</span>
+    <div class="bar"><div class="fill b{{ loop.index }}" style="width: {{ (cents / max_bucket * 100)|round(1) }}%"></div></div>
+    <span class="bar-val">{{ cents|eur }}</span></div>
+  {% endfor %}
+</section>
+<section class="card">
+  <h2>Kunden mit höchstem Risiko</h2>
+  <table><thead><tr><th>Kunde</th><th class="r">Überfällig</th><th class="r">Max. Tage</th><th>Letzte Stufe</th><th class="r">Risiko</th></tr></thead>
+  <tbody>{% for c in s.top_risk %}
+  <tr><td>{{ c.customer }}</td><td class="r">{{ c.overdue_cents|eur }}</td><td class="r">{{ c.max_days }}</td>
+      <td>{{ LEVEL_NAMES.get(c.level, "–") }}</td>
+      <td class="r"><span class="risk {% if c.risk >= 60 %}hi{% elif c.risk >= 35 %}mid{% else %}lo{% endif %}">{{ c.risk }}</span></td></tr>
+  {% else %}<tr><td colspan="5" class="muted">Keine überfälligen Forderungen.</td></tr>{% endfor %}</tbody></table>
+  <p class="muted small">Risiko 0–100: Alter (40), Anteil am Überfälligen (25), Mahnstufe (20), Zahlungshistorie (15).</p>
+</section>
+</div>
+{% endblock %}

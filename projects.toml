@@ -2,6 +2,14 @@
 # priority: 1 = highest.
 
 [[project]]
+id = "p01-mahn-agent"
+name = "P01 Mahn-Agent (agentic dunning)"
+priority = 1
+status = "mvp"
+path = "apps/mahn-agent"
+summary = "Agentic dunning for DACH receivables: Odoo/ERPNext sync, payment matching, Claude-drafted German reminders, human approval, dashboard."
+
+[[project]]
 id = "software-factory"
 name = "Software Factory"
 priority = 1

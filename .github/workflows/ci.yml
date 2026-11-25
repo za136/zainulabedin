@@ -3,7 +3,7 @@ on:
   push:
   pull_request:
 jobs:
-  test:
+  zfactory:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,3 +14,17 @@ jobs:
       - run: pytest -q
         env:
           ZF_OFFLINE: "1"
+  mahn-agent:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/mahn-agent
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+      - run: mahn-agent eval
+      - run: docker build -t mahn-agent .

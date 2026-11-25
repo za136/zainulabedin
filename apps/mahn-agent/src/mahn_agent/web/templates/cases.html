@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block title %}Rechnungen & Fälle{% endblock %}
+{% block content %}
+<h1>Rechnungen &amp; Mahnfälle</h1>
+<table class="card">
+<thead><tr><th>Rechnung</th><th>Kunde</th><th>Fällig</th><th class="r">Tage</th><th class="r">Offen</th>
+<th>Status</th><th>Gesendet</th><th>Fall</th><th>Zahlungszusage</th></tr></thead>
+<tbody>{% for i in invoices %}{% set days = (today - i.due_date).days %}
+<tr class="{% if i.case and i.case.status == 'escalated' %}esc{% endif %}">
+  <td>{{ i.number }}</td><td>{{ i.customer.name }} <span class="muted small">{{ i.customer.country }}</span></td>
+  <td>{{ i.due_date|d }}</td><td class="r">{{ days if days > 0 else "–" }}</td>
+  <td class="r">{{ i.outstanding_cents|eur }}</td><td>{{ i.status }}</td>
+  <td>{{ LEVEL_NAMES.get(i.case.level, "–") if i.case else "–" }}</td>
+  <td>{{ i.case.status if i.case else "–" }}</td>
+  <td>{% if i.status == "open" %}
+    <form method="post" action="/faelle/{{ i.id }}/zusage" class="inline">
+      <input type="date" name="until" value="{{ i.promise_to_pay_until.isoformat() if i.promise_to_pay_until else '' }}">
+      <button class="btn small">Speichern</button></form>{% endif %}</td>
+</tr>{% endfor %}</tbody></table>
+{% endblock %}

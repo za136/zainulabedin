@@ -1,0 +1,38 @@
+{% extends "base.html" %}{% block title %}Freigaben{% endblock %}
+{% block content %}
+<h1>Freigaben <span class="muted">({{ drafts|length }})</span></h1>
+<p class="muted">Nichts wird ohne Freigabe versendet. Bearbeitete Texte werden vor dem Versand erneut geprüft.</p>
+{% for d in drafts %}{% set inv = d.case.invoice %}
+<article class="card draft">
+  <div class="row between">
+    <div><span class="tag l{{ d.level }}">{{ LEVEL_NAMES[d.level] }}</span>
+      <strong>{{ inv.customer.name }}</strong> · {{ inv.number }} · an {{ inv.customer.email or "– keine E-Mail –" }}</div>
+    <span class="muted small">{{ d.generated_by }}</span>
+  </div>
+  <div class="claim">
+    <span>Offen <b>{{ d.outstanding_cents|eur }}</b></span>
+    <span>Zinsen <b>{{ d.interest_cents|eur }}</b></span>
+    <span>Gebühren <b>{{ d.fees_cents|eur }}</b></span>
+    <span>Gesamt <b>{{ d.total_cents|eur }}</b></span>
+    <span>Zahlbar bis <b>{{ d.pay_by|d }}</b></span>
+  </div>
+  <p class="muted small">{{ d.claim_note }}</p>
+  {% if d.agent_notes %}<p class="note">Hinweis des Agenten: {{ d.agent_notes }}</p>{% endif %}
+  <form method="post" action="/freigaben/{{ d.id }}/freigeben">
+    <label>Betreff<input name="subject" value="{{ d.subject }}"></label>
+    <label>Text<textarea name="body" rows="14">{{ d.body }}</textarea></label>
+    <div class="row">
+      <input name="approver" placeholder="Ihr Name" required>
+      <button class="btn primary">Freigeben &amp; senden</button>
+    </div>
+  </form>
+  <form method="post" action="/freigaben/{{ d.id }}/ablehnen" class="row reject">
+    <input name="approver" placeholder="Ihr Name" required>
+    <input name="reason" placeholder="Grund der Ablehnung" required>
+    <button class="btn">Ablehnen</button>
+  </form>
+</article>
+{% else %}
+<div class="card muted">Keine offenen Entwürfe. Starten Sie einen Mahnlauf auf der Übersicht.</div>
+{% endfor %}
+{% endblock %}

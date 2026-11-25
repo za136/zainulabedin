@@ -6,6 +6,7 @@ spa, film studio).
 
 | Priority | Project | What it does | Command |
 |---|---|---|---|
+| 1 | **P01 Mahn-Agent** ([apps/mahn-agent](apps/mahn-agent)) | Agentic dunning for DACH receivables: ERP sync, payment matching, Claude-drafted German reminders, human approval, dashboard | `cd apps/mahn-agent && make install && make demo` |
 | 1 | Software Factory | Spec -> plan -> code -> tests -> auto-fix loop | `zf software build specs/software/task-tracker.toml` |
 | 2 | Mobile App Factory | Spec -> Expo/React Native app (iOS + Android) | `zf app build specs/apps/aesthetic-clinic-app.toml` |
 | 2 | Website Factory | Brief -> static multi-page site (clinic, spa, studio, SaaS presets) | `zf web build specs/sites/aesthetic-clinic.toml` |
@@ -32,6 +33,7 @@ repair failing tests, write copy, treatments and screenplays. Without a key (or 
 ## Layout
 
 ```
+apps/mahn-agent/     P01 product: FastAPI + Claude agent + web UI + Docker (own README, tests, ADRs)
 src/zfactory/
   core/              LLM client, safe file writer, spec loader
   software_factory/  P1: planner -> builder -> test runner -> fixer loop

@@ -1,0 +1,31 @@
+# docker compose up --build   ->  app http://localhost:8000 · Mailpit (sent mails) http://localhost:8025
+services:
+  app:
+    build: .
+    ports: ["8000:8000"]
+    env_file: [{path: .env, required: false}]
+    environment:
+      MAHN_ERP: ${MAHN_ERP:-demo}
+      MAHN_DATABASE_URL: postgresql+psycopg://mahn:mahn@db:5432/mahn
+      MAHN_DEMO_ERP_FILE: /app/data/demo_erp.json
+      MAHN_MAIL_BACKEND: smtp
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+    volumes: ["appdata:/app/data"]
+    depends_on:
+      db: {condition: service_healthy}
+      mailpit: {condition: service_started}
+  db:
+    image: postgres:16-alpine
+    environment: {POSTGRES_USER: mahn, POSTGRES_PASSWORD: mahn, POSTGRES_DB: mahn}
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mahn"]
+      interval: 3s
+      retries: 20
+  mailpit:
+    image: axllent/mailpit:latest
+    ports: ["8025:8025"]
+volumes:
+  pgdata:
+  appdata:

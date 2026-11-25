@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block title %}Zahlungen{% endblock %}
+{% block content %}
+<h1>Zahlungseingänge</h1>
+<p class="muted">Zahlungen werden über die Rechnungsnummer im Verwendungszweck zugeordnet. Unklare Zahlungen ordnen Sie hier manuell zu.</p>
+<table class="card">
+<thead><tr><th>Datum</th><th class="r">Betrag</th><th>Zahler</th><th>Verwendungszweck</th><th>Zuordnung</th></tr></thead>
+<tbody>{% for p in payments %}
+<tr><td>{{ p.booking_date|d }}</td><td class="r">{{ p.amount_cents|eur }}</td><td>{{ p.payer_name or "–" }}</td>
+<td>{{ p.reference or "–" }}</td>
+<td>{% if p.invoice %}{{ p.invoice.number }} <span class="muted small">({{ p.match_method }})</span>
+{% else %}<form method="post" action="/zahlungen/{{ p.id }}/zuordnen" class="inline">
+  <select name="invoice_id">{% for i in open_invoices %}<option value="{{ i.id }}">{{ i.number }} · {{ i.customer.name }} · {{ i.outstanding_cents|eur }}</option>{% endfor %}</select>
+  <button class="btn small">Zuordnen</button></form>{% endif %}</td></tr>
+{% else %}<tr><td colspan="5" class="muted">Keine Zahlungen.</td></tr>{% endfor %}</tbody></table>
+{% endblock %}
