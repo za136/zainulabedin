@@ -109,6 +109,21 @@ importers:
         specifier: ^0.31.0
         version: 0.31.11
 
+  packages/sdk:
+    dependencies:
+      '@factory/core':
+        specifier: workspace:*
+        version: link:../core
+
+  tools/factory:
+    dependencies:
+      '@factory/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@factory/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+
 packages:
 
   '@drizzle-team/brocli@0.10.2':

@@ -1,0 +1,10 @@
+{
+  "name": "@factory/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The store factory CLI: create stores from presets, validate, scaffold products & 3D diagrams, pull Canva designs.",
+  "bin": { "factory": "./src/cli.ts" },
+  "scripts": { "typecheck": "tsc -p tsconfig.json", "test": "vitest run" },
+  "dependencies": { "@factory/config": "workspace:*", "@factory/core": "workspace:*" }
+}

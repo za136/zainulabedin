@@ -1,0 +1,10 @@
+{
+  "name": "@factory/sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Typed, dependency-free client for the store factory API. Works in browsers, Node, edge runtimes and React Server Components.",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "typecheck": "tsc -p tsconfig.json" },
+  "dependencies": { "@factory/core": "workspace:*" }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../packages/config/diagram.schema.json",
+  "id": "starter",
+  "version": 1,
+  "title": { "de": "Mein erstes 3D-Diagramm", "en": "My first 3D diagram" },
+  "background": "#0b1020",
+  "camera": { "position": [6, 4, 8], "target": [0, 0, 0] },
+  "nodes": [
+    { "id": "idea", "label": { "de": "Idee", "en": "Idea" }, "detail": { "de": "Alles beginnt mit einer Idee.", "en": "Everything starts with an idea." }, "shape": "sphere", "position": [-3, 0, 0], "color": "#38bdf8" },
+    { "id": "model", "label": { "de": "Modell", "en": "Model" }, "shape": "box", "position": [0, 0, 0], "color": "#a78bfa" },
+    { "id": "insight", "label": { "de": "Erkenntnis", "en": "Insight" }, "shape": "octahedron", "position": [3, 0, 0], "color": "#f59e0b" }
+  ],
+  "edges": [
+    { "from": "idea", "to": "model", "flow": true },
+    { "from": "model", "to": "insight", "flow": true }
+  ],
+  "steps": [
+    { "id": "s1", "title": { "de": "Start", "en": "Start" }, "narration": { "de": "Klicke auf die Knoten, um Details zu sehen.", "en": "Click the nodes to see details." }, "focus": ["idea"] },
+    { "id": "s2", "title": { "de": "Ziel", "en": "Goal" }, "narration": { "de": "Aus dem Modell entsteht die Erkenntnis.", "en": "The model leads to insight." }, "focus": ["model", "insight"] }
+  ]
+}
