@@ -3,7 +3,14 @@ import { dirname, join, resolve } from 'node:path';
 import type { PgDatabase, PgQueryResultHKT } from 'drizzle-orm/pg-core';
 import * as schema from './schema.js';
 
-export type Database = PgDatabase<PgQueryResultHKT, typeof schema>;
+/** Both node-postgres and PGlite return `{ rows }` from `db.execute()`. */
+export interface RowsResult<T> {
+  rows: T[];
+}
+export interface RowsResultHKT extends PgQueryResultHKT {
+  type: RowsResult<this['row']>;
+}
+export type Database = PgDatabase<RowsResultHKT, typeof schema>;
 
 export interface DbHandle {
   db: Database;
