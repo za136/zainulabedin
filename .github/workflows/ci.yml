@@ -28,3 +28,16 @@ jobs:
       - run: pytest -q
       - run: mahn-agent eval
       - run: docker build -t mahn-agent .
+  zainlabs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci && npm run check
+        working-directory: apps/zainlabs/content
+      - run: npm ci && npm run typecheck && npm run build
+        working-directory: apps/zainlabs/web
+      - run: npm ci && npm run typecheck && npx expo export --platform web
+        working-directory: apps/zainlabs/mobile

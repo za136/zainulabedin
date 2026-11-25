@@ -10,6 +10,14 @@ path = "apps/mahn-agent"
 summary = "Agentic dunning for DACH receivables: Odoo/ERPNext sync, payment matching, Claude-drafted German reminders, human approval, dashboard."
 
 [[project]]
+id = "zainlabs-platform"
+name = "ZAIN LABS website + iOS/Android app"
+priority = 2
+status = "active"
+path = "apps/zainlabs"
+summary = "Main platform: Next.js website with 3D hero + public API, Expo app for iOS/Android, one shared content source for every stream and project."
+
+[[project]]
 id = "software-factory"
 name = "Software Factory"
 priority = 1
