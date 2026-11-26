@@ -24,9 +24,12 @@ points to the project repos (see `README.md`). **Agents: go to `za136/factory-hq
 ## Branches kept as archive
 - `claude/multi-project-repo-setup-7ofpx7` (monorepo as built on 2026-11-25)
 - `claude/ecommerce-store-factory-rj88wa` (store factory as built on 2026-11-25)
-- `claude/kind-davinci-myzopa` (this index; merge into `main` if you want the index on the default branch)
+- `claude/kind-davinci-myzopa` (this index; merged into `main` on 2026-11-26)
+
+## Decisions (2026-11-26, delegated by the owner)
+- This index is merged into `main`.
+- All project repos stay private; the ZAIN LABS website no longer links to private repos.
+- Every other pending decision is listed in `za136/factory-hq` → `HANDOFF.md` → "Decisions taken on the owner's behalf".
 
 ## Next actions
-1. Owner: merge `claude/kind-davinci-myzopa` into `main` if you want this index on the front page.
-2. Owner: decide whether the new repos stay private (the ZAIN LABS website links to some of them as "Source").
-3. Continue work in `za136/factory-hq` → `HANDOFF.md` → "Global next actions".
+1. Continue work in `za136/factory-hq` → `HANDOFF.md` → "Global next actions".
